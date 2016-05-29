@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Android Studio常用Gradle操作 | 逍遥游</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、Gradle介绍    Gradle是一个高级构建系统和构建工具，允许通过插件自定义构建逻辑。Gradle的实质是配置脚本，执行一种类型的配置脚本时就会创建一个关联的对象，它由三种脚本类型构成，分别是构建脚本(Build Script)、初始化脚本(Init Script)及设置脚本(Settings Script)，其对应的三种代理对象分别是Project对象、Gradle对象及Settin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Studio常用Gradle操作">
+<meta property="og:url" content="http://www.xiaoyaoyou1212.com/2016/05/29/Android-Studio常用Gradle操作/index.html">
+<meta property="og:site_name" content="逍遥游">
+<meta property="og:description" content="一、Gradle介绍    Gradle是一个高级构建系统和构建工具，允许通过插件自定义构建逻辑。Gradle的实质是配置脚本，执行一种类型的配置脚本时就会创建一个关联的对象，它由三种脚本类型构成，分别是构建脚本(Build Script)、初始化脚本(Init Script)及设置脚本(Settings Script)，其对应的三种代理对象分别是Project对象、Gradle对象及Settin">
+<meta property="og:image" content="http://img.blog.csdn.net/20151212203949705">
+<meta property="og:updated_time" content="2016-05-29T02:36:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Studio常用Gradle操作">
+<meta name="twitter:description" content="一、Gradle介绍    Gradle是一个高级构建系统和构建工具，允许通过插件自定义构建逻辑。Gradle的实质是配置脚本，执行一种类型的配置脚本时就会创建一个关联的对象，它由三种脚本类型构成，分别是构建脚本(Build Script)、初始化脚本(Init Script)及设置脚本(Settings Script)，其对应的三种代理对象分别是Project对象、Gradle对象及Settin">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151212203949705">
+  
+    <link rel="alternative" href="/atom.xml" title="逍遥游" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">胡伟</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+							<li><a href="/picture">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">热爱技术，玩过Linux、Spring、Cocos-2d、Javascript等，擅长Android开发；喜欢钻研新技术，对新事物充满强烈的好奇心；爱好数学，喜欢数字独特的魅力；衷爱科学，喜欢探索解密，希望一生为之努力！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">胡伟</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">胡伟</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+					<li><a href="/picture">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Android-Studio常用Gradle操作" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/29/Android-Studio常用Gradle操作/" class="article-date">
+  	<time datetime="2016-05-29T02:32:42.000Z" itemprop="datePublished">2016-05-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android Studio常用Gradle操作
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具/">工具</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一、Gradle介绍<br>    Gradle是一个高级构建系统和构建工具，允许通过插件自定义构建逻辑。Gradle的实质是配置脚本，执行一种类型的配置脚本时就会创建一个关联的对象，它由三种脚本类型构成，分别是构建脚本(Build Script)、初始化脚本(Init Script)及设置脚本(Settings Script)，其对应的三种代理对象分别是Project对象、Gradle对象及Settings对象。<br><a id="more"></a><br>二、Gradle基础配置</p>
+<ol>
+<li>Android Studio对应工程目录<br><img src="http://img.blog.csdn.net/20151212203949705" alt="Android Studio工程目录"></li>
+<li>settings.gradle文件介绍<br> 该文件是全局的项目配置文件，里面主要声明一些需要加入gradle的module。</li>
+<li>build.gradle文件介绍<br> 该文件如果是面向工程的，一般用来存储构建脚本的版本来源及工程的仓库来源，如下图所示，指定的构建工具版本是gradle1.2.3，该工具及全局工程的仓库来源都是jcenter；</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath <span class="string">'com.android.tools.build:gradle:1.2.3'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而如果该文件面向的是对应的module，则一般指定的module类型，Android相关及依赖库，如下图所示为常用配置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//module类型，常用的如：'com.android.application'、'com.android.library'、'java'、'maven'等。</span></span><br><span class="line">apply plugin: <span class="string">'com.android.application'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Android常用配置</span></span><br><span class="line">android &#123;</span><br><span class="line">	<span class="comment">//编译版本</span></span><br><span class="line">    compileSdkVersion <span class="number">22</span></span><br><span class="line">    <span class="comment">//构建工具版本</span></span><br><span class="line">    buildToolsVersion <span class="string">"22.0.1"</span></span><br><span class="line">	<span class="comment">//默认配置</span></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">	    <span class="comment">//应用包名</span></span><br><span class="line">	    applicationId <span class="string">'com.xyy.example'</span></span><br><span class="line">	    <span class="comment">//最小版本</span></span><br><span class="line">        minSdkVersion <span class="number">15</span></span><br><span class="line">        <span class="comment">//目标版本</span></span><br><span class="line">        targetSdkVersion <span class="number">22</span></span><br><span class="line">        <span class="comment">//应用版本号</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        <span class="comment">//应用版本名称</span></span><br><span class="line">        versionName <span class="string">"1.0"</span></span><br><span class="line">		<span class="comment">//是否允许dex文件超过65535大小，默认打开</span></span><br><span class="line">        multiDexEnabled <span class="keyword">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//指定编译版本</span></span><br><span class="line">    compileOptions&#123;</span><br><span class="line">		sourceCompatibility JavaVersion.VERSION_1_7</span><br><span class="line">		targetCompatibility JavaVersion.VERSION_1_7</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//lint检查配置，默认关闭</span></span><br><span class="line">    lintOptions &#123;</span><br><span class="line">        abortOnError <span class="keyword">false</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//渠道指定</span></span><br><span class="line">    productFlavors &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//签名配置</span></span><br><span class="line">    signingConfigs &#123;</span><br><span class="line">	    <span class="comment">//调试版本</span></span><br><span class="line">        debug &#123;</span><br><span class="line">	        <span class="function">storeFile <span class="title">file</span><span class="params">(<span class="string">'×.keystore'</span>)</span></span><br><span class="line">            storePassword ×××</span><br><span class="line">            keyAlias ××××</span><br><span class="line">            keyPassword ×××</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//发布版本</span></span><br><span class="line">        release </span>&#123;</span><br><span class="line">	        <span class="comment">//签名文件目录指定，相对于该module</span></span><br><span class="line">	        <span class="function">storeFile <span class="title">file</span><span class="params">(<span class="string">'×.keystore'</span>)</span></span><br><span class="line">	        <span class="comment">//签名密码</span></span><br><span class="line">            storePassword ×××</span><br><span class="line">            <span class="comment">//Alias名称</span></span><br><span class="line">            keyAlias ××××</span><br><span class="line">            <span class="comment">//Alias密码</span></span><br><span class="line">            keyPassword ×××    </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//构建类型配置</span></span><br><span class="line">    buildTypes </span>&#123;</span><br><span class="line">        debug &#123;</span><br><span class="line">	        buildConfigField(<span class="string">"boolean"</span>, <span class="string">"LOG_DEBUG"</span>, <span class="string">"true"</span>)</span><br><span class="line">            versionNameSuffix <span class="string">"debug"</span></span><br><span class="line">            minifyEnabled <span class="keyword">false</span></span><br><span class="line">            zipAlignEnabled <span class="keyword">false</span></span><br><span class="line">            shrinkResources <span class="keyword">false</span></span><br><span class="line">            signingConfig signingConfigs.debug</span><br><span class="line">        &#125;</span><br><span class="line">        release &#123;</span><br><span class="line">	        <span class="comment">//添加buildConfig配置字段，可以设置日志打印开关字段，方便发布时自动关闭打印日志</span></span><br><span class="line">	        buildConfigField(<span class="string">"boolean"</span>, <span class="string">"LOG_DEBUG"</span>, <span class="string">"false"</span>)</span><br><span class="line">	        <span class="comment">//在生成的release版本APK后缀中添加"release"字段</span></span><br><span class="line">            versionNameSuffix <span class="string">"release"</span></span><br><span class="line">            <span class="comment">//是否混淆（特别注意：如果混淆文件未配置使用false）</span></span><br><span class="line">            minifyEnabled <span class="keyword">false</span></span><br><span class="line">            <span class="comment">//是否支持Zip Align</span></span><br><span class="line">            zipAlignEnabled <span class="keyword">true</span></span><br><span class="line">            <span class="comment">//是否清理无用资源</span></span><br><span class="line">            shrinkResources <span class="keyword">true</span></span><br><span class="line">			<span class="comment">//混淆文件指定</span></span><br><span class="line">            <span class="function">proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(<span class="string">'proguard-android.txt'</span>)</span>, 'proguard-rules.pro'</span><br><span class="line">            <span class="comment">//签名指定</span></span><br><span class="line">            signingConfig signingConfigs.release</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//相关源路径的设置</span></span><br><span class="line">    sourceSets</span>&#123;</span><br><span class="line">        main&#123;</span><br><span class="line">            manifest.srcFile <span class="string">'AndroidManifest.xml'</span></span><br><span class="line">	        java.srcDirs = [<span class="string">'src'</span>]</span><br><span class="line">	        resources.srcDirs = [<span class="string">'src'</span>]</span><br><span class="line">	        aidl.srcDirs = [<span class="string">'src'</span>]</span><br><span class="line">	        renderscript.srcDirs = [<span class="string">'src'</span>]</span><br><span class="line">	        res.srcDirs = [<span class="string">'res'</span>]</span><br><span class="line">	        assets.srcDirs = [<span class="string">'assets'</span>]</span><br><span class="line">	        jniLibs.srcDirs = [<span class="string">'libs'</span>]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//依赖配置</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">	<span class="comment">//本地依赖文件树</span></span><br><span class="line">    <span class="function">compile <span class="title">fileTree</span><span class="params">(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])</span></span><br><span class="line">    <span class="comment">//远程依赖</span></span><br><span class="line">    compile '...'</span><br><span class="line">    <span class="comment">//远程编译时依赖库但不包含该库，防止重复包含引起包冲突</span></span><br><span class="line">    provided '...'</span><br><span class="line">    <span class="comment">//本地依赖文件</span></span><br><span class="line">    compile <span class="title">files</span><span class="params">(<span class="string">'...'</span>)</span></span><br><span class="line">    <span class="comment">//本地编译时依赖文件，不包含该文件</span></span><br><span class="line">    provided <span class="title">files</span><span class="params">(<span class="string">'...'</span>)</span></span><br><span class="line">    <span class="comment">//本地依赖工程</span></span><br><span class="line">    compile <span class="title">project</span><span class="params">(<span class="string">'...'</span>)</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>4  gradle.properties文件介绍<br>     该文件一般用来存储工程范围内的全局属性，而如果是与开发者个人相关且不便纳入版本控制的属性，则放到 $HOME/.gradle 下的 gradle.properties 文件，比如签署app的密钥等。</p>
+<p>三、多渠道打包配置</p>
+<p> 1.在AndroidManifest.xml中设置PlaceHolder(占位符)<br>     在application下添加</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta-data</span><br><span class="line">    android:name=<span class="string">"渠道名称"</span></span><br><span class="line">    <span class="comment">//渠道名称，可以使用android:value="$&#123;变量名&#125;"，假如变量名为XYY_FLAVORS，下面使用该变量进行说明</span></span><br><span class="line">    android:value=<span class="string">"渠道ID"</span></span><br><span class="line">    /&gt;</span><br></pre></td></tr></table></figure>
+<p>2.在对应module中的build.gradle文件中设置productFlavors(渠道信息)<br>首先在defaultConfig下设置默认渠道</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">manifestPlaceholders = [XYY_FLAVORS: <span class="string">"渠道ID"</span>]</span><br></pre></td></tr></table></figure>
+<p>然后在android下指定需要打包的渠道信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">productFlavors &#123;</span><br><span class="line">    渠道ID1 &#123;&#125;</span><br><span class="line">    渠道ID2 &#123;&#125;</span><br><span class="line">    渠道ID3 &#123;&#125;</span><br><span class="line">    渠道ID4 &#123;&#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">productFlavors.all &#123;</span><br><span class="line">    flavor -&gt; flavor.manifestPlaceholders = [XYY_FLAVORS: name]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后在buidTypes的release下指定发布时的渠道包名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">applicationVariants.all &#123;</span><br><span class="line">    variant -&gt; variant.outputs.each &#123;</span><br><span class="line">	    output -&gt; def outputFile = output.outputFile</span><br><span class="line">           if(outputFile != null &amp;&amp; outputFile.name.endsWith(&quot;.apk&quot;))&#123;</span><br><span class="line">                def fileName = &quot;xyy_v$&#123;defaultConfig.versionName&#125;_$&#123;variant.productFlavors[0].name&#125;.apk&quot;</span><br><span class="line">                output.outputFile = new File(outputFile.parent, fileName)</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 3.使用assemble命令进行打包<br>     使用./gradlew assemble+productFlavor+buildType进行打包，如：<br>     ./gradlew assembleBaiduRelease指定Baidu的release版本；<br>     ./gradlew assembleBaidu指定Baidu的release和debug版本；<br>     ./gradlew assembleRelease指定所有渠道的release版本；<br>     ./gradlew assemble指定所有渠道的release和debug版本。</p>
+<p>四、Maven仓库管理配置<br>    1、本地配置，针对所有该用户下所有工程<br>        在$HOME/.gradle下添加init.gradle文件，这是Gradle初始化脚本，也是面向用户的全局配置，配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">allprojects&#123;</span><br><span class="line">repositories &#123;</span><br><span class="line">    def REPOSITORY_URL = &apos;本地仓库路径&apos;</span><br><span class="line">    //主要逻辑是判定如果是maven2及jcenter仓库，都先执行本地仓库</span><br><span class="line">    all &#123; ArtifactRepository repo -&gt;</span><br><span class="line">        if(repo instanceof MavenArtifactRepository)&#123;</span><br><span class="line">            def url = repo.url.toString()</span><br><span class="line">            if (url.startsWith(&apos;https://repo1.maven.org/maven2&apos;) || url.startsWith(&apos;https://jcenter.bintray.com/&apos;)) &#123;</span><br><span class="line">                project.logger.lifecycle &quot;Repository $&#123;repo.url&#125; replaced by $REPOSITORY_URL.&quot;</span><br><span class="line">                remove repo</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        maven &#123;</span><br><span class="line">            url REPOSITORY_URL</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、在对应工程的build.gradle配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        maven&#123;</span><br><span class="line">	        credentials&#123;</span><br><span class="line">	            username    &apos;用户名&apos;</span><br><span class="line">	            password    &apos;密码&apos;</span><br><span class="line">	        &#125;</span><br><span class="line">	        url &apos;本地仓库路径&apos;</span><br><span class="line">        &#125;</span><br><span class="line">        //jcenter()</span><br><span class="line">        //mavenLocal()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、上传代码到本地仓库配置<br>    在需要上传的module下的build.gradle中添加如下配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">apply   plugin:&apos;maven&apos;</span><br><span class="line">uploadArchives&#123;</span><br><span class="line">    repositories&#123;</span><br><span class="line">        mavenDeployer&#123;</span><br><span class="line">	        //指定groupId，在仓库下展示为路径com/xyy/example</span><br><span class="line">	        pom.groupId = &quot;com.xyy.example&quot;</span><br><span class="line">	        //指定版本号</span><br><span class="line">	        pom.version = &quot;1.0.0&quot;</span><br><span class="line">	        repository(url: &quot;本地仓库路径&quot;)&#123;</span><br><span class="line">		        authentication(userName: 用户名, password: 密码) </span><br><span class="line">	        &#125;</span><br><span class="line">	    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>五、自动化测试配置<br>在需要进行测试的module下的build.gradle文件中添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apply from: &apos;../config/quality.gradle&apos;</span><br></pre></td></tr></table></figure>
+<p>在工程下新建config文件夹，将如下路径<a href="https://github.com/xiaoyaoyou1212/vb-android-app-quality/tree/master/config" target="_blank" rel="external">https://github.com/xiaoyaoyou1212/vb-android-app-quality/tree/master/config</a>下的文件下载后放置到该文件夹下，再在该工程下使用gradle findbugs、gradle checkstyle、gradle lint及gradle pmd进行代码检查，检查的结果会在build下的reports文件夹下。</p>
+<p>六、参考链接</p>
+<ol>
+<li><a href="http://rinvay.github.io/android/2015/03/26/Gradle-Plugin-User-Guide%28Translation%29/#10102" target="_blank" rel="external">Gradle插件用户指南(译)</a></li>
+<li><a href="http://www.xinthink.com/gradle/2013/05/01/gradle-intro.html" target="_blank" rel="external">拥抱Gradle:下一代自动化工具</a></li>
+<li><a href="http://blog.csdn.net/yanbober/article/details/49314255" target="_blank" rel="external">Gradle脚本基础全攻略</a></li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/28/Android常见问题集锦/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android常见问题集锦</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android-Studio常用Gradle操作" data-title="Android Studio常用Gradle操作" data-url="http://www.xiaoyaoyou1212.com/2016/05/29/Android-Studio常用Gradle操作/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+	<div class=“footer-left”>
+	Total <span id="busuanzi_value_site_pv"></span> views.
+您是逍遥游的第<span id="busuanzi_value_site_uv"></span>个小伙伴！
+	</div>
+    	<div class="footer-right">
+    		版权所有 &copy; 2016 胡伟
+    	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

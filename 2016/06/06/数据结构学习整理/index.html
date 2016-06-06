@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据结构学习整理 | 逍遥游</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、相关概念数据结构是相互之间存在一种或多种特定关系的数据的集合。
+1、抽象层-逻辑结构数据元素之间的逻辑关系称为数据的逻辑结构。数据的逻辑结构可以看作是从具体问题抽象出来的数学模型，它与数据的存储无关。
+1.1、集合结构(集)结构中的数据元素除了同属于一个集合外没有其他关系。
+1.2、线性结构(表)结构中的数据元素具有一对一的前后关系。
+1.3、树型结构(树)结构中的数据元素具有一对多的父子关系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构学习整理">
+<meta property="og:url" content="http://www.xiaoyaoyou1212.com/2016/06/06/数据结构学习整理/index.html">
+<meta property="og:site_name" content="逍遥游">
+<meta property="og:description" content="一、相关概念数据结构是相互之间存在一种或多种特定关系的数据的集合。
+1、抽象层-逻辑结构数据元素之间的逻辑关系称为数据的逻辑结构。数据的逻辑结构可以看作是从具体问题抽象出来的数学模型，它与数据的存储无关。
+1.1、集合结构(集)结构中的数据元素除了同属于一个集合外没有其他关系。
+1.2、线性结构(表)结构中的数据元素具有一对一的前后关系。
+1.3、树型结构(树)结构中的数据元素具有一对多的父子关系">
+<meta property="og:updated_time" content="2016-06-06T15:42:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构学习整理">
+<meta name="twitter:description" content="一、相关概念数据结构是相互之间存在一种或多种特定关系的数据的集合。
+1、抽象层-逻辑结构数据元素之间的逻辑关系称为数据的逻辑结构。数据的逻辑结构可以看作是从具体问题抽象出来的数学模型，它与数据的存储无关。
+1.1、集合结构(集)结构中的数据元素除了同属于一个集合外没有其他关系。
+1.2、线性结构(表)结构中的数据元素具有一对一的前后关系。
+1.3、树型结构(树)结构中的数据元素具有一对多的父子关系">
+  
+    <link rel="alternative" href="/atom.xml" title="逍遥游" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">胡伟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives">所有文章</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                            <li><a href="/picture">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl facebook" target="_blank" href="#" title="facebook">facebook</a>
+                            
+                                <a class="fl rss" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a> <a href="/tags/随笔/" style="font-size: 20px;">随笔</a>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">热爱技术，玩过Linux、Spring、Cocos-2d、Javascript等，擅长Android开发；喜欢钻研新技术，对新事物充满强烈的好奇心；爱好数学，喜欢数字独特的魅力；衷爱科学，喜欢探索解密，希望一生为之努力！</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">胡伟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">胡伟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives">所有文章</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                    <li><a href="/picture">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="facebook" target="_blank" href="#" title="facebook">facebook</a>
+                    
+                        <a class="rss" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-数据结构学习整理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/06/数据结构学习整理/" class="article-date">
+      <time datetime="2016-06-06T15:14:39.000Z" itemprop="datePublished">2016-06-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据结构学习整理
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="一、相关概念"><a href="#一、相关概念" class="headerlink" title="一、相关概念"></a>一、相关概念</h3><p>数据结构是相互之间存在一种或多种特定关系的数据的集合。</p>
+<h4 id="1、抽象层-逻辑结构"><a href="#1、抽象层-逻辑结构" class="headerlink" title="1、抽象层-逻辑结构"></a>1、抽象层-逻辑结构</h4><p>数据元素之间的逻辑关系称为数据的逻辑结构。数据的逻辑结构可以看作是从具体问题抽象出来的数学模型，它与数据的存储无关。</p>
+<h5 id="1-1、集合结构-集"><a href="#1-1、集合结构-集" class="headerlink" title="1.1、集合结构(集)"></a>1.1、集合结构(集)</h5><p>结构中的数据元素除了同属于一个集合外没有其他关系。</p>
+<h5 id="1-2、线性结构-表"><a href="#1-2、线性结构-表" class="headerlink" title="1.2、线性结构(表)"></a>1.2、线性结构(表)</h5><p>结构中的数据元素具有一对一的前后关系。</p>
+<h5 id="1-3、树型结构-树"><a href="#1-3、树型结构-树" class="headerlink" title="1.3、树型结构(树)"></a>1.3、树型结构(树)</h5><p>结构中的数据元素具有一对多的父子关系。</p>
+<h5 id="1-4、网状结构-图"><a href="#1-4、网状结构-图" class="headerlink" title="1.4、网状结构(图)"></a>1.4、网状结构(图)</h5><p>结构中的数据元素具有多对多的交叉映射关系。<br><a id="more"></a></p>
+<h4 id="2、结构层-物理结构"><a href="#2、结构层-物理结构" class="headerlink" title="2、结构层-物理结构"></a>2、结构层-物理结构</h4><p>数据结构在计算机中的表示（又称映像）称为数据的物理结构，或称存储结构。它所研究的是数据结构在计算机中的实现方法，包括数据结构中元素的表示及元素间关系的表示。</p>
+<h5 id="2-1、顺序结构"><a href="#2-1、顺序结构" class="headerlink" title="2.1、顺序结构"></a>2.1、顺序结构</h5><p>结构中的数据元素存放在一段连续的地址空间中。<br>随机访问方便，空间利用率低，插入删除不方便。</p>
+<h5 id="2-2、链式结构"><a href="#2-2、链式结构" class="headerlink" title="2.2、链式结构"></a>2.2、链式结构</h5><p>结构中的数据元素存放在彼此独立的地址空间中。<br>每个独立的地址空间称为节点。<br>节点除保存数据外，还需要保存相关节点的地址。<br>插入删除方便，空间利用率高，随机访问不方便。</p>
+<h5 id="2-3、索引结构"><a href="#2-3、索引结构" class="headerlink" title="2.3、索引结构"></a>2.3、索引结构</h5><p>索引存储结构是用结点的索引号来确定结点存储地址，其优点是检索速度快，缺点是增加了附加的索引表，会占用较多的存储空间。</p>
+<h5 id="2-4、散列结构"><a href="#2-4、散列结构" class="headerlink" title="2.4、散列结构"></a>2.4、散列结构</h5><p>散列存储结构是根据结点的值确定它的存储地址，优点是检索、增加和删除结点的操作速度快，缺点是采用不好的散列函数时可能出现结点单元的碰撞，而需要附加时间和空间开销。</p>
+<h4 id="3、实现层-运算结构"><a href="#3、实现层-运算结构" class="headerlink" title="3、实现层-运算结构"></a>3、实现层-运算结构</h4><h5 id="3-1、创建与销毁"><a href="#3-1、创建与销毁" class="headerlink" title="3.1、创建与销毁"></a>3.1、创建与销毁</h5><p>分配资源，建立结构，释放资源。</p>
+<h5 id="3-2、插入与删除"><a href="#3-2、插入与删除" class="headerlink" title="3.2、插入与删除"></a>3.2、插入与删除</h5><p>增加、减少数据元素。</p>
+<h5 id="3-3、获取与修改"><a href="#3-3、获取与修改" class="headerlink" title="3.3、获取与修改"></a>3.3、获取与修改</h5><p>遍历、迭代、随机访问。</p>
+<h5 id="3-4、排序与查找"><a href="#3-4、排序与查找" class="headerlink" title="3.4、排序与查找"></a>3.4、排序与查找</h5><p>主要针对各种算法应用。</p>
+<h3 id="二、常用数据结构"><a href="#二、常用数据结构" class="headerlink" title="二、常用数据结构"></a>二、常用数据结构</h3><h4 id="1、栈"><a href="#1、栈" class="headerlink" title="1、栈"></a>1、栈</h4><p>栈是一种后进先出(LIFO)的线性数据结构。<br><strong>说明：</strong> 栈上的INSERT操作称为压入(PUSH)，而无元素参数的DELETE操作称为弹出(POP)，这两个名称使人联想到现实中的栈，比如餐馆里装有弹簧的摞盘子的栈，盘子从栈中弹出的次序刚好同它们压入的次序相反，这是因为只有最上面的盘子才能被取下来。<br><strong>判空：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">STACK-EMPTY(S)</span><br><span class="line">if S.top == 0</span><br><span class="line">	return TRUE</span><br><span class="line">else</span><br><span class="line">	return FALSE</span><br></pre></td></tr></table></figure></p>
+<p><strong>压入：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PUSH(S, x)</span><br><span class="line">S.top = S.top + 1;</span><br><span class="line">S[S.top] = x;</span><br></pre></td></tr></table></figure></p>
+<p><strong>弹出：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POP(S)</span><br><span class="line">if STACK-EMPTY(S)</span><br><span class="line">	error &quot;underflow&quot;</span><br><span class="line">else</span><br><span class="line">	S.top = S.top - 1</span><br><span class="line">return S[S.top + 1]</span><br></pre></td></tr></table></figure></p>
+<h4 id="2、队列"><a href="#2、队列" class="headerlink" title="2、队列"></a>2、队列</h4><p>队列是一种先进先出(FIFO)的线性数据结构。<br><strong>说明：</strong> 队列上的INSERT操作被称为入队(ENQUEUE)，DELETE操作被称为出队(DEQUEUE)，正如栈的POP操作一样，DEQUEUE操作也没有元素参数，队列的先进先出特性类似于收银台前排队等待结账的一排顾客。队列有队头(head)和队尾(tail)，当有一个元素入队时，它被放在队尾的位置，就像一个新到来的顾客排在队伍末端一样，而出队的元素则总是在队头的那个，就像排在队伍前面等待最久的那个顾客一样。<br><strong>入队：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ENQUEUE(Q, x)</span><br><span class="line">Q[Q.tail] = x</span><br><span class="line">if Q.tail == Q.lenght</span><br><span class="line">	Q.tail = 1;</span><br><span class="line">else</span><br><span class="line">	Q.tail = Q.tail + 1</span><br></pre></td></tr></table></figure></p>
+<p><strong>出队：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DEQUEUE(Q)</span><br><span class="line">x = Q[Q.head]</span><br><span class="line">if Q.head = Q.lenght</span><br><span class="line">	Q.head = 1</span><br><span class="line">else</span><br><span class="line">	Q.head = Q.head + 1</span><br><span class="line">return x</span><br></pre></td></tr></table></figure></p>
+<h4 id="3、链表"><a href="#3、链表" class="headerlink" title="3、链表"></a>3、链表</h4><p>链表是一种这样的数据结构，其中的各对象按线性顺序排列，数组的线性顺序是由数组下标决定的，然而与数组不同的是，链表的顺序是由各个对象里的指针决定的。<br><strong>说明：</strong> 链表有单链表、双向链表及循环链表，其中双向链表L的每个元素都是一个对象，每个对象有一个关键字key和两个指针：next和prev。对象中还可以包含其他的辅助数据(或称卫星数据)。设x为链表的一个元素，x.next指向它在链表中的后继元素，x.prev则指向它的前驱元素。如果x.prev=NIL，则元素x没有前驱，因此是链表的第一个元素，即链表的头(head)。如果x.next=NIL，则元素x没有后继，因此是链表的最后一个元素，即链表的尾(tail)。属性L.head指向链表的第一个元素，如果L.head=NIL，则链表为空。如果一个链表是单链接的，则省略每个元素中的prev指针。如果一个链表是循环链接的，则表头元素的prev指针指向表尾元素，而表尾元素的next指针则指向表头元素。如果链表是已排序的，则链表的线性顺序与链表元素中关键字的线性顺序一样，据此，最小的元素就是表头元素，而最大的元素则是表尾元素。如果链表是未排序的，则各元素可以以任何顺序出现。<br>以下操作伪代码都是基于未排序的双向链表。<br><strong>搜索：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LIST-SEARCH(L, k)</span><br><span class="line">x = L.head</span><br><span class="line">while x != NIL &amp;&amp; x.key != k</span><br><span class="line">	x = x.next</span><br><span class="line">return x</span><br></pre></td></tr></table></figure></p>
+<p><strong>插入：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LIST-INSERT(L, x)</span><br><span class="line">x.next = L.head</span><br><span class="line">if L.head != NIL</span><br><span class="line">	L.head.prev = x</span><br><span class="line">L.head = x</span><br><span class="line">x.prev = NIL</span><br></pre></td></tr></table></figure></p>
+<p><strong>删除：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">LIST-DELETE(L, x)</span><br><span class="line">if x.prev != NIL</span><br><span class="line">	x.prev.next = x.next</span><br><span class="line">else</span><br><span class="line">	L.head = x.next</span><br><span class="line">if x.next != NIL</span><br><span class="line">	x.next.prev = x.prev</span><br></pre></td></tr></table></figure></p>
+<h4 id="4、二叉树"><a href="#4、二叉树" class="headerlink" title="4、二叉树"></a>4、二叉树</h4><h5 id="4-1、树的相关概念"><a href="#4-1、树的相关概念" class="headerlink" title="4.1、树的相关概念"></a>4.1、树的相关概念</h5><p><strong>树：</strong> 树是n个节点的集合，集合中有一个称为根的特殊节点，在根节点下分布着一些互不相交的集合，每一个集合又是一棵树，这些树称为根节点的子树。<br>空集合也是树，称为空树。<br>单个节点是一棵树，树根就是该节点本身。<br>若某树有多个节点，则每个节点都可以看成是根节点。<br>在一棵树中，有且仅有一个节点没有前驱，这个节点就是树的根节点。<br>除根节点外，其余每个节点有且仅有一个前驱。<br>每个节点可以有任意多个后继。<br><strong>父节点、子节点、兄弟节点：</strong> 每个节点的子树的根称为该节点的儿子（子节点），相应的，该节点被称为子节点的父亲（父节点），具有同一父节点的节点称为兄弟节点。<br><strong>节点的度：</strong> 一个节点的子树的数量称为该节点的度。<br><strong>树的度：</strong> 一棵树的度是指该树中节点的最大度数。<br><strong>叶节点和分支节点：</strong> 树中度为零的节点称为叶节点或终端节点，树中度不为零的节点称为分支节点或非终端节点。<br><strong>节点的层数：</strong> 树是一种层次结构，每个节点都处在一定的层次上。<br><strong>树的深度：</strong> 一棵树中节点的最大层数称为树的深度。<br><strong>有序树和无序树：</strong> 若树种各节点的子树是按照一定次序从左向右安排的，称为有序树，否则称为无序树。<br><strong>森林：</strong> 森林是m(m&gt;=0)棵互不相交的树的集合。</p>
+<h5 id="4-2、二叉树的相关概念"><a href="#4-2、二叉树的相关概念" class="headerlink" title="4.2、二叉树的相关概念"></a>4.2、二叉树的相关概念</h5><p><strong>二叉树：</strong> 一个二叉树是n个节点的集合，此集合要么是空集，要么是由一个根节点加上分别称为左子树和右子树的两个互不相交的二叉树。<br><strong>二叉树的基本形态：</strong><br>空：没有任何节点。<br>仅有根节点：只有根节点，没有子节点。<br>仅有左子树：只有一个子节点，且位于左子树位置，右子树位置为空。<br>仅有右子树：只有一个子节点，且位于右子树位置，左子树位置为空。<br>有左右子树：左右子树都有。<br><strong>二叉树和树的两个主要差别如下：</strong><br>树中节点的最大度数没有限制，而二叉树节点的最大度数为2；<br>树的节点无左右之分，而二叉树的节点有左右之分。<br>满二叉树：在二叉树中，除最下一层的叶节点外，每层的节点都有两个子节点，就构成了满二叉树。<br>完全二叉树：除二叉树最后一层外，其他各层的节点数都达到最大个数，且最后一层从左向右的叶节点连续存在，只缺右侧若干节点，就是完全二叉树。<br><strong>二叉树的性质：</strong><br>在二叉树中，第i层的节点总数最多为2i-1个。<br>深度为k的二叉树最多有2k-1个节点（k&gt;=1），最少有k个节点。<br>对于一棵二叉树，如果其叶节点数为n0，而度为2的节点总数为n2，则n0=n2+1。<br>具有n个节点的完全二叉树的深度k为：k=[log2n]+1。<br>有n个节点的完全二叉树各节点如果用顺序方式存储，对任意节点i，有如下关系：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如果i!=1，则其父节点的编号为i/2;</span><br><span class="line">如果2*i&lt;=n，则其左子树根节点的编号为2*i；若2*i&gt;n，则无左子树；</span><br><span class="line">如果2*i+1&lt;=n，则其右子树根节点的编号为2*i+1；若2*i+1&gt;n，则无右子树。</span><br></pre></td></tr></table></figure></p>
+<h5 id="4-3、二叉搜索树："><a href="#4-3、二叉搜索树：" class="headerlink" title="4.3、二叉搜索树："></a>4.3、二叉搜索树：</h5><p>满足以下性质的二叉树为二叉搜索树：设x是二叉搜索树中的一个节点，如果y是x左子树种的一个节点，那么y.key&lt;=x.key，如果y是右子树的一个节点，那么y.key&gt;=x.key。<br>以下为针对搜索二叉树的基本操作伪代码介绍：<br><strong>SEARCH（查找）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TREE-SEARCH(x, k)</span><br><span class="line">if x == NIL || k == x.key</span><br><span class="line">	return x</span><br><span class="line">if k &lt; x.key</span><br><span class="line">	return TREE-SEARCH(x.left, k)</span><br><span class="line">else</span><br><span class="line">	return TREE-SEARCH(x.right, k)</span><br></pre></td></tr></table></figure></p>
+<p><strong>MINIMUM（最小值）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TREE-MINIMUM(x)</span><br><span class="line">while x.left != NIL</span><br><span class="line">	x = x.left</span><br><span class="line">return x</span><br></pre></td></tr></table></figure></p>
+<p><strong>MAXIMUM（最大值）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TREE-MAXIMUM(x)</span><br><span class="line">while x.right != NIL</span><br><span class="line">	x = x.right</span><br><span class="line">return x</span><br></pre></td></tr></table></figure></p>
+<p><strong>PREDECESSOR（前驱）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">TREE-PREDECESSOR(x)</span><br><span class="line">if x.left != NIL</span><br><span class="line">	return TREE-MAXIMUM(x)</span><br><span class="line">y = x.p</span><br><span class="line">while y != NIL &amp;&amp; x == y.left</span><br><span class="line">	x = y</span><br><span class="line">    y = y.p</span><br><span class="line">return y</span><br></pre></td></tr></table></figure></p>
+<p><strong>SUCCESSOR（后继）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">TREE-SUCCESSOR(x)</span><br><span class="line">if x.right != NIL</span><br><span class="line">	return TREE-MINIMUM(x, right)</span><br><span class="line">y = x.p</span><br><span class="line">while y != NIL &amp;&amp; x == y.right</span><br><span class="line">	x = y</span><br><span class="line">    y = y.p</span><br><span class="line">return y</span><br></pre></td></tr></table></figure></p>
+<p><strong>INSERT（插入）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">TREE-INSERT(T, z)</span><br><span class="line">y = NIL</span><br><span class="line">x = T.root</span><br><span class="line">while x != NIL</span><br><span class="line">	y = x</span><br><span class="line">    if z.key &lt; x.key</span><br><span class="line">    	x = x.left</span><br><span class="line">    else</span><br><span class="line">    	x = x.right</span><br><span class="line">z.p = y</span><br><span class="line">if y == NIL</span><br><span class="line">	T.root = z</span><br><span class="line">else if z.key &lt; y.key</span><br><span class="line">	y.left = z</span><br><span class="line">else</span><br><span class="line">	y.right = z</span><br></pre></td></tr></table></figure></p>
+<p><strong>TRANSPLANT（移动）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">TRANSPLANT(T, u, v)</span><br><span class="line">if u.p == NIL</span><br><span class="line">	T.root = v</span><br><span class="line">else if u == v.p.left</span><br><span class="line">	u.p.left = v</span><br><span class="line">else</span><br><span class="line">	u.p.right = v</span><br><span class="line">if v != NIL</span><br><span class="line">	v.p = u.p</span><br></pre></td></tr></table></figure></p>
+<p><strong>DELETE（删除）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">TREE-DELETE(T, z)</span><br><span class="line">if z.left == NIL</span><br><span class="line">	TRANSPLANT(T, z, z.right)</span><br><span class="line">else if z.right == NIL</span><br><span class="line">	TRANSPLANT(T, z, z.left)</span><br><span class="line">else</span><br><span class="line">	y = TREE-MINIMUM(z.right)</span><br><span class="line">    if y.p != z</span><br><span class="line">    	TRANSPLANT(T, y, y.right)</span><br><span class="line">    	y.right = z.right</span><br><span class="line">        y.right.p = y</span><br><span class="line">    TRANSPLANT(T, z, y)</span><br><span class="line">    y.left = z.left</span><br><span class="line">    y.left.p = y</span><br></pre></td></tr></table></figure></p>
+<h4 id="5、图"><a href="#5、图" class="headerlink" title="5、图"></a>5、图</h4><h5 id="5-1、概述："><a href="#5-1、概述：" class="headerlink" title="5.1、概述："></a>5.1、概述：</h5><p>图由数据元素和连接数据元素的线构成。在图中数据元素称为顶点(Vertex)，连接这些顶点的线称为边(Edge)。一个图是由顶点集合和边集合组成，一般记为以下形式：G=(V, E)或G=(V(G), E(G))，其中，V(G)表示顶点的非空集合，每个顶点可以用不同的字母或数字来表示。E(G)是图的所有边的集合，该集合可以为空，即没有边，图的每条边由所连接的两个顶点表示。</p>
+<h5 id="5-2、图的相关概念："><a href="#5-2、图的相关概念：" class="headerlink" title="5.2、图的相关概念："></a>5.2、图的相关概念：</h5><p><strong>无向图：</strong> 边没有方向的图称为无向图。<br><strong>有向图：</strong> 边有方向的图称为有向图。<br><strong>邻接点：</strong> 图中一条边的两个顶点互称为邻接点。<br><strong>顶点的度：</strong> 图中连接某个顶点的边的数量。<br><strong>完全图：</strong> 若在图中每两个顶点之间都存在一条边，则该图称为完全图。<br><strong>子图：</strong> 如果一个图G2的所在顶点和边都是另一个图G1的子集，则称G2为G1的子图。<br><strong>路径：</strong> 在一个图中，从顶点Vm到Vn之间存在一个顶点序列Vm、Vi1、Vi2、…、Vii、Vn，使得(Vm, Vi1)、(Vi1, Vi2)、…、(Vii, Vn)，则表示从Vm到Vn有一条路径。<br><strong>路径长度：</strong> 指路径上边的数量。<br><strong>回路：</strong> 若路径的第一个顶点和最后一个顶点相同，称为回路。<br><strong>连通图：</strong> 在无向图中，若两个顶点之间有路径，则称这两个顶点是连通的，若无向图G中任意两个顶点都是连通的，则称图G为连通图，否则称为非连通图。<br><strong>连通分量：</strong> 无向图G的极大连通子图称为G的连通分量，任何连通图的连通分量只有一个，即该图本身，而非连通图就有多个连通分量。<br><strong>强连通图：</strong> 若有向图G中任意两个顶点都是连通的，则称图G为强连通图。<br><strong>强连通分量：</strong> 有向图G的极大强连通子图称为强连通分量。<br><strong>权：</strong> 在一个图中，每条边可以标上具有某种含义的数值，该数值称为对应边的权。<br><strong>网：</strong> 边上带有权值的图称为带权图，也称为网。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/06/06/数据结构学习整理/">数据结构学习整理</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 胡伟 的个人博客">胡伟</a></p>
+        <p><span>发布时间:</span>2016年06月06日 - 23时14分</p>
+        <p><span>最后更新:</span>2016年06月06日 - 23时42分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/06/06/数据结构学习整理/" title="数据结构学习整理">http://www.xiaoyaoyou1212.com/2016/06/06/数据结构学习整理/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xiaoyaoyou1212.com/2016/06/06/数据结构学习整理/　　作者: 胡伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/29/从零开始搭建属于自己的博客/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">从零开始搭建属于自己的博客</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、相关概念"><span class="toc-number">1.</span> <span class="toc-text">一、相关概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、抽象层-逻辑结构"><span class="toc-number">1.1.</span> <span class="toc-text">1、抽象层-逻辑结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1、集合结构-集"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1、集合结构(集)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2、线性结构-表"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2、线性结构(表)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3、树型结构-树"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3、树型结构(树)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-4、网状结构-图"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.4、网状结构(图)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、结构层-物理结构"><span class="toc-number">1.2.</span> <span class="toc-text">2、结构层-物理结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1、顺序结构"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1、顺序结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2、链式结构"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2、链式结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3、索引结构"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3、索引结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4、散列结构"><span class="toc-number">1.2.4.</span> <span class="toc-text">2.4、散列结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、实现层-运算结构"><span class="toc-number">1.3.</span> <span class="toc-text">3、实现层-运算结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1、创建与销毁"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1、创建与销毁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2、插入与删除"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2、插入与删除</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3、获取与修改"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3、获取与修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4、排序与查找"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.4、排序与查找</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、常用数据结构"><span class="toc-number">2.</span> <span class="toc-text">二、常用数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、栈"><span class="toc-number">2.1.</span> <span class="toc-text">1、栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、队列"><span class="toc-number">2.2.</span> <span class="toc-text">2、队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、链表"><span class="toc-number">2.3.</span> <span class="toc-text">3、链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、二叉树"><span class="toc-number">2.4.</span> <span class="toc-text">4、二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-1、树的相关概念"><span class="toc-number">2.4.1.</span> <span class="toc-text">4.1、树的相关概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-2、二叉树的相关概念"><span class="toc-number">2.4.2.</span> <span class="toc-text">4.2、二叉树的相关概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3、二叉搜索树："><span class="toc-number">2.4.3.</span> <span class="toc-text">4.3、二叉搜索树：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、图"><span class="toc-number">2.5.</span> <span class="toc-text">5、图</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#5-1、概述："><span class="toc-number">2.5.1.</span> <span class="toc-text">5.1、概述：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-2、图的相关概念："><span class="toc-number">2.5.2.</span> <span class="toc-text">5.2、图的相关概念：</span></a></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/06/06/数据结构学习整理/" data-title="数据结构学习整理" data-url="http://www.xiaoyaoyou1212.com/2016/06/06/数据结构学习整理/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/05/29/从零开始搭建属于自己的博客/" title="下一篇: 从零开始搭建属于自己的博客">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/数据结构学习整理/">数据结构学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/从零开始搭建属于自己的博客/">从零开始搭建属于自己的博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Mac常用功能整理/">Mac常用功能整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Git学习整理/">Git学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Linux常用命令整理/">Linux常用命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Android-Studio常用Gradle操作/">Android Studio常用Gradle操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/28/Android常见问题集锦/">Android常见问题集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/28/hello-world/">Hello World</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                版权所有 &copy; 2016 胡伟
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >伙伴到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

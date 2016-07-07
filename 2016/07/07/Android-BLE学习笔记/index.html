@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android BLE学习笔记 | 逍遥游</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言：本文主要描述Android BLE的一些基础知识及相关操作流程，不牵扯具体的业务实现，其中提供了针对广播包及响应包的解析思路，希望对正在或即将面临Android BLE开发的伙伴们有所引导。注：其中的单模、双模、BR、BT、BLE、蓝牙3.0、蓝牙4.0等概念混在一起可能比较难理解，不知下文描述是否清晰，如果有不理解的地方，欢迎留言交流！
+一、相关介绍1、概述蓝牙无线技术是一种全球通用的短距">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android BLE学习笔记">
+<meta property="og:url" content="http://www.xiaoyaoyou1212.com/2016/07/07/Android-BLE学习笔记/index.html">
+<meta property="og:site_name" content="逍遥游">
+<meta property="og:description" content="前言：本文主要描述Android BLE的一些基础知识及相关操作流程，不牵扯具体的业务实现，其中提供了针对广播包及响应包的解析思路，希望对正在或即将面临Android BLE开发的伙伴们有所引导。注：其中的单模、双模、BR、BT、BLE、蓝牙3.0、蓝牙4.0等概念混在一起可能比较难理解，不知下文描述是否清晰，如果有不理解的地方，欢迎留言交流！
+一、相关介绍1、概述蓝牙无线技术是一种全球通用的短距">
+<meta property="og:image" content="http://i1.hexunimg.cn/2015-12-09/181086199.jpg">
+<meta property="og:image" content="http://jlog.qiniudn.com/ble-adv-data-fromat.jpg">
+<meta property="og:updated_time" content="2016-07-07T13:47:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android BLE学习笔记">
+<meta name="twitter:description" content="前言：本文主要描述Android BLE的一些基础知识及相关操作流程，不牵扯具体的业务实现，其中提供了针对广播包及响应包的解析思路，希望对正在或即将面临Android BLE开发的伙伴们有所引导。注：其中的单模、双模、BR、BT、BLE、蓝牙3.0、蓝牙4.0等概念混在一起可能比较难理解，不知下文描述是否清晰，如果有不理解的地方，欢迎留言交流！
+一、相关介绍1、概述蓝牙无线技术是一种全球通用的短距">
+<meta name="twitter:image" content="http://i1.hexunimg.cn/2015-12-09/181086199.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="逍遥游" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">胡伟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives">所有文章</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                            <li><a href="/picture">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl facebook" target="_blank" href="#" title="facebook">facebook</a>
+                            
+                                <a class="fl rss" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">热爱技术，喜欢钻研新技术，对新事物充满强烈的好奇心；爱好数学，喜欢数字独特的魅力；衷爱科学，喜欢探索解密，希望一生为之努力！</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">胡伟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">胡伟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives">所有文章</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                    <li><a href="/picture">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="facebook" target="_blank" href="#" title="facebook">facebook</a>
+                    
+                        <a class="rss" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Android-BLE学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/07/Android-BLE学习笔记/" class="article-date">
+      <time datetime="2016-07-07T13:44:38.000Z" itemprop="datePublished">2016-07-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android BLE学习笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>本文主要描述Android BLE的一些基础知识及相关操作流程，不牵扯具体的业务实现，其中提供了针对广播包及响应包的解析思路，希望对正在或即将面临Android BLE开发的伙伴们有所引导。<br>注：其中的单模、双模、BR、BT、BLE、蓝牙3.0、蓝牙4.0等概念混在一起可能比较难理解，不知下文描述是否清晰，如果有不理解的地方，欢迎留言交流！</p>
+<h4 id="一、相关介绍"><a href="#一、相关介绍" class="headerlink" title="一、相关介绍"></a>一、相关介绍</h4><h5 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h5><p>蓝牙无线技术是一种全球通用的短距离无线技术，通过蓝牙技术能够实现多种电子设备间的相互连接，特别是在小型无线电、耗电量低、成本低、安全性、稳定性、易用性以及特别的联网能力等固有的优势上，蓝牙无线技术发展迅速。</p>
+<h5 id="2、分类"><a href="#2、分类" class="headerlink" title="2、分类"></a>2、分类</h5><p>蓝牙分为三种：Bluetooth Smart Ready、Bluetooth Smart（Smart是低功耗蓝牙的标识）、以及标准 Bluetooth。根据 Bluetooth SIG的说法，这样是为了要分辨装置间的相容性以及标识各版本的传输频率。基本上来说，Bluetooth Smart Ready适用于任何双模蓝牙4.0的电子产品,而Bluetooth Smart是应用在心率监视器或计步器等使用扭扣式电池并传输单一的装置。Bluetooth Smart Ready的相容性最高，可与Bluetooth Smart及标准蓝牙相通。标准蓝牙则无法与Bluetooth Smart相通。<br><a id="more"></a><br><img src="http://i1.hexunimg.cn/2015-12-09/181086199.jpg" alt=""></p>
+<h5 id="3、BLE介绍"><a href="#3、BLE介绍" class="headerlink" title="3、BLE介绍"></a>3、BLE介绍</h5><p>BLE是Bluetooth Low Energy的缩写，又叫蓝牙4.0，区别于蓝牙3.0和之前的技术。BLE前身是NOKIA开发的Wibree技术，主要用于实现移动智能终端与周边配件之间的持续连接，是功耗极低的短距离无线通信技术，并且有效传输距离被提升到了100米以上，同时只需要一颗纽扣电池就可以工作数年之久。BLE是在蓝牙技术的基础上发展起来的，既同于蓝牙，又区别于传统蓝牙。BLE设备分单模和双模两种，双模简称BR，商标为Bluetooth Smart Ready，单模简称BLE或者LE,商标为Bluetooth Smart。Android是在4.3后才支持BLE，这说明不是所有蓝牙手机都支持BLE，而且支持BLE的蓝牙手机一般是双模的。双模兼容传统蓝牙，可以和传统蓝牙通信，也可以和BLE通信，常用在手机上，android4.3和IOS4.0之后版本都支持BR，也就是双模设备。单模只能和BR和单模的设备通信，不能和传统蓝牙通信，由于功耗低，待机长，所以常用在手环的智能设备上。</p>
+<h4 id="二、基本概念"><a href="#二、基本概念" class="headerlink" title="二、基本概念"></a>二、基本概念</h4><h5 id="1、Generic-Access-Profile-GAP"><a href="#1、Generic-Access-Profile-GAP" class="headerlink" title="1、Generic Access Profile(GAP)"></a>1、Generic Access Profile(GAP)</h5><p>用来控制设备连接和广播，GAP使你的设备被其他设备可见，并决定了你的设备是否可以或者怎样与合同设备进行交互。</p>
+<h5 id="2、Generic-Attribute-Profile-GATT"><a href="#2、Generic-Attribute-Profile-GATT" class="headerlink" title="2、Generic Attribute Profile(GATT)"></a>2、Generic Attribute Profile(GATT)</h5><p>通过BLE连接，读写属性类数据的Profile通用规范，现在所有的BLE应用Profile都是基于GATT的。</p>
+<h5 id="3、Attribute-Protocol-ATT"><a href="#3、Attribute-Protocol-ATT" class="headerlink" title="3、Attribute Protocol (ATT)"></a>3、Attribute Protocol (ATT)</h5><p>GATT是基于ATTProtocol的，ATT针对BLE设备做了专门的优化，具体就是在传输过程中使用尽量少的数据，每个属性都有一个唯一的UUID，属性将以characteristics and services的形式传输。</p>
+<h5 id="4、Characteristic"><a href="#4、Characteristic" class="headerlink" title="4、Characteristic"></a>4、Characteristic</h5><p>Characteristic可以理解为一个数据类型，它包括一个value和0至多个对次value的描述（Descriptor）。</p>
+<h5 id="5、Descriptor"><a href="#5、Descriptor" class="headerlink" title="5、Descriptor"></a>5、Descriptor</h5><p>对Characteristic的描述，例如范围、计量单位等。</p>
+<h5 id="6、Service"><a href="#6、Service" class="headerlink" title="6、Service"></a>6、Service</h5><p>Characteristic的集合。例如一个service叫做“Heart Rate Monitor”，它可能包含多个Characteristics，其中可能包含一个叫做“heart ratemeasurement”的Characteristic。</p>
+<h5 id="7、UUID"><a href="#7、UUID" class="headerlink" title="7、UUID"></a>7、UUID</h5><p>唯一标示符，每个Service，Characteristic，Descriptor，都是由一个UUID定义。</p>
+<h4 id="三、Android-BLE-API"><a href="#三、Android-BLE-API" class="headerlink" title="三、Android BLE API"></a>三、Android BLE API</h4><h5 id="1、BluetoothGatt"><a href="#1、BluetoothGatt" class="headerlink" title="1、BluetoothGatt"></a>1、BluetoothGatt</h5><p>继承BluetoothProfile，通过BluetoothGatt可以连接设备（connect）,发现服务（discoverServices），并把相应地属性返回到BluetoothGattCallback，可以看成蓝牙设备从连接到断开的生命周期。</p>
+<h5 id="2、BluetoothGattCharacteristic"><a href="#2、BluetoothGattCharacteristic" class="headerlink" title="2、BluetoothGattCharacteristic"></a>2、BluetoothGattCharacteristic</h5><p>相当于一个数据类型，可以看成一个特征或能力，它包括一个value和0~n个value的描述（BluetoothGattDescriptor）。</p>
+<h5 id="3、BluetoothGattDescriptor"><a href="#3、BluetoothGattDescriptor" class="headerlink" title="3、BluetoothGattDescriptor"></a>3、BluetoothGattDescriptor</h5><p>描述符，对Characteristic的描述，包括范围、计量单位等。</p>
+<h5 id="4、BluetoothGattService"><a href="#4、BluetoothGattService" class="headerlink" title="4、BluetoothGattService"></a>4、BluetoothGattService</h5><p>服务，Characteristic的集合。</p>
+<h5 id="5、BluetoothProfile"><a href="#5、BluetoothProfile" class="headerlink" title="5、BluetoothProfile"></a>5、BluetoothProfile</h5><p>一个通用的规范，按照这个规范来收发数据。</p>
+<h5 id="6、BluetoothManager"><a href="#6、BluetoothManager" class="headerlink" title="6、BluetoothManager"></a>6、BluetoothManager</h5><p>通过BluetoothManager来获取BluetoothAdapter。<br><code>BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);</code></p>
+<h5 id="7、BluetoothAdapter"><a href="#7、BluetoothAdapter" class="headerlink" title="7、BluetoothAdapter"></a>7、BluetoothAdapter</h5><p>代表了移动设备的本地的蓝牙适配器, 通过该蓝牙适配器可以对蓝牙进行基本操作，一个Android系统只有一个BluetoothAdapter，通过BluetoothManager获取。<br><code>BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();</code></p>
+<h5 id="8、BluetoothDevice"><a href="#8、BluetoothDevice" class="headerlink" title="8、BluetoothDevice"></a>8、BluetoothDevice</h5><p>扫描后发现可连接的设备，获取已经连接的设备。<br><code>BluetoothDevice bluetoothDevice = bluetoothAdapter.getRemoteDevice(address);</code></p>
+<h5 id="9、BluetoothGattCallback"><a href="#9、BluetoothGattCallback" class="headerlink" title="9、BluetoothGattCallback"></a>9、BluetoothGattCallback</h5><p>已经连接上设备，对设备的某些操作后返回的结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BluetoothGattCallback bluetoothGattCallback = new BluetoothGattCallback()&#123;</span><br><span class="line">	//实现回调方法，根据业务做相应处理</span><br><span class="line">&#125;;</span><br><span class="line">BluetoothGatt bluetoothGatt = bluetoothDevice.connectGatt(this, false, bluetoothGattCallback);</span><br></pre></td></tr></table></figure></p>
+<h4 id="三、操作流程"><a href="#三、操作流程" class="headerlink" title="三、操作流程"></a>三、操作流程</h4><h5 id="1、蓝牙开启"><a href="#1、蓝牙开启" class="headerlink" title="1、蓝牙开启"></a>1、蓝牙开启</h5><p>在使用蓝牙BLE之前，需要确认Android设备是否支持BLE feature(required为false时)，另外要需要确认蓝牙是否打开。如果发现不支持BLE，则不能使用BLE相关的功能；如果支持BLE，但是蓝牙没打开，则需要打开蓝牙。代码示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">//是否支持蓝牙模块</span><br><span class="line">@TargetApi(18)</span><br><span class="line">public static boolean isSupportBle(Context context) &#123;</span><br><span class="line">    if(context != null &amp;&amp; context.getPackageManager().hasSystemFeature(&quot;android.hardware.bluetooth_le&quot;)) &#123;</span><br><span class="line">        BluetoothManager manager = (BluetoothManager)context.getSystemService(&quot;bluetooth&quot;);</span><br><span class="line">        return manager.getAdapter() != null;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//是否开启蓝牙</span><br><span class="line">@TargetApi(18)</span><br><span class="line">public static boolean isBleEnable(Context context) &#123;</span><br><span class="line">    if(!isSupportBle(context)) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        BluetoothManager manager = (BluetoothManager)context.getSystemService(&quot;bluetooth&quot;);</span><br><span class="line">        return manager.getAdapter().isEnabled();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//开启蓝牙</span><br><span class="line">public static void enableBle(Activity act, int requestCode) &#123;</span><br><span class="line">    Intent mIntent = new Intent(&quot;android.bluetooth.adapter.action.REQUEST_ENABLE&quot;);</span><br><span class="line">    act.startActivityForResult(mIntent, requestCode);</span><br><span class="line">&#125;</span><br><span class="line">//蓝牙开启过程</span><br><span class="line">if(isSupportBle(mContext))&#123;</span><br><span class="line">	//支持蓝牙模块</span><br><span class="line">    if(!isBleEnable(mContext))&#123;</span><br><span class="line">    	//没开启蓝牙则开启</span><br><span class="line">    	enableBle(mSelfActivity, 1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else&#123;</span><br><span class="line">	//不支持蓝牙模块处理</span><br><span class="line">&#125;</span><br><span class="line">//蓝牙开启回调</span><br><span class="line">@Override</span><br><span class="line">protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">	//判断requestCode是否为开启蓝牙时传进去的值，再做相应处理</span><br><span class="line">    if(requestCode == 1)&#123;</span><br><span class="line">    	//蓝牙开启成功后的处理</span><br><span class="line">    &#125;</span><br><span class="line">    super.onActivityResult(requestCode, resultCode, data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="2、设备搜索"><a href="#2、设备搜索" class="headerlink" title="2、设备搜索"></a>2、设备搜索</h5><ul>
+<li><p>BluetoothAdapter.startDiscovery在大多数手机上是可以同时发现经典蓝牙和Ble的，但是startDiscovery的回调无法返回Ble的广播，所以无法通过广播识别设备，且startDiscovery扫描Ble的效率比StartLeScan低很多。所以在实际应用中，还是StartDiscovery和StartLeScan分开扫，前者扫传统蓝牙，后者扫低功耗蓝牙。</p>
+</li>
+<li><p>由于搜索需要尽量减少功耗，因此在实际使用时需要注意：当找到对应的设备后，立即停止扫描；不要循环搜索设备，为每次搜索设置适合的时间限制，避免设备不在可用范围的时候持续不停扫描，消耗电量。</p>
+</li>
+<li><p>通过调用BluetoothAdapter的 startLeScan() 搜索BLE设备。调用此方法时需要传入  BluetoothAdapter.LeScanCallback 参数。具体代码示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);</span><br><span class="line">BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();</span><br><span class="line">bluetoothAdapter.startLeScan(new BluetoothAdapter.LeScanCallback() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) &#123;</span><br><span class="line">		//对扫描到的设备进行处理，可以依据BluetoothDevice中的信息、信号强度rssi以及广播包和响应包组成的scanRecord字节数组进行分析</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="3、设备通信"><a href="#3、设备通信" class="headerlink" title="3、设备通信"></a>3、设备通信</h5><p>两个设备通过BLE通信，首先需要建立GATT连接，这里我们讲的是Android设备作为client端，连接GATT Server。连接GATT Server，需要调用BluetoothDevice的connectGatt()方法，此函数带三个参数：Context、autoConnect(boolean)和 BluetoothGattCallback 对象。调用后返回BluetoothGatt对象，它是GATT profile的封装，通过这个对象，我们就能进行GATT Client端的相关操作。如断开连接<code>bluetoothGatt.disconnect()</code>，发现服务<code>bluetoothGatt.discoverServices()</code>等等。示例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">BluetoothDevice bluetoothDevice = bluetoothAdapter.getRemoteDevice(address);</span><br><span class="line">BluetoothGattCallback bluetoothGattCallback = new BluetoothGattCallback()&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) &#123;</span><br><span class="line">        super.onConnectionStateChange(gatt, status, newState);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onServicesDiscovered(BluetoothGatt gatt, int status) &#123;</span><br><span class="line">        super.onServicesDiscovered(gatt, status);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) &#123;</span><br><span class="line">        super.onCharacteristicRead(gatt, characteristic, status);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) &#123;</span><br><span class="line">        super.onCharacteristicWrite(gatt, characteristic, status);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) &#123;</span><br><span class="line">        super.onCharacteristicChanged(gatt, characteristic);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onDescriptorRead(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) &#123;</span><br><span class="line">        super.onDescriptorRead(gatt, descriptor, status);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) &#123;</span><br><span class="line">        super.onDescriptorWrite(gatt, descriptor, status);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onReliableWriteCompleted(BluetoothGatt gatt, int status) &#123;</span><br><span class="line">        super.onReliableWriteCompleted(gatt, status);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) &#123;</span><br><span class="line">        super.onReadRemoteRssi(gatt, rssi, status);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onMtuChanged(BluetoothGatt gatt, int mtu, int status) &#123;</span><br><span class="line">        super.onMtuChanged(gatt, mtu, status);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">BluetoothGatt bluetoothGatt = bluetoothDevice.connectGatt(this, false, bluetoothGattCallback);</span><br><span class="line"></span><br><span class="line">//以下为获得Gatt后的相关操作对应的响应方法</span><br><span class="line">//notification to onCharacteristicChanged；</span><br><span class="line">bluetoothGatt.setCharacteristicNotification(characteristic, true);</span><br><span class="line"></span><br><span class="line">//readCharacteristic to onCharacteristicRead；</span><br><span class="line">bluetoothGatt.readCharacteristic(characteristic);</span><br><span class="line"></span><br><span class="line">//writeCharacteristic to onCharacteristicWrite；</span><br><span class="line">bluetoothGatt.wirteCharacteristic(mCurrentcharacteristic);</span><br><span class="line"></span><br><span class="line">//connect and disconnect to onConnectionStateChange；</span><br><span class="line">bluetoothGatt.connect();</span><br><span class="line">bluetoothGatt.disconnect();</span><br><span class="line"></span><br><span class="line">//readDescriptor to onDescriptorRead；</span><br><span class="line">bluetoothGatt.readDescriptor(descriptor);</span><br><span class="line"></span><br><span class="line">//writeDescriptor to onDescriptorWrite；</span><br><span class="line">bluetoothGatt.writeDescriptor(descriptor);</span><br><span class="line"></span><br><span class="line">//readRemoteRssi to onReadRemoteRssi；</span><br><span class="line">bluetoothGatt.readRemoteRssi();</span><br><span class="line"></span><br><span class="line">//executeReliableWrite to onReliableWriteCompleted；</span><br><span class="line">bluetoothGatt.executeReliableWrite();</span><br><span class="line"></span><br><span class="line">//discoverServices to onServicesDiscovered;</span><br><span class="line">bluetoothGatt.discoverServices();</span><br></pre></td></tr></table></figure>
+<h4 id="四、数据解析"><a href="#四、数据解析" class="headerlink" title="四、数据解析"></a>四、数据解析</h4><ul>
+<li><p>BLE中有两种角色Central和Peripheral，也就是中心设备和外围设备，中心设备可以主动连接外围设备，外围设备发送广播或者被中心设备连接，外围通过广播被中心设备发现，广播中带有外围设备自身的相关信息。</p>
+</li>
+<li><p>数据包有两种：广播包（Advertising Data）和响应包（Scan Response），其中广播包是每个设备必须广播的，而响应包是可选的。数据包的格式如下图所示（图片来自官方 Spec）：<br><img src="http://jlog.qiniudn.com/ble-adv-data-fromat.jpg" alt=""><br>每个包都是 31 字节，数据包中分为有效数据（significant）和无效数据（non-significant）两部分。</p>
+</li>
+<li><p>有效数据部分：包含若干个广播数据单元，称为AD Structure。如图中所示，AD Structure的组成是：第一个字节是长度值Len，表示接下来的Len个字节是数据部分。数据部分的第一个字节表示数据的类型AD Type，剩下的Len - 1个字节是真正的数据AD data。其中AD type非常关键，决定了AD Data的数据代表的是什么和怎么解析，这个在后面会详细讲；</p>
+</li>
+<li><p>无效数据部分：因为广播包的长度必须是31字节，如果有效数据部分不到31字节，剩下的就用0补齐，这部分的数据是无效的，解析的时候，直接忽略即可。</p>
+</li>
+<li><p>查看Nordic的SDK中的定义，AD type的定义在程序的“ble_gap.h”头文件中。定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#define BLE_GAP_AD_TYPE_FLAGS                               0x01 //&lt; Flags for discoverability. </span><br><span class="line">#define BLE_GAP_AD_TYPE_16BIT_SERVICE_UUID_MORE_AVAILABLE   0x02 //&lt; Partial list of 16 bit service UUIDs. </span><br><span class="line">#define BLE_GAP_AD_TYPE_16BIT_SERVICE_UUID_COMPLETE         0x03 //&lt; Complete list of 16 bit service UUIDs.  </span><br><span class="line">#define BLE_GAP_AD_TYPE_32BIT_SERVICE_UUID_MORE_AVAILABLE   0x04 //&lt; Partial list of 32 bit service UUIDs.  </span><br><span class="line">#define BLE_GAP_AD_TYPE_32BIT_SERVICE_UUID_COMPLETE         0x05 //&lt; Complete list of 32 bit service UUIDs. </span><br><span class="line">#define BLE_GAP_AD_TYPE_128BIT_SERVICE_UUID_MORE_AVAILABLE  0x06 //&lt; Partial list of 128 bit service UUIDs.  </span><br><span class="line">#define BLE_GAP_AD_TYPE_128BIT_SERVICE_UUID_COMPLETE        0x07 //&lt; Complete list of 128 bit service UUIDs. </span><br><span class="line">#define BLE_GAP_AD_TYPE_SHORT_LOCAL_NAME                    0x08 //&lt; Short local device name. </span><br><span class="line">#define BLE_GAP_AD_TYPE_COMPLETE_LOCAL_NAME                 0x09 //&lt; Complete local device name. </span><br><span class="line">#define BLE_GAP_AD_TYPE_TX_POWER_LEVEL                      0x0A //&lt; Transmit power level. </span><br><span class="line">#define BLE_GAP_AD_TYPE_CLASS_OF_DEVICE                     0x0D //&lt; Class of device. </span><br><span class="line">#define BLE_GAP_AD_TYPE_SIMPLE_PAIRING_HASH_C               0x0E //&lt; Simple Pairing Hash C. </span><br><span class="line">#define BLE_GAP_AD_TYPE_SIMPLE_PAIRING_RANDOMIZER_R         0x0F //&lt; Simple Pairing Randomizer R. </span><br><span class="line">#define BLE_GAP_AD_TYPE_SECURITY_MANAGER_TK_VALUE           0x10 //&lt; Security Manager TK Value. </span><br><span class="line">#define BLE_GAP_AD_TYPE_SECURITY_MANAGER_OOB_FLAGS          0x11 //&lt; Security Manager Out Of Band Flags. </span><br><span class="line">#define BLE_GAP_AD_TYPE_SLAVE_CONNECTION_INTERVAL_RANGE     0x12 //&lt; Slave Connection Interval Range. </span><br><span class="line">#define BLE_GAP_AD_TYPE_SOLICITED_SERVICE_UUIDS_16BIT       0x14 //&lt; List of 16-bit Service Solicitation UUIDs. </span><br><span class="line">#define BLE_GAP_AD_TYPE_SOLICITED_SERVICE_UUIDS_128BIT      0x15 //&lt; List of 128-bit Service Solicitation UUIDs. </span><br><span class="line">#define BLE_GAP_AD_TYPE_SERVICE_DATA                        0x16 //&lt; Service Data - 16-bit UUID. </span><br><span class="line">#define BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS               0x17 //&lt; Public Target Address. </span><br><span class="line">#define BLE_GAP_AD_TYPE_RANDOM_TARGET_ADDRESS               0x18 //&lt; Random Target Address. </span><br><span class="line">#define BLE_GAP_AD_TYPE_APPEARANCE                          0x19 //&lt; Appearance. </span><br><span class="line">#define BLE_GAP_AD_TYPE_ADVERTISING_INTERVAL                0x1A //&lt; Advertising Interval.  </span><br><span class="line">#define BLE_GAP_AD_TYPE_LE_BLUETOOTH_DEVICE_ADDRESS         0x1B //&lt; LE Bluetooth Device Address. </span><br><span class="line">#define BLE_GAP_AD_TYPE_LE_ROLE                             0x1C //&lt; LE Role. </span><br><span class="line">#define BLE_GAP_AD_TYPE_SIMPLE_PAIRING_HASH_C256            0x1D //&lt; Simple Pairing Hash C-256. </span><br><span class="line">#define BLE_GAP_AD_TYPE_SIMPLE_PAIRING_RANDOMIZER_R256      0x1E //&lt; Simple Pairing Randomizer R-256. </span><br><span class="line">#define BLE_GAP_AD_TYPE_SERVICE_DATA_32BIT_UUID             0x20 //&lt; Service Data - 32-bit UUID. </span><br><span class="line">#define BLE_GAP_AD_TYPE_SERVICE_DATA_128BIT_UUID            0x21 //&lt; Service Data - 128-bit UUID. </span><br><span class="line">#define BLE_GAP_AD_TYPE_3D_INFORMATION_DATA                 0x3D //&lt; 3D Information Data.</span><br><span class="line">#define BLE_GAP_AD_TYPE_MANUFACTURER_SPECIFIC_DATA          0xFF //&lt; Manufacturer Specific Data.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>所有的 AD Type 的定义在文档<a href="https://www.bluetooth.com/specifications/adopted-specifications" target="_blank" rel="external">Core Specification Supplement</a>中。根据上面头文件中的定义，AD Type包括如下类型：<br>1、TYPE = 0x01：标识设备LE物理连接的功能，占一个字节，各bit为1时定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bit 0: LE有限发现模式</span><br><span class="line">bit 1: LE普通发现模式</span><br><span class="line">bit 2: 不支持BR/EDR</span><br><span class="line">bit 3: 对Same Device Capable(Controller)同时支持BLE和BR/EDR</span><br><span class="line">bit 4: 对Same Device Capable(Host)同时支持BLE和BR/EDR</span><br><span class="line">bit 5..7: 预留</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>2、TYPE = 0x02：非完整的16 bit UUID列表<br>3、TYPE = 0x03：完整的16 bit UUID列表<br>4、TYPE = 0x04：非完整的32 bit UUID列表<br>5、TYPE = 0x05：完整的32 bit UUID列表<br>6、TYPE = 0x06：非完整的128 bit UUID列表<br>7、TYPE = 0x07：完整的128 bit UUID列表<br>8、TYPE = 0x08：设备简称<br>9、TYPE = 0x09：设备全名<br>10、TYPE = 0x0A：表示设备发送广播包的信号强度<br>11、TYPE = 0x0D：设备类别<br>12、TYPE = 0x0E：设备配对的Hash值<br>13、TYPE = 0x0F：设备配对的随机值<br>14、TYPE = 0x10：TK安全管理（Security Manager TK Value）<br>15、TYPE = 0x11：带外安全管理（Security Manager Out of Band），各bit定义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bit 0: OOB Flag，0-表示没有OOB数据，1-表示有</span><br><span class="line">bit 1: 支持LE</span><br><span class="line">bit 2: 对Same Device Capable(Host)同时支持BLE和BR/EDR</span><br><span class="line">bit 3: 地址类型，0-表示公开地址，1-表示随机地址</span><br></pre></td></tr></table></figure></p>
+<p>16、TYPE = 0x12：外设（Slave）连接间隔范围，数据中定义了Slave最大和最小连接间隔，数据包含4个字节：前两字节定义最小连接间隔，取值范围：0x0006 ~ 0x0C80，而0xFFFF表示未定义；后两字节，定义最大连接间隔，取值范围同上，不过需要保证最大连接间隔大于或者等于最小连接间隔。<br>17、TYPE = 0x14：服务搜寻16 bit UUID列表<br>18、TYPE = 0x15：服务搜寻128 bit UUID列表<br>19、TYPE = 0x16：16 bit UUID Service，前两个字节是UUID，后面是Service的数据<br>20、TYPE = 0x17：公开目标地址，表示希望这个广播包被指定的目标设备处理，此设备绑定了公开地址<br>21、TYPE = 0x18：随机目标地址，表示希望这个广播包被指定的目标设备处理，此设备绑定了随机地址<br>22、TYPE = 0x19：表示设备的外观<br>23、TYPE = 0x1A：广播区间<br>24、TYPE = 0x1B：LE设备地址<br>25、TYPE = 0x1C：LE设备角色<br>26、TYPE = 0x1D：256位设备配对的Hash值<br>27、TYPE = 0x1E：256位设备配对的随机值<br>28、TYPE = 0x20：32 bit UUID Service，前4个字节是UUID，后面是Service的数据<br>29、TYPE = 0x21：128 bit UUID Service，前16个字节是UUID，后面是Service的数据<br>30、TYPE = 0x3D：3D信息数据<br>31、TYPE = 0xFF：厂商自定义数据，厂商自定义的数据中，前两个字节表示厂商ID，剩下的是厂商自己按照需求添加，里面的数据内容自己定义。</p>
+<ul>
+<li>根据如下数据包，举例说明解析的思路<br>搜索设备获取的数据包如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">02 01 06 14 FF 11 22 00 00 00 01 00 1F 09 01 00 00 00 CE DD 5E 5A 5D 23 06 08 48 45 54 2D 35 09 03 E7 FE 12 FF 0F 18 0A 18 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>根据解析规则，可分成如下部分：<br>1、广播数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">02 01 06 14 FF 11 22 00 00 00 01 00 1F 09 01 00 00 00 CE DD 5E 5A 5D 23 06 08 48 45 54 2D 35</span><br></pre></td></tr></table></figure></p>
+<p>2、响应数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">09 03 E7 FE 12 FF 0F 18 0A 18 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span><br></pre></td></tr></table></figure></p>
+<p>3、有效数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">02 01 06 14 FF 11 22 00 00 00 01 00 1F 09 01 00 00 00 CE DD 5E 5A 5D 23 06 08 48 45 54 2D 35 09 03 E7 FE 12 FF 0F 18 0A 18</span><br></pre></td></tr></table></figure></p>
+<p>4、无效数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span><br></pre></td></tr></table></figure></p>
+<p>其中的有效数据又可分为如下几个数据单元：<br><code>02 01 06</code><br><code>14 FF 11 22 00 00 00 01 00 1F 09 01 00 00 00 CE DD 5E 5A 5D 23</code><br><code>06 08 48 45 54 2D 35</code><br><code>09 03 E7 FE 12 FF 0F 18 0A 18</code><br>根据上面定义的AD Type分别解析如下：<br>第一组数据告诉我们该设备属于LE普通发现模式，不支持BR/EDR；<br>第二组数据告诉我们该数据为厂商自定义数据，一般是必须解析的，可根据协议规则进行解析获取对应的所需信息；<br>第三组数据告诉我们该设备的简称为HET-5，其中对应的字符是查找<a href="http://baike.baidu.com/link?url=_TISWJN8T3JSHi5A8OrhuBNyzLLAf006twuPA8wIWtdDG7UbyTfenCFaGWMxJCfXXmZp3SFMTHirjsKx0pTRua" target="_blank" rel="external">ASSIC表</a>得出的；<br>第四组数据告诉我们UUID为<code>E7FE-12FF-0F18-0A18</code>(此处有疑，类型03表示的是16位的UUID，对应的两个字节，而此处有8个字节，估计是设备烧录时把字节位数理解为了字符位数导致的问题).</p>
+<h4 id="五、参考链接"><a href="#五、参考链接" class="headerlink" title="五、参考链接"></a>五、参考链接</h4><p>1、<a href="http://www.mr-wu.cn/ten-important-differences-between-bluetooth-bredr-and-bluetooth-smart/" target="_blank" rel="external">蓝牙Bluetooth BR/EDR 和 Bluetooth Smart 必需要知道的十个不同点</a><br>2、<a href="http://blog.csdn.net/cnbloger/article/details/41382653?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">BLE简介和Android BLE编程</a><br>3、<a href="http://www.tuicool.com/articles/3EZjYvv" target="_blank" rel="external">BLE广播数据解析</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/07/07/Android-BLE学习笔记/">Android BLE学习笔记</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 胡伟 的个人博客">胡伟</a></p>
+        <p><span>发布时间:</span>2016年07月07日 - 21时44分</p>
+        <p><span>最后更新:</span>2016年07月07日 - 21时47分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/07/Android-BLE学习笔记/" title="Android BLE学习笔记">http://www.xiaoyaoyou1212.com/2016/07/07/Android-BLE学习笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xiaoyaoyou1212.com/2016/07/07/Android-BLE学习笔记/　　作者: 胡伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/23/算法基础：排序与查找/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">算法基础：排序与查找</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#前言："><span class="toc-number">1.</span> <span class="toc-text">前言：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一、相关介绍"><span class="toc-number">2.</span> <span class="toc-text">一、相关介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、概述"><span class="toc-number">2.1.</span> <span class="toc-text">1、概述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、分类"><span class="toc-number">2.2.</span> <span class="toc-text">2、分类</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、BLE介绍"><span class="toc-number">2.3.</span> <span class="toc-text">3、BLE介绍</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、基本概念"><span class="toc-number">3.</span> <span class="toc-text">二、基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、Generic-Access-Profile-GAP"><span class="toc-number">3.1.</span> <span class="toc-text">1、Generic Access Profile(GAP)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、Generic-Attribute-Profile-GATT"><span class="toc-number">3.2.</span> <span class="toc-text">2、Generic Attribute Profile(GATT)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、Attribute-Protocol-ATT"><span class="toc-number">3.3.</span> <span class="toc-text">3、Attribute Protocol (ATT)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4、Characteristic"><span class="toc-number">3.4.</span> <span class="toc-text">4、Characteristic</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5、Descriptor"><span class="toc-number">3.5.</span> <span class="toc-text">5、Descriptor</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6、Service"><span class="toc-number">3.6.</span> <span class="toc-text">6、Service</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7、UUID"><span class="toc-number">3.7.</span> <span class="toc-text">7、UUID</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、Android-BLE-API"><span class="toc-number">4.</span> <span class="toc-text">三、Android BLE API</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、BluetoothGatt"><span class="toc-number">4.1.</span> <span class="toc-text">1、BluetoothGatt</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、BluetoothGattCharacteristic"><span class="toc-number">4.2.</span> <span class="toc-text">2、BluetoothGattCharacteristic</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、BluetoothGattDescriptor"><span class="toc-number">4.3.</span> <span class="toc-text">3、BluetoothGattDescriptor</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4、BluetoothGattService"><span class="toc-number">4.4.</span> <span class="toc-text">4、BluetoothGattService</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5、BluetoothProfile"><span class="toc-number">4.5.</span> <span class="toc-text">5、BluetoothProfile</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6、BluetoothManager"><span class="toc-number">4.6.</span> <span class="toc-text">6、BluetoothManager</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7、BluetoothAdapter"><span class="toc-number">4.7.</span> <span class="toc-text">7、BluetoothAdapter</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8、BluetoothDevice"><span class="toc-number">4.8.</span> <span class="toc-text">8、BluetoothDevice</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9、BluetoothGattCallback"><span class="toc-number">4.9.</span> <span class="toc-text">9、BluetoothGattCallback</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、操作流程"><span class="toc-number">5.</span> <span class="toc-text">三、操作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、蓝牙开启"><span class="toc-number">5.1.</span> <span class="toc-text">1、蓝牙开启</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、设备搜索"><span class="toc-number">5.2.</span> <span class="toc-text">2、设备搜索</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、设备通信"><span class="toc-number">5.3.</span> <span class="toc-text">3、设备通信</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、数据解析"><span class="toc-number">6.</span> <span class="toc-text">四、数据解析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五、参考链接"><span class="toc-number">7.</span> <span class="toc-text">五、参考链接</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/07/07/Android-BLE学习笔记/" data-title="Android BLE学习笔记" data-url="http://www.xiaoyaoyou1212.com/2016/07/07/Android-BLE学习笔记/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/06/23/算法基础：排序与查找/" title="下一篇: 算法基础：排序与查找">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Android-BLE学习笔记/">Android BLE学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/算法基础：排序与查找/">算法基础：排序与查找</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/数据结构学习整理/">数据结构学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/从零开始搭建属于自己的博客/">从零开始搭建属于自己的博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Mac常用功能整理/">Mac常用功能整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Git学习整理/">Git学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Linux常用命令整理/">Linux常用命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Android-Studio常用Gradle操作/">Android Studio常用Gradle操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/28/Android常见问题集锦/">Android常见问题集锦</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                版权所有 &copy; 2016 胡伟
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >伙伴到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

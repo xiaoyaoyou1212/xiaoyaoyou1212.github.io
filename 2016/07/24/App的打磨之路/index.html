@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>App的打磨之路 | 逍遥游</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言：俗话说磨刀不误砍柴工，一个优秀的产品从一个不错的点子直到用户的手中，是需要一个团队不遗余力协同合作不断打磨出来的；同样，一个好的App除正常的代码编写外，还需要经过其他方面的不断打磨才能正式交互，最终到达用户的手中。该文主要讲述一个应用除开发外还需要进行哪些工作才能合格交互，在此抛砖引玉，希望对有需要的朋友一点启示！
+一、单元测试单元测试是编写测试代码，用来检测特定的、明确的、细颗粒的功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App的打磨之路">
+<meta property="og:url" content="http://www.xiaoyaoyou1212.com/2016/07/24/App的打磨之路/index.html">
+<meta property="og:site_name" content="逍遥游">
+<meta property="og:description" content="前言：俗话说磨刀不误砍柴工，一个优秀的产品从一个不错的点子直到用户的手中，是需要一个团队不遗余力协同合作不断打磨出来的；同样，一个好的App除正常的代码编写外，还需要经过其他方面的不断打磨才能正式交互，最终到达用户的手中。该文主要讲述一个应用除开发外还需要进行哪些工作才能合格交互，在此抛砖引玉，希望对有需要的朋友一点启示！
+一、单元测试单元测试是编写测试代码，用来检测特定的、明确的、细颗粒的功能。">
+<meta property="og:image" content="http://img.blog.csdn.net/20160717204116339">
+<meta property="og:image" content="http://img.blog.csdn.net/20160717203349141">
+<meta property="og:image" content="http://img.blog.csdn.net/20160717203423173">
+<meta property="og:image" content="http://img.blog.csdn.net/20160717204325154">
+<meta property="og:image" content="http://img.blog.csdn.net/20160717204342468">
+<meta property="og:updated_time" content="2016-07-24T15:11:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="App的打磨之路">
+<meta name="twitter:description" content="前言：俗话说磨刀不误砍柴工，一个优秀的产品从一个不错的点子直到用户的手中，是需要一个团队不遗余力协同合作不断打磨出来的；同样，一个好的App除正常的代码编写外，还需要经过其他方面的不断打磨才能正式交互，最终到达用户的手中。该文主要讲述一个应用除开发外还需要进行哪些工作才能合格交互，在此抛砖引玉，希望对有需要的朋友一点启示！
+一、单元测试单元测试是编写测试代码，用来检测特定的、明确的、细颗粒的功能。">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160717204116339">
+  
+    <link rel="alternative" href="/atom.xml" title="逍遥游" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: true
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">胡伟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives">所有文章</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                            <li><a href="/picture">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl facebook" target="_blank" href="#" title="facebook">facebook</a>
+                            
+                                <a class="fl rss" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">热爱技术，喜欢钻研新技术，对新事物充满强烈的好奇心；爱好数学，喜欢数字独特的魅力；衷爱科学，喜欢探索解密，希望一生为之努力！</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">胡伟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">胡伟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives">所有文章</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                    <li><a href="/picture">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="facebook" target="_blank" href="#" title="facebook">facebook</a>
+                    
+                        <a class="rss" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-App的打磨之路" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/24/App的打磨之路/" class="article-date">
+      <time datetime="2016-07-24T15:12:12.000Z" itemprop="datePublished">2016-07-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      App的打磨之路
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>俗话说磨刀不误砍柴工，一个优秀的产品从一个不错的点子直到用户的手中，是需要一个团队不遗余力协同合作不断打磨出来的；同样，一个好的App除正常的代码编写外，还需要经过其他方面的不断打磨才能正式交互，最终到达用户的手中。该文主要讲述一个应用除开发外还需要进行哪些工作才能合格交互，在此抛砖引玉，希望对有需要的朋友一点启示！</p>
+<h4 id="一、单元测试"><a href="#一、单元测试" class="headerlink" title="一、单元测试"></a>一、单元测试</h4><p>单元测试是编写测试代码，用来检测特定的、明确的、细颗粒的功能。单元测试不仅仅用来保证当前代码的正确性，更重要的是用来保证代码修复、改进或重构之后的正确性。对于想打造优秀产品的码农来说是必不可少的，虽然在大部分公司实现有居多困难。<br>一般来说，单元测试任务主要包括以下几个方面：</p>
+<ol>
+<li>接口功能测试<br>主要用来保证接口功能的正确性。</li>
+<li>数据结构测试<br>主要用来保证接口中的数据结构的正确性，比如变量有无初始值，是否溢出等。<a id="more"></a></li>
+<li>边界条件测试<br>边界条件判定是单元测试中最常用的，在开发中也是最容易遇到的BUG，边界条件判定的类型主要有以下几种情形：<ul>
+<li>变量是对象：如对象是否为NULL等；</li>
+<li>变量是数值：数值边界：最小值、最大值、无穷小、无穷大，溢出边界：最小值-1、最大值+1，临近边界：最小值+1、最大值-1；</li>
+<li>变量是字符串：字符串是否为空，字符串的长度进行数值变量的判定；</li>
+<li>变量是集合：集合是否为空，集合的大小进行数值变量的判定；</li>
+</ul>
+</li>
+<li>独立执行通路测试<br>主要保证代码的覆盖率，如语句覆盖：保证每一条语句都执行到，分支覆盖：保证每一个分支都执行到，条件覆盖：保证每一个条件都覆盖到true和false的情形，路径覆盖：保证每一个路径都执行到；</li>
+<li>异常处理通路测试<br>主要保证所有的异常都经过测试。</li>
+</ol>
+<p>JUnit是Java单元测试框架，已经在Android Studio中默认依赖。目前主流的有JUnit3和JUnit4。JUnit3中，测试用例需要继承TestCase类。JUnit4中，测试用例无需继承TestCase类，只需要使用@Test等注解。以下通过一个实例来更好的展示单元测试过程：<br>先在应用下建立一个计算工具类，方便写单元测试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">package com.vise.note.util;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 计算相关工具类</span><br><span class="line"> * Created by xyy on 16/6/25.</span><br><span class="line"> */</span><br><span class="line">public class CalculatorUtil &#123;</span><br><span class="line">    public double plus(double a, double b)&#123;</span><br><span class="line">        return a + b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public double minus(double a, double b)&#123;</span><br><span class="line">        return a - b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public double multiply(double a, double b)&#123;</span><br><span class="line">        return a * b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public double divide(double a, double b) throws Exception &#123;</span><br><span class="line">        if(b == 0)&#123;</span><br><span class="line">            throw new Exception(&quot;除数不能为零！&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return a / b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Android Studio提供了一个快速创建测试类的方法，只需在编辑器内右键点击CalculatorTest类的声明，选择Go to &gt; Test，然后点击”Create a new test…”，到此会弹出两个选项，一个是androidTest，一个是test目录下，由于该测试不需要用到模拟器，可以运行在本地电脑Java虚拟机上，所以此处选择test目录下，随后在test与应用同包的目录下生成CalculatorUtilTest.java文件，内容如下（方法内部实现是手动添加的）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">package com.vise.note.util;</span><br><span class="line"></span><br><span class="line">import org.junit.After;</span><br><span class="line">import org.junit.Before;</span><br><span class="line">import org.junit.Test;</span><br><span class="line"></span><br><span class="line">import static org.junit.Assert.*;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by xyy on 16/6/25.</span><br><span class="line"> */</span><br><span class="line">public class CalculatorUtilTest &#123;</span><br><span class="line"></span><br><span class="line">    private CalculatorUtil calculatorUtil;</span><br><span class="line"></span><br><span class="line">    @Before</span><br><span class="line">    public void setUp() throws Exception &#123;</span><br><span class="line">        calculatorUtil = new CalculatorUtil();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @After</span><br><span class="line">    public void tearDown() throws Exception &#123;</span><br><span class="line">        calculatorUtil = null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testPlus() throws Exception &#123;</span><br><span class="line">        assertEquals(6d, calculatorUtil.plus(1d, 5d), 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testMinus() throws Exception &#123;</span><br><span class="line">        assertEquals(-4d, calculatorUtil.minus(1d, 5d), 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testMultiply() throws Exception &#123;</span><br><span class="line">        assertEquals(5d, calculatorUtil.multiply(1d, 5d), 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testDivide() throws Exception &#123;</span><br><span class="line">        assertEquals(0.2d, calculatorUtil.divide(1d, 5d), 0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后就可以直接选择CalculatorUtilTest直接运行了。到此，单元测试就告一段落了，下面是讲述性能分析，这个也很重要哦！^-^</p>
+<h4 id="二、性能分析"><a href="#二、性能分析" class="headerlink" title="二、性能分析"></a>二、性能分析</h4><h5 id="1、Memory-Monitor"><a href="#1、Memory-Monitor" class="headerlink" title="1、Memory Monitor"></a>1、Memory Monitor</h5><p>在Android Studio中运行项目后，点击Android Monitor中的Monitor就可以看到如下图所示的Memory使用及CPU运行情况：<br><img src="http://img.blog.csdn.net/20160717204116339" alt="这里写图片描述"><br>下面还可以查看GPU和Network的相关情况，其中NetWork的频繁使用是造成应用耗电的关键，70%左右的电量是被上报数据，检查位置信息，定时检索后台广告信息所使用掉的，如何平衡之间的使用也是很重要的。</p>
+<h5 id="2、Heap-Snapshot"><a href="#2、Heap-Snapshot" class="headerlink" title="2、Heap Snapshot"></a>2、Heap Snapshot</h5><p>依据上面Memory Monitor描述，找到Memory中第三个图标“Dump Java Heap”，每次点击之后会生成一个.hprof的文件，点击一个.hprof文件，查看右侧的Analyzer Tasks,能看到两个选项，一个是‘Detect Leaeked Activites’，另一个是’Find Duplicate Strings’，点击右上角的绿色播放按钮，会自动分析heap dump去定位泄露的activity和重复的string，出现如下的Analysis Results：<br><img src="http://img.blog.csdn.net/20160717203349141" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20160717203423173" alt="这里写图片描述"><br>从上面两幅图中可以看出，第一个选项表示查看的信息可以有三种类型:App heap/Image heap/Zygote heap.分别代表App堆内存信息，图片堆内存信息，Zygote进程的堆内存信息。还有一个选项可以选择Class List View和Package Tree View两种视图展示方式。</p>
+<p>各属性中英文对照表</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total Count</td>
+<td>内存中该类的对象个数</td>
+</tr>
+<tr>
+<td>Heap Count</td>
+<td>堆内存中该类的对象个数</td>
+</tr>
+<tr>
+<td>Sizeof</td>
+<td>物理大小</td>
+</tr>
+<tr>
+<td>Depth</td>
+<td>深度</td>
+</tr>
+<tr>
+<td>Shallow size</td>
+<td>对象本身占有内存大小</td>
+</tr>
+<tr>
+<td>Retained Size</td>
+<td>释放该对象后，节省的内存大小</td>
+</tr>
+<tr>
+<td>Dominating Size</td>
+<td>管辖的内存大小</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3、LeakCanary"><a href="#3、LeakCanary" class="headerlink" title="3、LeakCanary"></a>3、LeakCanary</h5><ul>
+<li>使用方法<br>在 build.gradle 中加入引用，不同的编译使用不同的引用：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">   debugCompile &apos;com.squareup.leakcanary:leakcanary-android:1.3&apos;</span><br><span class="line">   releaseCompile &apos;com.squareup.leakcanary:leakcanary-android-no-op:1.3&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在 Application 中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class ExampleApplication extends Application &#123;</span><br><span class="line"></span><br><span class="line">  @Override public void onCreate() &#123;</span><br><span class="line">    super.onCreate();</span><br><span class="line">    LeakCanary.install(this);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>应用运行起来后，LeakCanary会自动去分析当前的内存状态，如果检测到泄漏会发送到通知栏，点击通知栏就可以跳转到具体的泄漏分析页面。</p>
+<ul>
+<li>工作机制<br>1、RefWatcher.watch() 创建一个 KeyedWeakReference 到要被监控的对象。<br>2、然后在后台线程检查引用是否被清除，如果没有，调用GC。<br>3、如果引用还是未被清除，把 heap 内存 dump 到 APP 对应的文件系统中的一个 .hprof 文件中。<br>4、在另外一个进程中的 HeapAnalyzerService 有一个 HeapAnalyzer 使用HAHA 解析这个文件。<br>5、得益于唯一的 reference key, HeapAnalyzer 找到 KeyedWeakReference，定位内存泄露。<br>6、HeapAnalyzer 计算 到 GC roots 的最短强引用路径，并确定是否是泄露。如果是的话，建立导致泄露的引用链。<br>7、引用链传递到 APP 进程中的 DisplayLeakService， 并以通知的形式展示出来。<br>更多关于LeakCanary的使用介绍请参考：<a href="http://www.liaohuqiu.net/cn/posts/leak-canary-read-me/" target="_blank" rel="external">LeakCanary 中文使用说明</a></li>
+</ul>
+<p>注：以上都是针对Android Studio IDE的性能分析方式。</p>
+<h4 id="三、签名"><a href="#三、签名" class="headerlink" title="三、签名"></a>三、签名</h4><p>签名的前提得有签名文件，生成签名文件的方式大同小异，IDE基本都有这个功能，这里以Android Studio为列讲述生成签名文件的过程。选择工具栏Build-&gt;Generate Signed APK,打开后选择对应的module，点击next，如图所示：<br><img src="http://img.blog.csdn.net/20160717204325154" alt="这里写图片描述"><br>点击Create new，进入如下界面：<br><img src="http://img.blog.csdn.net/20160717204342468" alt="这里写图片描述"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">信息注释</span><br><span class="line">Key store path:签名文件路径</span><br><span class="line">Password:签名库密码</span><br><span class="line">Confirm:确认签名库密码</span><br><span class="line">Alias:别名</span><br><span class="line">Password:该别名下签名密码</span><br><span class="line">Confirm:确认该别名下签名密码</span><br><span class="line">Validity:认证年限</span><br><span class="line">First and Last Name:你的全名</span><br><span class="line">Organizational Unit:组织单位</span><br><span class="line">Organization:组织</span><br><span class="line">City or Locality:城市或地区</span><br><span class="line">State or Province:川或省</span><br><span class="line">Country Code:国家代码</span><br></pre></td></tr></table></figure></p>
+<p>按照指示填写对应信息，点击OK就生成了签名文件。<br>还一种方式是使用命令的方式创建，进入Java的bin目录下，如我的Java目录为：/Library/Java/Home/bin，通过keytool工具来创建keystore库，输入以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -genkeypair -alias - xyy.keystore -keyalg RSA -validity 100 -keystore xyy.keystore</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">命令说明如下：</span><br><span class="line">-genkeypair：指定生成数字证实</span><br><span class="line">-alias：指定生成数字证书的别名</span><br><span class="line">-keyalg：指定生成数字证书的算法  这里如RSA算法</span><br><span class="line">-validity：指定生成数字证书的有效期</span><br><span class="line">-keystore ：指定生成数字证书的存储路径（这里默认在keytool目录下）</span><br></pre></td></tr></table></figure>
+<p>再按照提示一步步输入对应的信息，最后就生成了一个名为xyy.keystore的签名文件。<br>有了签名文件后，将签名文件放到对应需要签名的工程目录module下，再在module对应的build文件中添加如下签名信息(签名信息对应输入自己设置的秘钥信息)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">android&#123;</span><br><span class="line">	...</span><br><span class="line">	signingConfigs &#123;</span><br><span class="line">        debug &#123;</span><br><span class="line">			storeFile file(&quot;xyy.keystore&quot;)</span><br><span class="line">            storePassword &quot;xyy&quot;</span><br><span class="line">            keyAlias &quot;Note&quot;</span><br><span class="line">            keyPassword &quot;xyy&quot;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        release &#123;</span><br><span class="line">            storeFile file(&quot;xyy.keystore&quot;)</span><br><span class="line">            storePassword &quot;xyy&quot;</span><br><span class="line">            keyAlias &quot;Note&quot;</span><br><span class="line">            keyPassword &quot;xyy&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        debug &#123;</span><br><span class="line">            minifyEnabled false</span><br><span class="line">            zipAlignEnabled true</span><br><span class="line">            shrinkResources false</span><br><span class="line">            signingConfig signingConfigs.debug</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        release &#123;</span><br><span class="line">            //是否混淆（注：如果混淆文件未配置使用false）</span><br><span class="line">            minifyEnabled false</span><br><span class="line">            //是否支持Zip Align</span><br><span class="line">            zipAlignEnabled true</span><br><span class="line">            //是否清理无用资源</span><br><span class="line">            shrinkResources true</span><br><span class="line">            proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos;</span><br><span class="line">            //使用签名配置</span><br><span class="line">            signingConfig signingConfigs.release</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样配置完后每次build工程生成的文件都会使用debug下的签名信息了，gradle配置详情可参考我的另一篇博客<a href="http://blog.csdn.net/xiaoyaoyou1212/article/details/50277555" target="_blank" rel="external">Android Studio常用Gradle操作</a>。</p>
+<h4 id="四、混淆"><a href="#四、混淆" class="headerlink" title="四、混淆"></a>四、混淆</h4><h5 id="1、混淆原理"><a href="#1、混淆原理" class="headerlink" title="1、混淆原理"></a>1、混淆原理</h5><p>Java 是一种跨平台的、解释型语言，Java 源代码编译成中间”字节码”存储于 class 文件中。由于跨平台的需要，Java 字节码中包括了很多源代码信息，如变量名、方法名，并且通过这些名称来访问变量和方法，这些符号带有许多语义信息，很容易被反编译成 Java 源代码。为了防止这种现象，我们可以使用 Java 混淆器对 Java 字节码进行混淆。<br>混淆就是对发布出去的程序进行重新组织和处理，使得处理后的代码与处理前代码完成相同的功能，而混淆后的代码很难被反编译，即使反编译成功也很难得出程序的真正语义。被混淆过的程序代码，仍然遵照原来的档案格式和指令集，执行结果也与混淆前一样，只是混淆器将代码中的所有变量、函数、类的名称变为简短的英文字母代号，在缺乏相应的函数名和程序注释的况下，即使被反编译，也将难以阅读。同时混淆是不可逆的，在混淆的过程中一些不影响正常运行的信息将永久丢失，这些信息的丢失使程序变得更加难以理解。</p>
+<h5 id="2、混淆语法"><a href="#2、混淆语法" class="headerlink" title="2、混淆语法"></a>2、混淆语法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">-include &#123;filename&#125;    从给定的文件中读取配置参数</span><br><span class="line">-basedirectory &#123;directoryname&#125;    指定基础目录为以后相对的档案名称</span><br><span class="line">-injars &#123;class_path&#125;    指定要处理的应用程序jar,war,ear和目录</span><br><span class="line">-outjars &#123;class_path&#125;    指定处理完后要输出的jar,war,ear和目录的名称</span><br><span class="line">-libraryjars &#123;classpath&#125;    指定要处理的应用程序jar,war,ear和目录所需要的程序库文件</span><br><span class="line">-dontskipnonpubliclibraryclasses    指定不去忽略非公共的库类</span><br><span class="line">-dontskipnonpubliclibraryclassmembers    指定不去忽略包可见的库类的成员</span><br><span class="line"></span><br><span class="line">保留选项</span><br><span class="line">-keep &#123;Modifier&#125; &#123;class_specification&#125;    保护指定的类文件和类的成员</span><br><span class="line">-keepnames &#123;class_specification&#125;    保护指定的类和类的成员的名称（如果他们不会在压缩步骤中删除）</span><br><span class="line">-keepclassmembers &#123;modifier&#125; &#123;class_specification&#125;    保护指定类的成员，如果此类受到保护他们会保护的更好</span><br><span class="line">-keepclassmembernames &#123;class_specification&#125;    保护指定的类的成员的名称（如果他们不会在压缩步骤中删除）</span><br><span class="line">-keepclasseswithmembers &#123;class_specification&#125;    保护指定的类和类的成员，但条件是所有指定的类和类成员是要存在</span><br><span class="line">-keepclasseswithmembernames &#123;class_specification&#125;    保护指定的类和类的成员的名称，如果所有指定的类成员出席（在压缩步骤之后）</span><br><span class="line">-printseeds &#123;filename&#125;    列出类和类的成员-keep选项的清单，标准输出到给定的文件</span><br><span class="line">-keepattributes &#123;attribute_name,...&#125;    保护给定的可选属性，例如LineNumberTable, LocalVariableTable, SourceFile, Deprecated, Synthetic, Signature, and InnerClasses.</span><br><span class="line"></span><br><span class="line">压缩相关</span><br><span class="line">-dontshrink    不压缩输入的类文件</span><br><span class="line">-printusage &#123;filename&#125;</span><br><span class="line">-dontwarn   如果有警告也不终止</span><br><span class="line">-whyareyoukeeping &#123;class_specification&#125;</span><br><span class="line"></span><br><span class="line">优化相关</span><br><span class="line">-dontoptimize    不优化输入的类文件</span><br><span class="line">-assumenosideeffects &#123;class_specification&#125;    优化时假设指定的方法，没有任何副作用</span><br><span class="line">-allowaccessmodification    优化时允许访问并修改有修饰符的类和类的成员</span><br><span class="line"></span><br><span class="line">混淆相关</span><br><span class="line">-dontobfuscate    不混淆输入的类文件</span><br><span class="line">-printmapping &#123;filename&#125;</span><br><span class="line">-applymapping &#123;filename&#125;    重用映射增加混淆</span><br><span class="line">-obfuscationdictionary &#123;filename&#125;    使用给定文件中的关键字作为要混淆方法的名称</span><br><span class="line">-overloadaggressively    混淆时应用侵入式重载</span><br><span class="line">-useuniqueclassmembernames    确定统一的混淆类的成员名称来增加混淆</span><br><span class="line">-flattenpackagehierarchy &#123;package_name&#125;    重新包装所有重命名的包并放在给定的单一包中</span><br><span class="line">-repackageclass &#123;package_name&#125;    重新包装所有重命名的类文件中放在给定的单一包中</span><br><span class="line">-dontusemixedcaseclassnames    混淆时不会产生形形色色的类名</span><br><span class="line">-renamesourcefileattribute &#123;string&#125;    设置源文件中给定的字符串常量</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>keep</td>
+<td>保留类和类中的成员，防止它们被混淆或移除。</td>
+</tr>
+<tr>
+<td>keepnames</td>
+<td>保留类和类中的成员，防止它们被混淆，但当成员没有被引用时会被移除。</td>
+</tr>
+<tr>
+<td>keepclassmembers</td>
+<td>只保留类中的成员，防止它们被混淆或移除。</td>
+</tr>
+<tr>
+<td>keepclassmembernames</td>
+<td>只保留类中的成员，防止它们被混淆，但当成员没有被引用时会被移除。</td>
+</tr>
+<tr>
+<td>keepclasseswithmembers</td>
+<td>保留类和类中的成员，防止它们被混淆或移除，前提是指名的类中的成员必须存在，如果不存在则还是会混淆。</td>
+</tr>
+<tr>
+<td>keepclasseswithmembernames</td>
+<td>保留类和类中的成员，防止它们被混淆，但当成员没有被引用时会被移除，前提是指名的类中的成员必须存在，如果不存在则还是会混淆。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;field&gt;</td>
+<td>匹配类中的所有字段</td>
+</tr>
+<tr>
+<td>&lt;method&gt;</td>
+<td>匹配类中的所有方法</td>
+</tr>
+<tr>
+<td>&lt;init&gt;</td>
+<td>匹配类中的所有构造函数</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>匹配任意长度字符，但不含包名分隔符(.)。比如说我们的完整类名是<code>com.vise.note.MainActivity</code>，使用<code>com.*</code>，或者<code>com.vise.*</code>都是无法匹配的，因为<code>*</code>无法匹配包名中的分隔符，正确的匹配方式是<code>com.vise.*.*</code>，或者<code>com.vise.note.*</code>，这些都是可以的。但如果你不写任何其它内容，只有一个<code>*</code>，那就表示匹配所有的东西。</td>
+</tr>
+<tr>
+<td><code>**</code></td>
+<td>匹配任意长度字符，并且包含包名分隔符<code>(.)</code>。比如<code>proguard-android.txt</code>中使用的<code>-dontwarn android.support.**</code>就可以匹配<code>android.support</code>包下的所有内容，包括任意长度的子包。</td>
+</tr>
+<tr>
+<td><code>***</code></td>
+<td>匹配任意参数类型。比如<code>void set*(***)</code>就能匹配任意传入的参数类型，<code>*** get*()</code>就能匹配任意返回值的类型。</td>
+</tr>
+<tr>
+<td><code>…</code></td>
+<td>匹配任意长度的任意类型参数。比如<code>void test(…)</code>就能匹配任意<code>void test(String a)</code>或者是<code>void test(int a, String b)</code>这些方法。</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3、混淆文件编写"><a href="#3、混淆文件编写" class="headerlink" title="3、混淆文件编写"></a>3、混淆文件编写</h5><p>混淆是apk上线前挺重要的一个环节,Android使用的是ProGuard，可以起到压缩，混淆，预检，优化的作用。纵观大部分项目的混淆文件，其大部分内容都是固定的，从中可以整理出一个通用的模板，模板内容大致分为以下几个部分：基本指令、公共组件、第三方库、实体类、反射相关及JS调用相关。其中前两部分基本不会有太大变化，第三方库网上基本都会提供混淆方式，下文也会依据网上资源整理出大部分的三方库保留方式，而后面几个部分就与具体项目相关了，掌握思路后依照具体项目定制就行。</p>
+<p>3.1、基本指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-optimizationpasses 5	# 指定代码的压缩级别</span><br><span class="line">-dontusemixedcaseclassnames	# 表示混淆时不使用大小写混合类名</span><br><span class="line">-dontskipnonpubliclibraryclasses	# 表示不跳过library中的非public的类</span><br><span class="line">-dontskipnonpubliclibraryclassmembers	# 指定不去忽略包可见的库类的成员</span><br><span class="line">-dontoptimize	# 表示不进行优化，建议使用此选项，因为根据proguard-android-optimize.txt中的描述，优化可能会造成一些潜在风险，不能保证在所有版本的Dalvik上都正常运行</span><br><span class="line">-dontpreverify  # 表示不进行预校验,这个预校验是作用在Java平台上的，Android平台上不需要这项功能，去掉之后还可以加快混淆速度</span><br><span class="line">-verbose	# 表示打印混淆的详细信息</span><br><span class="line">-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*	# 混淆时所采用的算法</span><br><span class="line"></span><br><span class="line">-dump dump.txt	# 描述apk内所有class文件的内部结构</span><br><span class="line">-printseeds seeds.txt	# 列出了没有被混淆的类和成员</span><br><span class="line">-printusage unused.txt	# 列出了源代码中被删除在apk中不存在的代码</span><br><span class="line">-printmapping mapping.txt	# 表示混淆前后代码的对照表</span><br></pre></td></tr></table></figure></p>
+<p>3.2、公共组件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">-keep public class * extends android.app.Activity	# 保留继承自Activity类不被混淆</span><br><span class="line">-keep public class * extends android.app.Application	# 保留继承自Application类不被混淆</span><br><span class="line">-keep public class * extends android.support.multidex.MultiDexApplication	# 保留继承自MultiDexApplication类不被混淆</span><br><span class="line">-keep public class * extends android.app.Service	# 保留继承自Service类不被混淆</span><br><span class="line">-keep public class * extends android.content.BroadcastReceiver	# 保留继承自BroadcastReceiver类不被混淆</span><br><span class="line">-keep public class * extends android.content.ContentProvider	# 保留继承自ContentProvider类不被混淆</span><br><span class="line">-keep public class * extends android.app.backup.BackupAgentHelper	# 保留继承自BackupAgentHelper类不被混淆</span><br><span class="line">-keep public class * extends android.preference.Preference	# 保留继承自Preference类不被混淆</span><br><span class="line">-keep public class com.google.vending.licensing.ILicensingService	# 保留Google包下ILicensingService类不被混淆</span><br><span class="line">-keep public class com.android.vending.licensing.ILicensingService	# 保留Android包下ILicensingService类不被混淆</span><br><span class="line"></span><br><span class="line">-keepattributes *Annotation*,InnerClasses,Signature,SourceFile,LineNumberTable	# 保留相关属性</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembernames class * &#123;	# 保持native方法不被混淆</span><br><span class="line">    native &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers public class * extends android.view.View&#123;	# 保持自定义控件类不被混淆</span><br><span class="line">    *** get*();</span><br><span class="line">    void set*(***);</span><br><span class="line">    public &lt;init&gt;(android.content.Context);</span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet);</span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;	# 保持自定义控件类不被混淆</span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet);</span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class * extends android.app.Activity &#123;	# 表示不混淆Activity中参数是View的方法，主要针对在xml中配置onClick事件</span><br><span class="line">   public void *(android.view.View);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers enum * &#123;	# 保持枚举类不被混淆</span><br><span class="line">    public static **[] values();</span><br><span class="line">    public static ** valueOf(java.lang.String);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keep class * implements android.os.Parcelable &#123;	# 保持Parcelable不被混淆</span><br><span class="line">  public static final android.os.Parcelable$Creator *;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class * implements java.io.Serializable &#123;	# 保持Serializable不被混淆</span><br><span class="line">    static final long serialVersionUID;</span><br><span class="line">    private static final java.io.ObjectStreamField[] serialPersistentFields;</span><br><span class="line">    private void writeObject(java.io.ObjectOutputStream);</span><br><span class="line">    private void readObject(java.io.ObjectInputStream);</span><br><span class="line">    java.lang.Object writeReplace();</span><br><span class="line">    java.lang.Object readResolve();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class **.R$* &#123;	# 表示不混淆R文件下的静态字段</span><br><span class="line">    public static &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class * extends android.webkit.webViewClient &#123;	# 保留WebView</span><br><span class="line">	public void *(android.webkit.webView, jav.lang.String);</span><br><span class="line">    public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);</span><br><span class="line">    public boolean *(android.webkit.WebView, java.lang.String);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.3、第三方库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#EventBus</span><br><span class="line">-keepattributes *Annotation*</span><br><span class="line">-keepclassmembers class ** &#123;</span><br><span class="line">    @org.greenrobot.eventbus.Subscribe &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line">-keep enum org.greenrobot.eventbus.ThreadMode &#123; *; &#125;</span><br><span class="line"></span><br><span class="line"># Only required if you use AsyncExecutor</span><br><span class="line">-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent &#123;</span><br><span class="line">    &lt;init&gt;(java.lang.Throwable);</span><br><span class="line">&#125;</span><br><span class="line">-keepclassmembers class * &#123;	# 保持EventBus中Event事件接收</span><br><span class="line">    void *(**On*Event);</span><br><span class="line">&#125;</span><br><span class="line">#注：此处以EventBus为例，描述第三方库的保留方式，更多的第三方库保留方式已提交到github上。</span><br></pre></td></tr></table></figure></p>
+<p>3.4、实体类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-keep class 你的实体类包名.** &#123; *; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.5、反射相关<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-keep class 你的类所在的包.** &#123; *; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.6、JS调用相关<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-keepattributes *JavascriptInterface*</span><br><span class="line">-keep class **.Webview2JsInterface &#123; *; &#125;  # 保持WebView对HTML页面的API不被混淆</span><br><span class="line">-keepclassmembers class fqcn.of.javascript.interface.for.webview &#123;	# 保留WebView</span><br><span class="line">   public *;</span><br><span class="line">&#125;</span><br><span class="line">-keep class 你的类所在的包.** &#123; *; &#125;</span><br><span class="line">#如果是内部类则使用如下方式</span><br><span class="line">-keepclasseswithmembers class 你的类所在的包.父类$子类 &#123; &lt;methods&gt;; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>到此混淆相关介绍就已完成，完整的混淆文件已提交到github上，路径如下：<a href="https://github.com/xiaoyaoyou1212/Note/blob/master/app/proguard-rules.pro" target="_blank" rel="external">https://github.com/xiaoyaoyou1212/Note/blob/master/app/proguard-rules.pro</a>.其中包含了大部分第三方库的混淆方式。</p>
+<p>注：混淆后生成的相关信息文件在当前module的build/outputs/mapping下，目录下可能会有渠道名，下面再分为debug和release，与你的配置相关，其中的mapping.txt文件需要重点关注，该文件表示混淆前后代码的对照表，这个文件非常重要,如果你的代码混淆后会产生bug的话，log提示中是混淆后的代码，希望定位到源代码的话就可以根据mapping.txt反推,每次发布都要保留它方便该版本出现问题时调出日志进行排查，它可以根据版本号或是发布时间命名来保存或是放进代码版本控制中。</p>
+<h4 id="五、APK瘦身"><a href="#五、APK瘦身" class="headerlink" title="五、APK瘦身"></a>五、APK瘦身</h4><h5 id="1、APK文件结构"><a href="#1、APK文件结构" class="headerlink" title="1、APK文件结构"></a>1、APK文件结构</h5><p>Android应用是用Java编写的，利用Android SDK编译代码，并且把所有的数据和资源文件打包成一个APK (Android Package）文件，这是一个后缀名为.apk的压缩文件，APK文件中包含了一个Android应用程序的所有内容，是Android平台用于安装应用程序的文件。APK就是一个zip压缩包，解开这个APK包我们可以看到以下的结构：</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>assets目录</td>
+<td>存放需要打包到apk中的静态文件</td>
+</tr>
+<tr>
+<td>lib目录</td>
+<td>程序依赖的native库</td>
+</tr>
+<tr>
+<td>res目录</td>
+<td>存放应用程序的资源</td>
+</tr>
+<tr>
+<td>META-INF目录</td>
+<td>存放应用程序签名和证书的目录</td>
+</tr>
+<tr>
+<td>AndroidManifest.xml</td>
+<td>应用程序的配置文件</td>
+</tr>
+<tr>
+<td>classes.dex</td>
+<td>dex可执行文件</td>
+</tr>
+<tr>
+<td>resources.arsc</td>
+<td>资源配置文件</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>assets目录<br>用于存放需要打包到APK中的静态文件，和res的不同点在于，assets目录支持任意深度的子目录，用户可以根据自己的需求任意部署文件夹架构，而且res目录下的文件会在R文件中生成对应的资源ID，assets不会自动生成对应的ID，访问的时候需要AssetManager类。</li>
+<li>lib目录<br>这里存放应用程序依赖的native库文件，一般是用C/C++编写，这里的lib库可能包含4中不同类型，根据CPU型号的不同，大体可以分为ARM、ARM-v7a、MIPS、X86，分别对应着ARM架构，ARM-V7架构，MIPS架构和X86架构，而每个架构又分32位和64位；其中，不同的CPU架构对应着不同的目录，每个目录中可以放很多对应版本的so库，且这个目录的结构固定，用户只能按照这个目录存放自己的so库。目前市场上使用的移动终端大多是基于ARM或者ARM-V7a架构的，X86和MIPS架构的移动智能终端比较少，所以有些应用程序lib目录下只包含armeabi目录或者armeabi-v7a目录，也就是说，这四个目录要根据CPU的架构来选，而市面上ARM架构的手机占大多数，所以一般的APK只包含ARM和ARM-V7a的so。</li>
+<li>res目录<br>res是resource的缩写，这个目录存放资源文件，存在这个文件夹下的所有文件都会映射到Android工程的R文件中，生成对应的ID，访问的时候直接使用资源ID即R.id.filename，res文件夹下可以包含多个文件夹，其中anim存放动画文件；drawable目录存放图像资源；layout目录存放布局文件；values目录存放一些特征值，colors.xml存放color颜色值，dimens.xml定义尺寸值，string.xml定义字符串的值，styles.xml定义样式对象；xml文件夹存放任意xml文件，在运行时可以通过Resources.getXML()读取；raw是可以直接复制到设备中的任意文件，无需编译。</li>
+<li>META-INF目录<br>保存应用的签名信息，签名信息可以验证APK文件的完整性。AndroidSDK在打包APK时会计算APK包中所有文件的完整性，并且把这些完整性保存到META-INF文件夹下，应用程序在安装的时候首先会根据META-INF文件夹校验APK的完整性，这样就可以保证APK中的每一个文件都不能被篡改。以此来确保APK应用程序不被恶意修改或者病毒感染，有利于确保Android应用的完整性和系统的安全性。META-INF目录下包含的文件有CERT.RSA，CERT.DSA，CERT.SF和MANIFEST.MF，其中CERT.RSA是开发者利用私钥对APK进行签名的签名文件，CERT.SF，MANIFEST.MF记录了文件中文件的SHA-1哈希值。</li>
+<li>AndroidManifest.xml<br>是Android应用程序的配置文件，是一个用来描述Android应用“整体资讯”的设定文件，简单来说，相当于Android应用向Android系统“自我介绍”的配置文件，Android系统可以根据这个“自我介绍”完整地了解APK应用程序的资讯，每个Android应用程序都必须包含一个AndroidManifest.xml文件，且它的名字是固定的，不能修改。我们在开发Android应用程序的时候，一般都把代码中的每一个Activity，Service，ContentProvider和BroadcastReceiver在AndroidManifest.xml中注册，只有这样系统才能启动对应的组件，另外这个文件还包含一些权限声明以及使用的SDK版本信息等等。程序打包时，会把AndroidManifest.xml进行简单的编译，便于Android系统识别，编译之后的格式是AXML格式。</li>
+<li>classes.dex<br>传统的Java程序，首先先把Java文件编译成class文件，字节码都保存在了class文件中，Java虚拟机可以通过解释执行这些class文件。而Dalvik虚拟机是在Java虚拟机进行了优化，执行的是Dalvik字节码，而这些Dalvik字节码是由Java字节码转换而来，一般情况下，Android应用在打包时通过AndroidSDK中的dx工具将Java字节码转换为Dalvik字节码。dx工具可以对多个class文件进行合并，重组，优化，可以达到减小体积，缩短运行时间的目的。</li>
+<li>resources.arsc<br>用来记录资源文件和资源ID之间的映射关系，用来根据资源ID寻找资源。Android的开发是分模块的，res目录专门用来存放资源文件，当在代码中需要调用资源文件时，只需要调用findviewbyId()就可以得到资源文件，每当在res文件夹下放一个文件，aapt就会自动生成对应的ID保存在R文件中，我们调用这个ID就可以，但是只有这个ID还不够，R文件只是保证编译程序不报错，实际上在程序运行时，系统要根据ID去寻找对应的资源路径，而resources.arsc文件就是用来记录这些ID和资源文件位置对应关系的文件。</li>
+</ul>
+<p>从以上目录结构中可以看出，如果需要缩小apk的大小，主要针对的是assets目录、lib目录、res目录及classes.dex文件。其中的assets目录主要是静态加载到apk中的文件，这个可以根据是否需要来进行手动管理，没什么优化的空间，下文主要针对classes.dex文件、res目录及lib目录来进行优化讲解。</p>
+<h5 id="2、Apk瘦身方式"><a href="#2、Apk瘦身方式" class="headerlink" title="2、Apk瘦身方式"></a>2、Apk瘦身方式</h5><p>2.1、Proguard混淆优化代码<br>Proguard是一个很强悍的工具，它可以帮你在代码编译时对代码进行混淆，优化和压缩。它有一个专门用来减少apk文件大小的功能叫做tree-shaking。Proguard 会遍历你的所有代码然后找出无用处的代码。所有这些不可达（或者不需要）的代码都会在生成最终的apk文件之前被清除掉。Proguard 也会重命名你的类属性，类和接口，然整个代码尽可能地保持轻量级水平。</p>
+<p>2.2、Lint检查优化资源<br>混淆只能优化java代码，不能对无用资源进行清理，而Lint则可以检查所有无用的资源文件，只要使用命令<code>./gradlew lint</code>或者在Android Studio工程中点击Analyze-&gt;Inspect Code,选择Whole Project点击ok就行。它在检测完之后会提供一份详细的资源文件清单，并将无用的资源列在“UnusedResources: Unused resources” 区域之下。只要你不通过反射来反问这些无用资源，你就可以放心地移除这些文件了。</p>
+<p>2.3、压缩图片<br>图片资源的优化原则是：在不降低图片效果、保证APK显示效果的前提下缩小图片文件的大小。</p>
+<ul>
+<li>AAPT：Aapt(Android Asset Packaging Tool)就内置了保真图像压缩算法。例如，一个只需256色的真彩PNG图片会被aapt通过一个颜色调色板转化成一个8-bit PNG文件，这可以帮助你减少图片文件的大小。</li>
+<li>使用tinypng优化大部分图片资源：tinypng是一个支持压缩png和jpg图片格式的网站，通过其独特的算法（通过一种叫“量化”的技术，把原本png文件的24位真彩色压缩为8位的索引演示，是一种矢量压缩方法，把颜色值用数值123等代替。）可以实现在无损压缩的情况下图片文件大小缩小到原来的30%-50%。<br>tinypng的缺点是在压缩某些带有过渡效果（带alpha值）的图片时，图片会失真，这种图片可以将png图片转换为下面介绍的webP格式，可以在保证图片质量的前提下大幅缩小图片的大小。</li>
+<li>使用webP图片格式：WebP是谷歌研发出来的一种图片数据格式，它是一种支持有损压缩和无损压缩的图片文件格式，派生自图像编码格式 VP8。根据 Google 的测试，无损压缩后的 WebP 比 PNG 文件少了 45％ 的文件大小，即使这些 PNG 文件经过其他压缩工具压缩之后，WebP 还是可以减少 28％ 的文件大小。目前很多公司已经将webP技术运用到Android APP中，比如FaceBook、腾讯、淘宝。webP相比于png最明显的问题是加载稍慢，不过现在的智能设备硬件配置越来越高，这都不是事儿。<br>假如你打算在 App 中使用 WebP，除了 Android4.0 以上提供的原生支持外，其他版本以可以使用官方提供的解析库webp-android-backport编译成so使用。<br>通常UI提供的图片都是png或者jpg格式，我们可以通过智图或者isparta将其它格式的图片转换成webP格式，isparta可实现批量转换，墙裂推荐！</li>
+<li>使用tintcolor实现按钮反选效果：通常按钮的正反旋图片我们都是通过提供一张按钮正常图片和一张按钮反选图片，然后通过selector实现，两张图片除了alpha值不一样外其它的内容都是重复的，在Android 5.0及以上的版本可以通过tintcolor实现只提供一张按钮的图片，在程序中实现按钮反选效果，前提是图片的内容一样，只是正反选按钮的颜色不一样。</li>
+</ul>
+<p>2.4、限制支持CPU架构<br>一般说来Android使用Java代码即可以满足大部分需求，不过还是有一小部分案例需要使用一些native code。CPU的架构主要分为以下几种：ARM架构，ARM-V7架构，MIPS架构和X86架构，目前市场上使用的移动终端大多是基于ARM或者ARM-V7a架构的，X86和MIPS架构的移动智能终端比较少，所以有些应用程序lib目录下只包含armeabi目录或者armeabi-v7a目录，也就是说lib目录要根据CPU的架构来选，而市面上ARM架构的手机占大多数，所以一般的APK只包含ARM和ARM-V7a的so。</p>
+<p>2.5、其他优化技巧</p>
+<ul>
+<li>对资源文件进行取舍<br>Android支持多种设备。Android的系统设计让它可以支持设备的多样性：屏幕密度，屏幕形状，屏幕大小等等。到了Android4.4，它支持的屏幕密度包括：ldpi,mdpi,hdpi,xhdpi,xxhdpi以及xxxhdpi，但Android支持这么多的屏幕密度并不意味着需要为每一个屏幕密度提供相应的资源文件。我们可以选择目前主流手机的分辨率对应的xhdpi和xxhdpi，如果某些设备不是这几个屏幕密度的，不用担心，Android系统会自动使用存在的资源为设备计算然后提供相近大小的资源文件。</li>
+<li><p>资源文件最少化配置<br>Android开发经常会依赖各种外部开源代码库，但是这些库里面并不是所有的资源文件你都会用到。从Android Gradle Plugin 0.7 开始，你可以配置你的app的build系统。这主要是通过配置resConfig和resConfigs以及默认的配置选项。下面的DSL(Domain Specific Language)就会阻止aapt(Android Asset Packaging Tool)打包app中不需要的资源文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">defaultConfig &#123;</span><br><span class="line">    resConfigs &quot;en&quot;, &quot;de&quot;, &quot;fr&quot;, &quot;it&quot;</span><br><span class="line">    resConfigs &quot;nodpi&quot;, &quot;hdpi&quot;, &quot;xhdpi&quot;, &quot;xxhdpi&quot;, &quot;xxxhdpi&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>尽可能地重用<br>重用资源是最重要的优化技巧之一。比如在一个ListView或者RecyclerView，重用可以帮助你在列表滚动时保持界面流畅;重用还可以帮你减少apk文件的大小,例如，Android 提供了几个工具为一个asset文件重新着色，在Android L中你可以使用android:tint和android:tintMode来达到效果，在老版本中则可以使用ColorFilter;如果系统中有两种图片，一种图片是另一种图片翻转180°得到的，那么你就可以移除一种图片，通过代码实现。</p>
+</li>
+<li>在合适的时候使用代码渲染图像</li>
+</ul>
+<h4 id="六、打包"><a href="#六、打包" class="headerlink" title="六、打包"></a>六、打包</h4><p>每个Android应用在完成后都需要打成APK包，对于单个打包的方式在此就不赘述了，基本IDE都带，只是在对外发布的应用需要配置属于该应用的唯一签名，下文主要讲述需要上传多个市场的情况下怎么批量打包。</p>
+<h5 id="1、Maven打包"><a href="#1、Maven打包" class="headerlink" title="1、Maven打包"></a>1、Maven打包</h5><p>Maven是一个项目管理工具，它包含了一个项目对象模型(Project Object Model)，一组标准集合，一个项目生命周期(ProjectLifecycle)，一个依赖管理系统(Dependency Management System)，和用来运行定义在生命周期阶段(phase)中插件(plugin)目标(goal)的逻辑。<br>Maven也是自动构建工具，配合使用android-maven-plugin插件，以及maven-resources-plugin插件可以很方便的生成渠道包，下面简要介绍下打包过程，更多Maven以及插件的使用方法请参考<a href="http://www.yiibai.com/maven/" target="_blank" rel="external">Maven教程</a>。<br>首先，在AndroidManifest.xml的<application>节点中添加如下<meta-data>元素，用来定义渠道的来源：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 使用Maven打包时会用具体的渠道号替换掉$&#123;channel&#125; --&gt;</span><br><span class="line">&lt;meta-data</span><br><span class="line">        android:name=&quot;channel&quot;</span><br><span class="line">        android:value=&quot;$&#123;channel&#125;&quot; /&gt;</span><br></pre></td></tr></table></figure></meta-data></application></p>
+<p>定义好渠道来源后，接下来就可以在程序启动时读取渠道号了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private String getChannel(Context context) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        PackageManager pm = context.getPackageManager();</span><br><span class="line">        ApplicationInfo appInfo = pm.getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);</span><br><span class="line">        return appInfo.metaData.getString(&quot;channel&quot;);</span><br><span class="line">    &#125; catch (PackageManager.NameNotFoundException ignored) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    return &quot;&quot;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要替换AndroidManifest.xml文件定义的渠道号，还需要在pom.xml文件中配置Resources插件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--描述项目相关的所有资源路径列表--&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">	&lt;!--描述项目相关的所有资源路径--&gt;</span><br><span class="line">    &lt;resource&gt;</span><br><span class="line">    	&lt;!--描述存放资源的目录，该路径相对POM路径--&gt;</span><br><span class="line">        &lt;directory&gt;$&#123;project.basedir&#125;&lt;/directory&gt;</span><br><span class="line">        &lt;!--是否使用参数值代替参数名--&gt;</span><br><span class="line">        &lt;filtering&gt;true&lt;/filtering&gt;</span><br><span class="line">        &lt;!--描述资源的目标路径--&gt;</span><br><span class="line">        &lt;targetPath&gt;$&#123;project.build.directory&#125;/filtered-manifest&lt;/targetPath&gt;</span><br><span class="line">        &lt;!--包含的模式列表，例如**/*.xml.--&gt;</span><br><span class="line">        &lt;includes&gt;</span><br><span class="line">            &lt;include&gt;AndroidManifest.xml&lt;/include&gt;</span><br><span class="line">        &lt;/includes&gt;</span><br><span class="line">    &lt;/resource&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure></p>
+<p>准备工作已经完成，现在需要的就是实际的渠道号了。下面的脚本会遍历渠道列表，逐个替换并打包：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">package()&#123;</span><br><span class="line">    while read line</span><br><span class="line">    do</span><br><span class="line">        mvn clean</span><br><span class="line">        mvn  -Dchannel=$line package</span><br><span class="line">    done &lt; $1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">package $1</span><br></pre></td></tr></table></figure></p>
+<p>从以上描述中可以看出该方式每打一个包都会重新构建，执行效率太低，对于少量渠道还可以接受，渠道包过多就没法满足需求了。</p>
+<h5 id="2、Apktool打包"><a href="#2、Apktool打包" class="headerlink" title="2、Apktool打包"></a>2、Apktool打包</h5><p>Apktool是一个逆向工程工具，可以用它解码（decode）并修改apk中的资源。接下来详细介绍如何使用apktool生成渠道包。<br>前期工作和用Maven打包一样，也需要在AndroidManifest.xml文件中定义<code>&lt;meta-data&gt;</code>元素，并在应用启动的时候读取清单文件中的渠道号。具体请参考上面的代码。和Maven不一样的是，每次打包时不再需要重新构建项目。打包时，只需生成一个apk，然后在该apk的基础上生成其他渠道包即可。<br>首先，使用apktool decode应用程序，在终端中输入如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apktool d your_original_apk build</span><br></pre></td></tr></table></figure></p>
+<p>上面的命令会在build目录中decode应用文件，decode完成后的目录描述如下：</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>assets目录</td>
+<td>存放需要打包到apk中的静态文件</td>
+</tr>
+<tr>
+<td>lib目录</td>
+<td>程序依赖的native库</td>
+</tr>
+<tr>
+<td>res目录</td>
+<td>存放应用程序的资源</td>
+</tr>
+<tr>
+<td>smail目录</td>
+<td>存放Dalvik VM内部执行的smail代码</td>
+</tr>
+<tr>
+<td>AndroidManifest.xml</td>
+<td>应用程序的配置文件</td>
+</tr>
+<tr>
+<td>apktool.yml</td>
+<td>apktool相关配置文件</td>
+</tr>
+</tbody>
+</table>
+<p>接下来，替换AndroidManifest.xml文件中定义的渠道号，下面是一段python脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line"></span><br><span class="line">def replace_channel(channel, manifest):</span><br><span class="line">    pattern = r&apos;(&lt;meta-data\s+android:name=&quot;channel&quot;\s+android:value=&quot;)(\S+)(&quot;\s+/&gt;)&apos;</span><br><span class="line">    replacement = r&quot;\g&lt;1&gt;&#123;channel&#125;\g&lt;3&gt;&quot;.format(channel=channel)</span><br><span class="line">    return re.sub(pattern, replacement, manifest)</span><br></pre></td></tr></table></figure></p>
+<p>更多有关Python的使用可参考<a href="http://www.yiibai.com/python/" target="_blank" rel="external">Python教程</a>。<br>然后，使用apktool构建未签名的apk：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apktool b build your_unsigned_apk</span><br></pre></td></tr></table></figure></p>
+<p>最后，使用jarsigner重新签名apk：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jarsigner -sigalg MD5withRSA -digestalg SHA1 -keystore your_keystore_path -storepass your_storepass -signedjar your_signed_apk, your_unsigned_apk, your_alias</span><br></pre></td></tr></table></figure></p>
+<p>上面就是使用apktool打包的方法，通过使用脚本可以批量地生成渠道包。不像Maven，每打一个包都需要执行一次构建过程，该方法只需构建一次，大大节省了时间，但缺点是每生成一个包需要重新签名一次。</p>
+<h5 id="3、批量快速打包"><a href="#3、批量快速打包" class="headerlink" title="3、批量快速打包"></a>3、批量快速打包</h5><p>如果能直接修改APK的渠道号，而不需要再重新签名能节省不少打包的时间。上文APK瘦身中讲述过APK解压后的目录结构，其中有个META-INF目录，是存放签名相关信息用来校验APK的完整性的，如果在META-INF目录内添加空文件，可以不用重新签名应用。因此，通过为不同渠道的应用添加不同的空文件，可以唯一标识一个渠道。<br>下面的python代码用来给apk添加空的渠道文件，渠道名的前缀为channel_：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import zipfile</span><br><span class="line">zipped = zipfile.ZipFile(your_apk, &apos;a&apos;, zipfile.ZIP_DEFLATED)</span><br><span class="line">empty_channel_file = &quot;META-INF/channel_&#123;channel&#125;&quot;.format(channel=your_channel)</span><br><span class="line">zipped.write(your_empty_file, empty_channel_file)</span><br></pre></td></tr></table></figure></p>
+<p>假设渠道名为test,则添加完空渠道文件后META-INFO目录多了一个名为channel_test的空文件：<br>接下来就可以在代码中读取空渠道文件名了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public static String getChannel(Context context) &#123;</span><br><span class="line">    ApplicationInfo appinfo = context.getApplicationInfo();</span><br><span class="line">    String sourceDir = appinfo.sourceDir;</span><br><span class="line">    String ret = &quot;&quot;;</span><br><span class="line">    ZipFile zipfile = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        zipfile = new ZipFile(sourceDir);</span><br><span class="line">        Enumeration&lt;?&gt; entries = zipfile.entries();</span><br><span class="line">        while (entries.hasMoreElements()) &#123;</span><br><span class="line">            ZipEntry entry = ((ZipEntry) entries.nextElement());</span><br><span class="line">            String entryName = entry.getName();</span><br><span class="line">            if (entryName.startsWith(&quot;channel&quot;)) &#123;</span><br><span class="line">                ret = entryName;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        if (zipfile != null) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                zipfile.close();</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    String[] split = ret.split(&quot;_&quot;);</span><br><span class="line">    if (split != null &amp;&amp; split.length &gt;= 2) &#123;</span><br><span class="line">        return ret.substring(split[0].length() + 1);</span><br><span class="line"></span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return &quot;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样，每打一个渠道包只需复制一个apk，在META-INF中添加一个使用渠道号命名的空文件即可。<br>更多关于打包详情可参考<a href="https://github.com/GavinCT/AndroidMultiChannelBuildTool" target="_blank" rel="external">AndroidMultiChannelBuildTool</a>.</p>
+<h5 id="4、Gradle定制化打包"><a href="#4、Gradle定制化打包" class="headerlink" title="4、Gradle定制化打包"></a>4、Gradle定制化打包</h5><p>关于Gradle多渠道打包可以参考我的另一篇博文<a href="http://blog.csdn.net/xiaoyaoyou1212/article/details/50277555" target="_blank" rel="external">Android Studio常用Gradle操作</a>，下面主要讲解如何根据各个渠道不同的需求来定制化打包，如控制是否自动更新，使用不同的包名、应用名等。</p>
+<ul>
+<li>使用不同的包名<br>如应用test有两个不同的包名，分别是com.example.test1和com.example.test2，需要对应上传到市场t1和t2，那么在productFlavors中进行如下描述：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">productFlavors &#123;</span><br><span class="line">    t1 &#123;</span><br><span class="line">        applicationId &quot;com.example.test1&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    t2 &#123;</span><br><span class="line">        applicationId &quot;com.example.test1&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面的代码添加了两个渠道，两个渠道的包名不同，运行gradle assemble命令即可生成两个不同渠道的适配包。</p>
+<ul>
+<li>控制是否自动更新<br>有些客户端在启动时会默认检查客户端是否有更新，如果有更新就会提示用户下载。但是有些渠道和应用市场不允许这种默认行为，所以在适配这些渠道时需要禁止自动更新功能。一般的解决思路是提供一个配置字段，应用启动的时候检查该字段的值以决定是否开启自动更新功能。<br>Gradle会在generateSources阶段为flavor生成一个BuildConfig.java文件。BuildConfig类默认提供了一些常量字段，比如应用的版本名（VERSION_NAME），应用的包名（PACKAGE_NAME）等。更强大的是，开发者还可以添加自定义的一些字段。下面的示例假设t3市场默认禁止自动更新功能：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        buildConfigField &quot;boolean&quot;, &quot;AUTO_UPDATES&quot;, &quot;true&quot;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    productFlavors &#123;</span><br><span class="line">        t3 &#123;</span><br><span class="line">            buildConfigField &quot;boolean&quot;, &quot;AUTO_UPDATES&quot;, &quot;false&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面的代码会在BuildConfig类中生成AUTO_UPDATES布尔常量，默认值为true，在使用t3渠道时，该值会被设置成false。接下来就可以在代码中使用AUTO_UPDATES常量来判断是否开启自动更新功能了。最后，运行gradle assembleT3命令即可生成默认不开启自动升级功能的渠道包。</p>
+<ul>
+<li>使用不同的资源<br>最常见的一类适配是修改应用的资源，如不同的应用名称、不同的logo、不同的启动页等。<br>Gradle在构建应用时，会优先使用flavor所属dataSet中的同名资源。所以，解决思路就是在flavor的dataSet中添加同名的字符串资源，以覆盖默认的资源。下面以适配t4渠道的应用名为Example2为例进行介绍。<br>首先，在build.gradle配置文件中添加如下flavor：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    productFlavors &#123;</span><br><span class="line">        t4 &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面的配置会默认src/t4目录为t4 flavor的dataSet。<br>接下来，在src目录内创建t4目录，并添加如下应用名字符串资源（src/t4/res/values/appname.xml）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;string name=&quot;app_name&quot;&gt;Example2&lt;/string&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure></p>
+<p>默认的应用名字符串资源如下（src/main/res/values/strings.xml）:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;string name=&quot;app_name&quot;&gt;Example1&lt;/string&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure></p>
+<p>最后，运行gradle assembleT4命令即可生成应用名为Example2的应用了。</p>
+<ul>
+<li>使用第三方SDK<br>某些渠道会要求客户端嵌入第三方SDK来满足特定的适配需求，假设渠道t5需要引用<code>com.example.test3:test:1.0.0</code>该库，那么可以像如下这样描述：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    productFlavors &#123;</span><br><span class="line">        t5 &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">dependencies &#123;</span><br><span class="line">    provided &apos;com.example.test3:test:1.0.0&apos;</span><br><span class="line">    t5Compile &apos;com.example.test3:test:1.0.0&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面添加了名为t5的flavor，并且指定编译和运行时都依赖<code>com.example.test3:test:1.0.0</code>。而其他渠道只是在构建的时候依赖该SDK，打包的时候并不会添加它。<br>接下来，需要在代码中使用反射技术判断应用程序是否添加了该SDK，从而决定是否要显示该SDK提供的功能。部分代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class MyActivity extends Activity &#123;</span><br><span class="line">    private boolean useSdk;</span><br><span class="line"></span><br><span class="line">    @override</span><br><span class="line">    public void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Class.forName(&quot;com.example.test3.Test&quot;);</span><br><span class="line">            useSdk = true;</span><br><span class="line">        &#125; catch (ClassNotFoundException ignored) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后，运行gradle assembleT5命令即可生成包含该SDK功能的渠道包了。</p>
+<h4 id="七、反编译"><a href="#七、反编译" class="headerlink" title="七、反编译"></a>七、反编译</h4><h5 id="1、原理"><a href="#1、原理" class="headerlink" title="1、原理"></a>1、原理</h5><p>反编译，又称为逆向编译技术，是指将可执行文件变成高级语言源程序的过程。反编译技术依赖于编译技术，是编译过程的逆过程。<br>编译程序把一个源程序翻译成目标程序的工作过程分为五个阶段：词法分析；语法分析；语义检查和中间代码生成；代码优化；目标代码生成。词法分析的任务是对由字符组成的单词进行处理，从左至右逐个字符地对源程序进行扫描，产生一个个的单词符号，把作为字符串的源程序改造成为单词符号串的中间程序。语法分析以单词符号作为输入，分析单词符号串是否形成符合语法规则的语法单位，如表达式、赋值、循环等，最后看是否构成一个符合要求的程序。语义分析是审查源程序有无语义错误，为代码生成阶段收集类型信息。中间代码是源程序的一种内部表示，或称中间语言。中间代码的作用是可使编译程序的结构在逻辑上更为简单明确，特别是可使目标代码的优化比较容易实现。代码优化是指对程序进行多种等价变换，使得从变换后的程序出发，能生成更有效的目标代码。目标代码生成是编译的最后一个阶段。<br>反编译器分为前端和后端，前端是一个机器依赖的模块，包含句法分析二进制程序、分析其指令的语义、并且生成该程序的低级中间表示法和每一子程序的控制流向图，通用的反编译机器是一个与语言和机器无关的模块，分析低级中间代码，将它转换成对任何高级语言都可接受的高级表示法，并且分析控制流向图的结构、把它们转换成用高级控制结构表现的图；而后端是一个目标语言依赖的模块，生成目标语言代码。</p>
+<h5 id="2、语言介绍"><a href="#2、语言介绍" class="headerlink" title="2、语言介绍"></a>2、语言介绍</h5><p>C++、C语言一般不能反编译为源代码，只能反编译为asm（汇编）语言，因为C较为底层，编译之后不保留任何元信息，而计算机运行的二进制实际上就代表了汇编指令，所以反编译为汇编是较为简单的。<br>C#、Java这类高级语言，尤其是需要运行环境的语言，如果没有混淆，非常容易反编译。原因很简单，这类语言只会编译为中间语言（C#为MSIL，Java为Bytecode），而中间语言与原语言本身较为相似，加上保留的元信息（记录类名、成员函数等信息）就可以反向生成源代码，注意是由反编译器生成，不会与源代码完全相同，但可以编译通过。这些特性本来是为反射技术准备的，却被反编译器利用，现在的C#反编译器ILSpy甚至可以反向工程。</p>
+<h5 id="3、工具"><a href="#3、工具" class="headerlink" title="3、工具"></a>3、工具</h5><ul>
+<li>dex2jar 这个工具用于将dex文件转换成jar文件<br>下载地址：http<a href="http://sourceforge.net/projects/dex2jar/files/" target="_blank" rel="external">://sourceforge.net/projects/dex2jar/files/</a></li>
+<li>jd-gui 这个工具用于将jar文件转换成java代码<br>下载地址：<a href="http://jd.benow.ca/" target="_blank" rel="external">http://jd.benow.ca/</a></li>
+<li>apktool 这个工具用于最大幅度地还原APK文件中的9-patch图片、布局、字符串等等一系列的资源<br>下载地址：<a href="http://ibotpeaches.github.io/Apktool/install/" target="_blank" rel="external">http://ibotpeaches.github.io/Apktool/install/</a></li>
+</ul>
+<h5 id="4、反编译过程"><a href="#4、反编译过程" class="headerlink" title="4、反编译过程"></a>4、反编译过程</h5><p>4.1、解压APK，获得其中的classes.dex文件；<br>4.2、拷贝classes.dex文件到dex2jar工具的解压目录下，使用如下命令：<code>d2j-dex2jar classes.dex</code>获得classes-dex2jar.jar文件；<br>4.3、使用工具jd-gui打开classes-dex2jar.jar文件，如果代码未被混淆，那么打开后就可以对除资源外的源码进行分析了；<br>4.4、将APK拷贝到apktool的解压目录下，使用命令<code>apktool -d ***.apk</code>,其中d是decode的意思，表示我们要对<code>***.apk</code>这个文件进行解码。这样可得到一个以APK名称命名的目录，该目录下就是解码后的结果了，其中的资源都是可以查看的。apktool命令除了这个基本用法之外，我们还可以再加上一些附加参数来控制decode的更多行为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-f 如果目标文件夹已存在，则强制删除现有文件夹（默认如果目标文件夹已存在，则解码失败）。</span><br><span class="line">-o 指定解码目标文件夹的名称（默认使用APK文件的名字来命名目标文件夹）。</span><br><span class="line">-s 不反编译dex文件，也就是说classes.dex文件会被保留（默认会将dex文件解码成smali文件）。</span><br><span class="line">-r 不反编译资源文件，也就是说resources.arsc文件会被保留（默认会将resources.arsc解码成具体的资源文件）。</span><br></pre></td></tr></table></figure></p>
+<p>4.5、假如我们修改了解码后的部分代码或资源中的内容需要重新打包，那么则使用命令<code>apktool b *** -o New_***.apk</code>进行打包；<br>4.6、打包后还不能安装，需要重新进行签名，签名过程上文已描述过，在此就不赘述该过程了；<br>4.7、Android还极度建议我们对签名后的APK文件进行一次对齐操作，因为这样可以使得我们的程序在Android系统中运行得更快，对齐操作使用的是zipalign工具，该工具存放于<android sdk="">/build-tools/<version>目录下，对齐使用命令如下：<code>zipalign 4 New_***.apk New_***_aligned.apk</code>，其中4是固定值。</version></android></p>
+<ul>
+<li>注：以上所写<code>***</code>都表示该APK的名称，还有以上所描述过程仅用作技术交流，仅限于学习。</li>
+</ul>
+<h4 id="八、加固"><a href="#八、加固" class="headerlink" title="八、加固"></a>八、加固</h4><p>Android中的Apk反编译可能是每个开发都会经历的事，但是在反编译的过程中，对于源程序的开发者来说那是不公平的，那么Apk加固也是应运而生，现在网上有很多Apk加固的第三方平台，如以下所示：<br><a href="http://jingyan.baidu.com/article/7e440953ddaf6f2fc0e2efa0.html" target="_blank" rel="external">爱加密加固</a><br><a href="http://jiagu.360.cn/1101144936.php?dtid=1101144931&amp;did=1101151213" target="_blank" rel="external">360加固</a><br><a href="http://dev.bangcle.com/home/help?id=2" target="_blank" rel="external">梆梆加固</a><br>其实加固有些人认为很高深的技术，其实不然，说的简单点就是对源Apk进行加密，然后在套上一层壳即可，当然还有很多细节需要处理，其简单介绍如下：<br>1、加壳程序<br>任务：对源程序Apk进行加密，合并脱壳程序的Dex文件 ，然后输入一个加壳之后的Dex文件<br>语言：任何语言都可以，不限于Java语言<br>技术点：对Dex文件格式的解析<br>2、脱壳程序<br>任务：获取源程序Apk,进行解密，然后动态加载进来，运行程序<br>语言：Android项目(Java)<br>技术点：如何从Apk中获取Dex文件，动态加载Apk，使用反射运行Application<br>目前来说，不管是混淆、加密还是加固都不完全是安全的，不管何时，逆向和安全的战争都永远不会停歇。但对于普通应用来说，混淆和加固基本就可以保证你应用的安全了，因为不管是出于什么原因都是需要考虑时间和人力成本的。</p>
+<h5 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h5><p>1、<a href="http://blog.csdn.net/catoop/article/details/47208833" target="_blank" rel="external">Android 项目的代码混淆，Android proguard 使用说明</a><br>2、<a href="http://blog.csdn.net/guolin_blog/article/details/50451259" target="_blank" rel="external">Android安全攻防战，反编译与混淆技术完全解析</a><br>3、<a href="http://greenrobot.me/devpost/putting-your-apks-on-diet/" target="_blank" rel="external">如何给你的Android 安装文件（APK）瘦身</a><br>4、<a href="http://blog.csdn.net/ekeuy/article/details/44900741" target="_blank" rel="external">关于APK瘦身值得分享的一些经验</a><br>5、<a href="http://tech.meituan.com/mt-apk-packaging.html" target="_blank" rel="external">美团Android自动化之旅—生成渠道包</a><br>6、<a href="http://tech.meituan.com/mt-apk-adaptation.html" target="_blank" rel="external">美团Android自动化之旅—适配渠道包</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/07/24/App的打磨之路/">App的打磨之路</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 胡伟 的个人博客">胡伟</a></p>
+        <p><span>发布时间:</span>2016年07月24日 - 23时12分</p>
+        <p><span>最后更新:</span>2016年07月24日 - 23时11分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/24/App的打磨之路/" title="App的打磨之路">http://www.xiaoyaoyou1212.com/2016/07/24/App的打磨之路/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xiaoyaoyou1212.com/2016/07/24/App的打磨之路/　　作者: 胡伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/07/Android-BLE学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android BLE学习笔记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#前言："><span class="toc-number">1.</span> <span class="toc-text">前言：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一、单元测试"><span class="toc-number">2.</span> <span class="toc-text">一、单元测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、性能分析"><span class="toc-number">3.</span> <span class="toc-text">二、性能分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、Memory-Monitor"><span class="toc-number">3.1.</span> <span class="toc-text">1、Memory Monitor</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、Heap-Snapshot"><span class="toc-number">3.2.</span> <span class="toc-text">2、Heap Snapshot</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、LeakCanary"><span class="toc-number">3.3.</span> <span class="toc-text">3、LeakCanary</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、签名"><span class="toc-number">4.</span> <span class="toc-text">三、签名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、混淆"><span class="toc-number">5.</span> <span class="toc-text">四、混淆</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、混淆原理"><span class="toc-number">5.1.</span> <span class="toc-text">1、混淆原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、混淆语法"><span class="toc-number">5.2.</span> <span class="toc-text">2、混淆语法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、混淆文件编写"><span class="toc-number">5.3.</span> <span class="toc-text">3、混淆文件编写</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五、APK瘦身"><span class="toc-number">6.</span> <span class="toc-text">五、APK瘦身</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、APK文件结构"><span class="toc-number">6.1.</span> <span class="toc-text">1、APK文件结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、Apk瘦身方式"><span class="toc-number">6.2.</span> <span class="toc-text">2、Apk瘦身方式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#六、打包"><span class="toc-number">7.</span> <span class="toc-text">六、打包</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、Maven打包"><span class="toc-number">7.1.</span> <span class="toc-text">1、Maven打包</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、Apktool打包"><span class="toc-number">7.2.</span> <span class="toc-text">2、Apktool打包</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、批量快速打包"><span class="toc-number">7.3.</span> <span class="toc-text">3、批量快速打包</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4、Gradle定制化打包"><span class="toc-number">7.4.</span> <span class="toc-text">4、Gradle定制化打包</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#七、反编译"><span class="toc-number">8.</span> <span class="toc-text">七、反编译</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、原理"><span class="toc-number">8.1.</span> <span class="toc-text">1、原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、语言介绍"><span class="toc-number">8.2.</span> <span class="toc-text">2、语言介绍</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、工具"><span class="toc-number">8.3.</span> <span class="toc-text">3、工具</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4、反编译过程"><span class="toc-number">8.4.</span> <span class="toc-text">4、反编译过程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#八、加固"><span class="toc-number">9.</span> <span class="toc-text">八、加固</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#参考链接："><span class="toc-number">9.1.</span> <span class="toc-text">参考链接：</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/07/24/App的打磨之路/" data-title="App的打磨之路" data-url="http://www.xiaoyaoyou1212.com/2016/07/24/App的打磨之路/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/07/07/Android-BLE学习笔记/" title="下一篇: Android BLE学习笔记">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/24/App的打磨之路/">App的打磨之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Android-BLE学习笔记/">Android BLE学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/算法基础：排序与查找/">算法基础：排序与查找</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/数据结构学习整理/">数据结构学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/从零开始搭建属于自己的博客/">从零开始搭建属于自己的博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Mac常用功能整理/">Mac常用功能整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Git学习整理/">Git学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Linux常用命令整理/">Linux常用命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Android-Studio常用Gradle操作/">Android Studio常用Gradle操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/28/Android常见问题集锦/">Android常见问题集锦</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                版权所有 &copy; 2016 胡伟
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >伙伴到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

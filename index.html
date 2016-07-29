@@ -146,7 +146,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
+                        <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/学习笔记/" style="font-size: 16.67px;">学习笔记</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
                     </div>
                 </section>
                 
@@ -223,6 +223,68 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Android-Permission整理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/29/Android-Permission整理/" class="article-date">
+      <time datetime="2016-07-29T14:53:39.000Z" itemprop="datePublished">2016-07-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/29/Android-Permission整理/">Android Permission整理</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h4 id="1、权限概述"><a href="#1、权限概述" class="headerlink" title="1、权限概述"></a>1、权限概述</h4><p>Android 通过在每台设备上实施了基于权限的安全策略来处理安全问题，采用权限来限制安装应用程序的能力。当某个权限与某个操作和资源对象绑定在一起，我们必须获得这个权限才能在对象上执行操作。由于Android设计本身就是为Android开发人员着想，所以一切权限许可权由用户决定而不是手机制造商和平台提供商，但这不得不带来了开发者滥用权限，黑客通过权限来进行恶意行为的风险，所以作为静态分析一个App是否为恶意软件的第一道关，获取并了解Android Permission权限意义是十分重大的。<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/29/Android-Permission整理/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-App的打磨之路" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -805,70 +867,10 @@
 
 
   
-    <article id="post-Android常见问题集锦" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2016/05/28/Android常见问题集锦/" class="article-date">
-      <time datetime="2016-05-28T13:24:15.000Z" itemprop="datePublished">2016-05-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/28/Android常见问题集锦/">Android常见问题集锦</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <ul>
-<li>SVN：Commit failed(details follow):svn: xxx is scheduled for addition, but is missing<br><strong>描述：</strong>删除文件夹后点commit提交，但是提示以下错误： “svn: Commit failed (details follow): svn: ‘xxx’ is scheduled for addition, but is missing”。<br><strong>原因：</strong>之前用SVN提交过的文件，被标记为”add”状态，等待被加入到仓库。若此时你把这个文件删除了，SVN提交的时候还是会尝试提交这个文件，虽然它的状态已经是 “missing”了。<br><strong>解决：</strong>在命令行下用 “svn revert xxx –depth infinity”，在图形界面下，右键–Revert，选中那个文件或文件夹。这样就告诉SVN把这个文件退回到之前的状态 “unversioned”，也就是不对这个文件做任何修改。</li>
-<li>Java工程中调用Android库出现“Stub!”错误<br><strong>描述：</strong>控制台显示错误：Exception in thread “main” java.lang.RuntimeException: Stub!<br><strong>原因：</strong>在Java工程中尝试使用Android库中的org.json.JSONObject类，在执行时出现“Stub！”错误，Android工程中无法执行java的main函数相似，Android工程和Java工程还有一定的差异，不能混用他们的库，和函数入口方法。<br><strong>解决：</strong>将执行的代码，移植到在Android工程可以正确执行！
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/问题/">问题</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/05/28/Android常见问题集锦/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">

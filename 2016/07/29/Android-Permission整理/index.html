@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android Permission整理 | 逍遥游</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、权限概述Android 通过在每台设备上实施了基于权限的安全策略来处理安全问题，采用权限来限制安装应用程序的能力。当某个权限与某个操作和资源对象绑定在一起，我们必须获得这个权限才能在对象上执行操作。由于Android设计本身就是为Android开发人员着想，所以一切权限许可权由用户决定而不是手机制造商和平台提供商，但这不得不带来了开发者滥用权限，黑客通过权限来进行恶意行为的风险，所以作为静态分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Permission整理">
+<meta property="og:url" content="http://www.xiaoyaoyou1212.com/2016/07/29/Android-Permission整理/index.html">
+<meta property="og:site_name" content="逍遥游">
+<meta property="og:description" content="1、权限概述Android 通过在每台设备上实施了基于权限的安全策略来处理安全问题，采用权限来限制安装应用程序的能力。当某个权限与某个操作和资源对象绑定在一起，我们必须获得这个权限才能在对象上执行操作。由于Android设计本身就是为Android开发人员着想，所以一切权限许可权由用户决定而不是手机制造商和平台提供商，但这不得不带来了开发者滥用权限，黑客通过权限来进行恶意行为的风险，所以作为静态分">
+<meta property="og:updated_time" content="2016-07-29T14:56:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Permission整理">
+<meta name="twitter:description" content="1、权限概述Android 通过在每台设备上实施了基于权限的安全策略来处理安全问题，采用权限来限制安装应用程序的能力。当某个权限与某个操作和资源对象绑定在一起，我们必须获得这个权限才能在对象上执行操作。由于Android设计本身就是为Android开发人员着想，所以一切权限许可权由用户决定而不是手机制造商和平台提供商，但这不得不带来了开发者滥用权限，黑客通过权限来进行恶意行为的风险，所以作为静态分">
+  
+    <link rel="alternative" href="/atom.xml" title="逍遥游" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: true
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">胡伟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives">所有文章</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                            <li><a href="/picture">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl facebook" target="_blank" href="#" title="facebook">facebook</a>
+                            
+                                <a class="fl rss" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/学习笔记/" style="font-size: 16.67px;">学习笔记</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">热爱技术，喜欢钻研新技术，对新事物充满强烈的好奇心；爱好数学，喜欢数字独特的魅力；衷爱科学，喜欢探索解密，希望一生为之努力！</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">胡伟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">胡伟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives">所有文章</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                    <li><a href="/picture">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="facebook" target="_blank" href="#" title="facebook">facebook</a>
+                    
+                        <a class="rss" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Android-Permission整理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/29/Android-Permission整理/" class="article-date">
+      <time datetime="2016-07-29T14:53:39.000Z" itemprop="datePublished">2016-07-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android Permission整理
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="1、权限概述"><a href="#1、权限概述" class="headerlink" title="1、权限概述"></a>1、权限概述</h4><p>Android 通过在每台设备上实施了基于权限的安全策略来处理安全问题，采用权限来限制安装应用程序的能力。当某个权限与某个操作和资源对象绑定在一起，我们必须获得这个权限才能在对象上执行操作。由于Android设计本身就是为Android开发人员着想，所以一切权限许可权由用户决定而不是手机制造商和平台提供商，但这不得不带来了开发者滥用权限，黑客通过权限来进行恶意行为的风险，所以作为静态分析一个App是否为恶意软件的第一道关，获取并了解Android Permission权限意义是十分重大的。<br><a id="more"></a></p>
+<h4 id="2、权限策略"><a href="#2、权限策略" class="headerlink" title="2、权限策略"></a>2、权限策略</h4><p>Android 框架提供一套默认的权限存储在android.anifest.permission类中，同时也允许我们自己定义新的权限。我们在写应用程序时声明权限，程序安装时新权限被引入系统，权限授权在应用程序被安装时执行。当在设备上安装应用程序时，程序将请求完成任务必需的权限集合，被请求的权限列单显示在设备屏幕上以待用户审查只有用户同意授权后，程序才会被安装，该应用程序获得所有被请求的权限。所以Android系统实施的主要安全准则是应用程序只有得到权限许可后，才能执行可能会影响到系统其它部分的操作。每个权限被定义成一个字符串，用来传达权限以执行某个特殊的操作。所有权限可以分为两个类别:一种是执行程序时被应用程序所请求的权限，一种是应用程序的组件之间通信时被其它组件请求的权限。开发者通过在AndroidManifest.xml文件中编写权限标签来定义以上两种类别的权限策略。</p>
+<h4 id="3、权限声明"><a href="#3、权限声明" class="headerlink" title="3、权限声明"></a>3、权限声明</h4><p>应用程序可以用一个<code>&lt;permission&gt;</code>元素来声明权限， 用于限制访问特定组件或应用程序 在安装程序时， 这个已声明的权限被加入到系统中，具体可以参看下文的Android自定义权限。</p>
+<h4 id="4、权限请求"><a href="#4、权限请求" class="headerlink" title="4、权限请求"></a>4、权限请求</h4><p>应用程序列出所有需要用来完成任务的权限，分别用 <code>&lt;use-permission&gt;</code>元素标识这些权限。在程序安装时被请求，列表显示在屏幕上用户要么同意安装，要么中止安装。同意安装则意味着授权所有被请求的权限。</p>
+<h4 id="5、获取权限"><a href="#5、获取权限" class="headerlink" title="5、获取权限"></a>5、获取权限</h4><p>获取权限，是我们静态分析某个App的第一关，通过知道App所具有的权限，我们一般能够基本知道该App或许会有哪些行为。目前已有多个工具可以静态检测Android app所具有的Permissions，这类工具有：aapt、apktool、androguard等等。</p>
+<h4 id="6、Android自定义权限"><a href="#6、Android自定义权限" class="headerlink" title="6、Android自定义权限"></a>6、Android自定义权限</h4><p>在android系统的安全模型中，应用程序在默认的情况下不可以执行任何对其他应用程序，系统或者用户带来负面影响的操作。如果应用需要执行某些操作，就需要声明使用这个操作对应的权限（在manifest文件中 添加<code>&lt;uses-permission&gt;</code>标记）。<br>android 系统提供了一系列这样的权限，具体可以查看android 权限，另外，android系统在新的版本中会增加一些permission，可以查看android 版本信息。<br>当然，app也可以自定义属于自己的permission 或属于开发者使用的同一个签名的permission。定义一个permission 就是在menifest文件中添加一个permission标签。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;permission android:description=&quot;string resource&quot;</span><br><span class="line">    android:icon=&quot;drawable resource&quot;</span><br><span class="line">    android:label=&quot;string resource&quot;</span><br><span class="line">    android:name=&quot;string&quot;</span><br><span class="line">    android:permissionGroup=&quot;string&quot;</span><br><span class="line">    android:protectionLevel=[&quot;normal&quot; | &quot;dangerous&quot; | &quot;signature&quot; | &quot;signatureOrSystem&quot;] /&gt;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>各属性详解：<br><strong>android:description:</strong>对权限的描述，一般是两句话，第一句话描述这个权限所针对的操作，第二句话告诉用户授予app这个权限会带来的后果；<br><strong>android:label:</strong>对权限的一个简短描述；<br><strong>android:name:</strong>权限的唯一标识，一般都是使用 报名加权限名；<br><strong>android:permissionGroup:</strong>权限所属权限组的名称；<br><strong>android:protectionLevel:</strong>权限的等级，包含以下几个：<br>normal是最低的等级，声明次权限的app，系统会默认授予次权限，不会提示用户；<br>dangerous权限对应的操作有安全风险，系统在安装声明此类权限的app时会提示用户；<br>signature权限表明的操作只针对使用同一个证书签名的app开放；<br>signatureOrSystem与signature类似，只是增加了rom中自带的app的声明；<br>其中android:name属性是必须的，其他的可选，未写的系统会指定默认值。</li>
+</ul>
+<h4 id="7、Android权限一览"><a href="#7、Android权限一览" class="headerlink" title="7、Android权限一览"></a>7、Android权限一览</h4><p>在Android的设计中，资源的访问或者网络连接，要得到这些服务都需要声明其访问权限，否则将无法正常工作。在Android中这样的权限有很多种，这里将各类访问权限一一罗列出来，供大家使用时参考之用。</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>android.permission.EXPAND_STATUS_BAR</td>
+<td>允许一个程序扩展收缩在状态栏,android开发网提示应该是一个类似Windows Mobile中的托盘程序</td>
+</tr>
+<tr>
+<td>android.permission.FACTORY_TEST</td>
+<td>作为一个工厂测试程序，运行在root用户</td>
+</tr>
+<tr>
+<td>android.permission.FLASHLIGHT</td>
+<td>访问闪光灯,android开发网提示HTC Dream不包含闪光灯</td>
+</tr>
+<tr>
+<td>android.permission.FORCE_BACK</td>
+<td>允许程序强行一个后退操作是否在顶层activities</td>
+</tr>
+<tr>
+<td>android.permission.FOTA_UPDATE</td>
+<td>暂时不了解这是做什么使用的，android开发网分析可能是一个预留权限</td>
+</tr>
+<tr>
+<td>android.permission.GET_ACCOUNTS</td>
+<td>访问一个帐户列表在Accounts Service中</td>
+</tr>
+<tr>
+<td>android.permission.GET_PACKAGE_SIZE</td>
+<td>允许一个程序获取任何package占用空间容量</td>
+</tr>
+<tr>
+<td>android.permission.GET_TASKS</td>
+<td>允许一个程序获取信息有关当前或最近运行的任务，一个缩略的任务状态，是否活动等等</td>
+</tr>
+<tr>
+<td>android.permission.HARDWARE_TEST</td>
+<td>允许访问硬件</td>
+</tr>
+<tr>
+<td>android.permission.INJECT_EVENTS</td>
+<td>允许一个程序截获用户事件如按键、触摸、轨迹球等等到一个时间流</td>
+</tr>
+<tr>
+<td>android.permission.INSTALL_PACKAGES</td>
+<td>允许一个程序安装packages</td>
+</tr>
+<tr>
+<td>android.permission.INTERNAL_SYSTEM_WINDOW</td>
+<td>允许打开窗口使用系统用户界面</td>
+</tr>
+<tr>
+<td>android.permission.ACCESS_CHECKIN_PROPERTIES</td>
+<td>允许读写访问“properties”表在checkin数据库中，改值可以修改上传</td>
+</tr>
+<tr>
+<td>android.permission.ACCESS_COARSE_LOCATION</td>
+<td>允许一个程序访问CellID或WiFi热点来获取粗略的位置</td>
+</tr>
+<tr>
+<td>android.permission.ACCESS_FINE_LOCATION</td>
+<td>允许一个程序访问精良位置(如GPS)</td>
+</tr>
+<tr>
+<td>android.permission.WRITE_CONTACTS</td>
+<td>允许程序写入但不读取用户联系人数据</td>
+</tr>
+<tr>
+<td>android.permission.WRITE_GSERVICES</td>
+<td>允许程序修改Google服务地图</td>
+</tr>
+<tr>
+<td>android.permission.WRITE_OWNER_DATA</td>
+<td>允许一个程序写入但不读取所有者数据</td>
+</tr>
+<tr>
+<td>android.permission.WRITE_SETTINGS</td>
+<td>允许程序读取或写入系统设置</td>
+</tr>
+<tr>
+<td>android.permission.WRITE_SMS</td>
+<td>允许程序写短信</td>
+</tr>
+<tr>
+<td>android.permission.WRITE_SYNC_SETTINGS</td>
+<td>允许程序写入同步设置</td>
+</tr>
+<tr>
+<td>android.permission.ACCESS_LOCATION_EXTRA_COMMANDS</td>
+<td>允许应用程序访问额外的位置提供命令</td>
+</tr>
+<tr>
+<td>android.permission.ACCESS_MOCK_LOCATION</td>
+<td>允许程序创建模拟位置提供用于测试</td>
+</tr>
+<tr>
+<td>android.permission.ACCESS_NETWORK_STATE</td>
+<td>允许程序访问有关GSM网络信息</td>
+</tr>
+<tr>
+<td>android.permission.ACCESS_SURFACE_FLINGER</td>
+<td>允许程序使用SurfaceFlinger底层特性</td>
+</tr>
+<tr>
+<td>android.permission.ACCESS_WIFI_STATE</td>
+<td>允许程序访问Wi-Fi网络状态信息</td>
+</tr>
+<tr>
+<td>android.permission.ADD_SYSTEM_SERVICE</td>
+<td>允许程序发布系统级服务</td>
+</tr>
+<tr>
+<td>android.permission.BATTERY_STATS</td>
+<td>允许程序更新手机电池统计信息</td>
+</tr>
+<tr>
+<td>android.permission.BLUETOOTH</td>
+<td>允许程序连接到已配对的蓝牙设备</td>
+</tr>
+<tr>
+<td>android.permission.BLUETOOTH_ADMIN</td>
+<td>允许程序发现和配对蓝牙设备</td>
+</tr>
+<tr>
+<td>android.permission.BROADCAST_PACKAGE_REMOVED</td>
+<td>允许程序广播一个提示消息在一个应用程序包已经移除后</td>
+</tr>
+<tr>
+<td>android.permission.BROADCAST_STICKY</td>
+<td>允许一个程序广播常用intents</td>
+</tr>
+<tr>
+<td>android.permission.CALL_PHONE</td>
+<td>允许一个程序初始化一个电话拨号不需通过拨号用户界面需要用户确认</td>
+</tr>
+<tr>
+<td>android.permission.DELETE_CACHE_FILES</td>
+<td>允许程序删除缓存文件</td>
+</tr>
+<tr>
+<td>android.permission.DELETE_PACKAGES</td>
+<td>允许一个程序删除包</td>
+</tr>
+<tr>
+<td>android.permission.DEVICE_POWER</td>
+<td>允许访问底层电源管理</td>
+</tr>
+<tr>
+<td>android.permission.DIAGNOSTIC</td>
+<td>允许程序RW诊断资源</td>
+</tr>
+<tr>
+<td>android.permission.DISABLE_KEYGUARD</td>
+<td>允许程序禁用键盘锁</td>
+</tr>
+<tr>
+<td>android.permission.DUMP</td>
+<td>允许程序返回状态抓取信息从系统服务</td>
+</tr>
+<tr>
+<td>android.permission.CALL_PRIVILEGED</td>
+<td>允许一个程序拨打任何号码，包含紧急号码无需通过拨号用户界面需要用户确认</td>
+</tr>
+<tr>
+<td>android.permission.CAMERA</td>
+<td>请求访问使用照相设备</td>
+</tr>
+<tr>
+<td>android.permission.CHANGE_COMPONENT_ENABLED_STATE</td>
+<td>允许一个程序是否改变一个组件或其他的启用或禁用</td>
+</tr>
+<tr>
+<td>android.permission.CHANGE_CONFIGURATION</td>
+<td>允许一个程序修改当前设置，如本地化</td>
+</tr>
+<tr>
+<td>android.permission.CHANGE_NETWORK_STATE</td>
+<td>允许程序改变网络连接状态</td>
+</tr>
+<tr>
+<td>android.permission.CHANGE_WIFI_STATE</td>
+<td>允许程序改变Wi-Fi连接状态</td>
+</tr>
+<tr>
+<td>android.permission.CLEAR_APP_CACHE</td>
+<td>允许一个程序清楚缓存从所有安装的程序在设备中</td>
+</tr>
+<tr>
+<td>android.permission.CLEAR_APP_USER_DATA</td>
+<td>允许一个程序清除用户设置</td>
+</tr>
+<tr>
+<td>android.permission.CONTROL_LOCATION_UPDATES</td>
+<td>允许启用禁止位置更新提示从无线模块</td>
+</tr>
+<tr>
+<td>android.permission.REBOOT</td>
+<td>请求能够重新启动设备</td>
+</tr>
+<tr>
+<td>android.permission.RECEIVE_BOOT_COMPLETED</td>
+<td>允许一个程序接收到ACTION_BOOT_COMPLETED广播在系统完成启动</td>
+</tr>
+<tr>
+<td>android.permission.RECEIVE_MMS</td>
+<td>允许一个程序监控将收到MMS彩信,记录或处理</td>
+</tr>
+<tr>
+<td>android.permission.RECEIVE_SMS</td>
+<td>允许程序监控一个将收到短信息，记录或处理</td>
+</tr>
+<tr>
+<td>android.permission.RECEIVE_WAP_PUSH</td>
+<td>允许程序监控将收到WAP PUSH信息</td>
+</tr>
+<tr>
+<td>android.permission.RECORD_AUDIO</td>
+<td>允许程序录制音频</td>
+</tr>
+<tr>
+<td>android.permission.REORDER_TASKS</td>
+<td>允许程序改变Z轴排列任务</td>
+</tr>
+<tr>
+<td>android.permission.RESTART_PACKAGES</td>
+<td>允许程序重新启动其他程序</td>
+</tr>
+<tr>
+<td>android.permission.SEND_SMS</td>
+<td>允许程序发送SMS短信</td>
+</tr>
+<tr>
+<td>android.permission.INTERNET</td>
+<td>允许程序打开网络套接字</td>
+</tr>
+<tr>
+<td>android.permission.MANAGE_APP_TOKENS</td>
+<td>允许程序管理(创建、催后、 z-order默认向z轴推移)程序引用在窗口管理器中</td>
+</tr>
+<tr>
+<td>android.permission.MASTER_CLEAR</td>
+<td>目前还没有明确的解释，android开发网分析可能是清除一切数据，类似硬格机</td>
+</tr>
+<tr>
+<td>android.permission.MODIFY_AUDIO_SETTINGS</td>
+<td>允许程序修改全局音频设置</td>
+</tr>
+<tr>
+<td>android.permission.MODIFY_PHONE_STATE</td>
+<td>允许修改话机状态，如电源，人机接口等</td>
+</tr>
+<tr>
+<td>android.permission.MOUNT_UNMOUNT_FILESYSTEMS</td>
+<td>允许挂载和反挂载文件系统可移动存储</td>
+</tr>
+<tr>
+<td>android.permission.PERSISTENT_ACTIVITY允许一个程序设置他的activities显示</td>
+</tr>
+<tr>
+<td>android.permission.PROCESS_OUTGOING_CALLS</td>
+<td>允许程序监视、修改有关播出电话</td>
+</tr>
+<tr>
+<td>android.permission.READ_CALENDAR</td>
+<td>允许程序读取用户日历数据</td>
+</tr>
+<tr>
+<td>android.permission.READ_CONTACTS</td>
+<td>允许程序读取用户联系人数据</td>
+</tr>
+<tr>
+<td>android.permission.READ_FRAME_BUFFER</td>
+<td>允许程序屏幕波或和更多常规的访问帧缓冲数据</td>
+</tr>
+<tr>
+<td>android.permission.READ_INPUT_STATE</td>
+<td>允许程序返回当前按键状态</td>
+</tr>
+<tr>
+<td>android.permission.READ_LOGS</td>
+<td>允许程序读取底层系统日志文件</td>
+</tr>
+<tr>
+<td>android.permission.READ_OWNER_DATA</td>
+<td>允许程序读取所有者数据</td>
+</tr>
+<tr>
+<td>android.permission.READ_SMS</td>
+<td>允许程序读取短信息</td>
+</tr>
+<tr>
+<td>android.permission.READ_SYNC_SETTINGS</td>
+<td>允许程序读取同步设置</td>
+</tr>
+<tr>
+<td>android.permission.READ_SYNC_STATS</td>
+<td>允许程序读取同步状态</td>
+</tr>
+<tr>
+<td>android.permission.SET_ACTIVITY_WATCHER</td>
+<td>允许程序监控或控制activities已经启动全局系统中</td>
+</tr>
+<tr>
+<td>android.permission.SET_ALWAYS_FINISH</td>
+<td>允许程序控制是否活动间接完成在处于后台时</td>
+</tr>
+<tr>
+<td>android.permission.SET_ANIMATION_SCALE</td>
+<td>修改全局信息比例</td>
+</tr>
+<tr>
+<td>android.permission.SET_DEBUG_APP</td>
+<td>配置一个程序用于调试</td>
+</tr>
+<tr>
+<td>android.permission.SET_ORIENTATION</td>
+<td>允许底层访问设置屏幕方向和实际旋转</td>
+</tr>
+<tr>
+<td>android.permission.SET_PREFERRED_APPLICATIONS</td>
+<td>允许一个程序修改列表参数PackageManager.addPackageToPreferred()和PackageManager.removePackageFromPreferred()方法</td>
+</tr>
+<tr>
+<td>android.permission.SET_PROCESS_FOREGROUND</td>
+<td>允许程序当前运行程序强行到前台</td>
+</tr>
+<tr>
+<td>android.permission.SET_PROCESS_LIMIT</td>
+<td>允许设置最大的运行进程数量</td>
+</tr>
+<tr>
+<td>android.permission.SET_TIME_ZONE</td>
+<td>允许程序设置时间区域</td>
+</tr>
+<tr>
+<td>android.permission.SET_WALLPAPER</td>
+<td>允许程序设置壁纸</td>
+</tr>
+<tr>
+<td>android.permission.SET_WALLPAPER_HINTS</td>
+<td>允许程序设置壁纸hits</td>
+</tr>
+<tr>
+<td>android.permission.SIGNAL_PERSISTENT_PROCESSES</td>
+<td>允许程序请求发送信号到所有显示的进程中</td>
+</tr>
+<tr>
+<td>android.permission.STATUS_BAR</td>
+<td>允许程序打开、关闭或禁用状态栏及图标</td>
+</tr>
+<tr>
+<td>android.permission.SUBSCRIBED_FEEDS_READ</td>
+<td>允许一个程序访问订阅RSS Feed内容提供</td>
+</tr>
+<tr>
+<td>android.permission.SUBSCRIBED_FEEDS_WRITE</td>
+<td>系统暂时保留改设置</td>
+</tr>
+<tr>
+<td>android.permission.SYSTEM_ALERT_WINDOW</td>
+<td>允许一个程序打开窗口使用TYPE_SYSTEM_ALERT，显示在其他所有程序的顶层</td>
+</tr>
+<tr>
+<td>android.permission.VIBRATE</td>
+<td>允许访问振动设备</td>
+</tr>
+<tr>
+<td>android.permission.WAKE_LOCK</td>
+<td>允许使用PowerManager的 WakeLocks保持进程在休眠时从屏幕消失</td>
+</tr>
+<tr>
+<td>android.permission.WRITE_APN_SETTINGS</td>
+<td>允许程序写入API设置</td>
+</tr>
+<tr>
+<td>android.permission.WRITE_CALENDAR</td>
+<td>允许一个程序写入但不读取用户日历数据</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>参考链接<br><a href="http://www.cppblog.com/guojingjia2006/archive/2013/02/18/197911.html" target="_blank" rel="external">Android各种访问权限Permission详解</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/07/29/Android-Permission整理/">Android Permission整理</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 胡伟 的个人博客">胡伟</a></p>
+        <p><span>发布时间:</span>2016年07月29日 - 22时53分</p>
+        <p><span>最后更新:</span>2016年07月29日 - 22时56分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/29/Android-Permission整理/" title="Android Permission整理">http://www.xiaoyaoyou1212.com/2016/07/29/Android-Permission整理/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xiaoyaoyou1212.com/2016/07/29/Android-Permission整理/　　作者: 胡伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/24/App的打磨之路/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">App的打磨之路</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、权限概述"><span class="toc-number">1.</span> <span class="toc-text">1、权限概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、权限策略"><span class="toc-number">2.</span> <span class="toc-text">2、权限策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、权限声明"><span class="toc-number">3.</span> <span class="toc-text">3、权限声明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、权限请求"><span class="toc-number">4.</span> <span class="toc-text">4、权限请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、获取权限"><span class="toc-number">5.</span> <span class="toc-text">5、获取权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、Android自定义权限"><span class="toc-number">6.</span> <span class="toc-text">6、Android自定义权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、Android权限一览"><span class="toc-number">7.</span> <span class="toc-text">7、Android权限一览</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/07/29/Android-Permission整理/" data-title="Android Permission整理" data-url="http://www.xiaoyaoyou1212.com/2016/07/29/Android-Permission整理/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/07/24/App的打磨之路/" title="下一篇: App的打磨之路">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/Android-Permission整理/">Android Permission整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/24/App的打磨之路/">App的打磨之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Android-BLE学习笔记/">Android BLE学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/算法基础：排序与查找/">算法基础：排序与查找</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/数据结构学习整理/">数据结构学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/从零开始搭建属于自己的博客/">从零开始搭建属于自己的博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Mac常用功能整理/">Mac常用功能整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Git学习整理/">Git学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Linux常用命令整理/">Linux常用命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Android-Studio常用Gradle操作/">Android Studio常用Gradle操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/28/Android常见问题集锦/">Android常见问题集锦</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                版权所有 &copy; 2016 胡伟
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >伙伴到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

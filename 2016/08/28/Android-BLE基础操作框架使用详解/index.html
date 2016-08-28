@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android BLE基础操作框架使用详解 | 逍遥游</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android BLE基础操作框架，基于回调，操作简单。其中包含扫描、连接、广播包解析、服务读写及通知等功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android BLE基础操作框架使用详解">
+<meta property="og:url" content="http://www.xiaoyaoyou1212.com/2016/08/28/Android-BLE基础操作框架使用详解/index.html">
+<meta property="og:site_name" content="逍遥游">
+<meta property="og:description" content="Android BLE基础操作框架，基于回调，操作简单。其中包含扫描、连接、广播包解析、服务读写及通知等功能。">
+<meta property="og:image" content="http://img.blog.csdn.net/20160828100329779">
+<meta property="og:image" content="http://img.blog.csdn.net/20160828100240247">
+<meta property="og:image" content="http://img.blog.csdn.net/20160828100259718">
+<meta property="og:image" content="http://img.blog.csdn.net/20160828100315766">
+<meta property="og:image" content="http://img.blog.csdn.net/20160828100343826">
+<meta property="og:updated_time" content="2016-08-28T10:18:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android BLE基础操作框架使用详解">
+<meta name="twitter:description" content="Android BLE基础操作框架，基于回调，操作简单。其中包含扫描、连接、广播包解析、服务读写及通知等功能。">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160828100329779">
+  
+    <link rel="alternative" href="/atom.xml" title="逍遥游" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: true
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">胡伟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives">所有文章</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                            <li><a href="/picture">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl facebook" target="_blank" href="#" title="facebook">facebook</a>
+                            
+                                <a class="fl rss" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/学习笔记/" style="font-size: 15px;">学习笔记</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">热爱技术，喜欢钻研新技术，对新事物充满强烈的好奇心；爱好数学，喜欢数字独特的魅力；衷爱科学，喜欢探索解密，希望一生为之努力！</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">胡伟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">胡伟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives">所有文章</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                    <li><a href="/picture">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="facebook" target="_blank" href="#" title="facebook">facebook</a>
+                    
+                        <a class="rss" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Android-BLE基础操作框架使用详解" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/28/Android-BLE基础操作框架使用详解/" class="article-date">
+      <time datetime="2016-08-28T10:13:09.000Z" itemprop="datePublished">2016-08-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android BLE基础操作框架使用详解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Android BLE基础操作框架，基于回调，操作简单。其中包含扫描、连接、广播包解析、服务读写及通知等功能。<br><a id="more"></a></p>
+<ul>
+<li><p>项目地址：<a href="https://github.com/xiaoyaoyou1212/BLE" target="_blank" rel="external">https://github.com/xiaoyaoyou1212/BLE</a></p>
+</li>
+<li><p>项目引入：<code>compile project(&#39;com.vise.xiaoyaoyou:baseble:1.0.0&#39;)</code></p>
+</li>
+</ul>
+<h2 id="设备扫描"><a href="#设备扫描" class="headerlink" title="设备扫描"></a>设备扫描</h2><h3 id="使用简介"><a href="#使用简介" class="headerlink" title="使用简介"></a>使用简介</h3><p>扫描包含三种方式，第一种方式是直接扫描所有设备，可以设置循环扫描，也可以设置超时时间，扫描到的设备可以添加到<code>BluetoothLeDeviceStore</code>中统一进行处理，使用方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViseBluetooth.getInstance(this).setScanTimeout(-1).startScan(new PeriodScanCallback() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void scanTimeout() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onDeviceFound(BluetoothLeDevice bluetoothLeDevice) &#123;</span><br><span class="line">		bluetoothLeDeviceStore.addDevice(bluetoothLeDevice);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>第二种方式是扫描指定Mac地址的设备，一般需设置超时时间，扫描到指定设备后就停止扫描，使用方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViseBluetooth.getInstance(this).setScanTimeout(5000).startScan(new PeriodMacScanCallback() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void scanTimeout() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onDeviceFound(BluetoothLeDevice bluetoothLeDevice) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>第三种方式是扫描指定广播名的设备，同第二种方式类似，也需设置超时时间，扫描到指定设备后也会停止扫描，使用方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViseBluetooth.getInstance(this).setScanTimeout(5000).startScan(new PeriodNameScanCallback() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void scanTimeout() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onDeviceFound(BluetoothLeDevice bluetoothLeDevice) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>其中扫描到的设备信息都统一放到<code>BluetoothLeDevice</code>中，其中包含了设备的所有信息，以下会详细讲解具体包含哪些信息。</p>
+<h3 id="示例图"><a href="#示例图" class="headerlink" title="示例图"></a>示例图</h3><p><img src="http://img.blog.csdn.net/20160828100329779" alt="设备扫描"></p>
+<h2 id="设备连接"><a href="#设备连接" class="headerlink" title="设备连接"></a>设备连接</h2><h3 id="使用简介-1"><a href="#使用简介-1" class="headerlink" title="使用简介"></a>使用简介</h3><p>连接与扫描一样也有三种方式，第一种方式是在扫描获取设备信息<code>BluetoothLeDevice</code>后才可使用，可设置连接超时时间，默认超时时间为10秒，使用方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViseBluetooth.getInstance(this).connect(bluetoothLeDevice, false, new IConnectCallback() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onConnectSuccess(BluetoothGatt gatt, int status) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onConnectFailure(BleException exception) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>第二种方式是连接指定Mac地址的设备，该方式使用前不需要进行扫描，该方式直接将扫描和连接放到一起，在扫描到指定设备后自动进行连接，使用方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViseBluetooth.getInstance(this).connectByMac(mac, false, new IConnectCallback() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onConnectSuccess(BluetoothGatt gatt, int status) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onConnectFailure(BleException exception) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>第三种方式是连接指定名称的设备，该方式与第二种方式类似，使用方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViseBluetooth.getInstance(this).connectByName(name, false, new IConnectCallback() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onConnectSuccess(BluetoothGatt gatt, int status) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onConnectFailure(BleException exception) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>连接成功后就可以进行相关处理，回调已在底层做了线程切换处理，可以直接操作视图。如果知道该设备服务的UUID，可直接调用<code>ViseBluetooth.getInstance(this).withUUIDString(serviceUUID, characteristicUUID, descriptorUUID);</code>，那么在下面操作设备时就不需要传特征(<code>BluetoothGattCharacteristic</code>)和描述(<code>BluetoothGattDescriptor</code>)相关参数，如果在连接成功后一直没设置UUID，那么在操作时则需要传该参数，该内容在下文的设备操作中会详细讲解，此处就不一一讲解了。</p>
+<h3 id="示例图-1"><a href="#示例图-1" class="headerlink" title="示例图"></a>示例图</h3><p><img src="http://img.blog.csdn.net/20160828100240247" alt="设备连接"></p>
+<h2 id="设备详情"><a href="#设备详情" class="headerlink" title="设备详情"></a>设备详情</h2><h3 id="使用简介-2"><a href="#使用简介-2" class="headerlink" title="使用简介"></a>使用简介</h3><h4 id="DEVICE-INFO-设备信息"><a href="#DEVICE-INFO-设备信息" class="headerlink" title="DEVICE INFO(设备信息)"></a>DEVICE INFO(设备信息)</h4><ul>
+<li>获取设备名称(Device Name):<code>bluetoothLeDevice.getName()</code>；</li>
+<li>获取设备地址(Device Address):<code>bluetoothLeDevice.getAddress()</code>；</li>
+<li>获取设备类别(Device Class):<code>bluetoothLeDevice.getBluetoothDeviceClassName()</code>；</li>
+<li>获取主要设备类别(Major Class):<code>bluetoothLeDevice.getBluetoothDeviceMajorClassName()</code>；</li>
+<li>获取服务类别(Service Class):<code>bluetoothLeDevice.getBluetoothDeviceKnownSupportedServices()</code>；</li>
+<li>获取配对状态(Bonding State):<code>bluetoothLeDevice.getBluetoothDeviceBondState()</code>；<h4 id="RSSI-INFO-信号信息"><a href="#RSSI-INFO-信号信息" class="headerlink" title="RSSI INFO(信号信息)"></a>RSSI INFO(信号信息)</h4></li>
+<li>获取第一次信号时间戳(First Timestamp):<code>bluetoothLeDevice.getFirstTimestamp()</code>；</li>
+<li>获取第一次信号强度(First RSSI):<code>bluetoothLeDevice.getFirstRssi()</code>；</li>
+<li>获取最后一次信号时间戳(Last Timestamp):<code>bluetoothLeDevice.getTimestamp()</code>；</li>
+<li>获取最后一次信号强度(Last RSSI):<code>bluetoothLeDevice.getRssi()</code>；</li>
+<li>获取平均信号强度(Running Average RSSI):<code>bluetoothLeDevice.getRunningAverageRssi()</code>；<h4 id="SCAN-RECORD-INFO-广播信息"><a href="#SCAN-RECORD-INFO-广播信息" class="headerlink" title="SCAN RECORD INFO(广播信息)"></a>SCAN RECORD INFO(广播信息)</h4>根据扫描到的广播包<code>AdRecordStore</code>获取某个广播数据单元<code>AdRecord</code>的类型编号<code>record.getType()</code>，再根据编号获取广播数据单元的类型描述<code>record.getHumanReadableType()</code>以及该广播数据单元的长度及数据内容，最后通过<code>AdRecordUtil.getRecordDataAsString(record)</code>将数据内容转换成具体字符串。</li>
+</ul>
+<h3 id="示例图-2"><a href="#示例图-2" class="headerlink" title="示例图"></a>示例图</h3><p><img src="http://img.blog.csdn.net/20160828100259718" alt="设备详情"> <img src="http://img.blog.csdn.net/20160828100315766" alt="设备详情"></p>
+<h2 id="设备操作"><a href="#设备操作" class="headerlink" title="设备操作"></a>设备操作</h2><h3 id="使用简介-3"><a href="#使用简介-3" class="headerlink" title="使用简介"></a>使用简介</h3><p>在操作设备前首先要保证设备已连接成功，那么在设备连接成功获取到<code>BluetoothGatt</code>后直接对服务的特征值UUID进行相关处理，其中特征值UUID有可读、可写、可通知、指示器四种，获取过程如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">final String unknownServiceString = getResources().getString(R.string.unknown_service);</span><br><span class="line">final String unknownCharaString = getResources().getString(R.string.unknown_characteristic);</span><br><span class="line">final List&lt;Map&lt;String, String&gt;&gt; gattServiceData = new ArrayList&lt;&gt;();</span><br><span class="line">final List&lt;List&lt;Map&lt;String, String&gt;&gt;&gt; gattCharacteristicData = new ArrayList&lt;&gt;();</span><br><span class="line">mGattCharacteristics = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">// Loops through available GATT Services.</span><br><span class="line">for (final BluetoothGattService gattService : gattServices) &#123;</span><br><span class="line">    final Map&lt;String, String&gt; currentServiceData = new HashMap&lt;&gt;();</span><br><span class="line">    uuid = gattService.getUuid().toString();</span><br><span class="line">    currentServiceData.put(LIST_NAME, GattAttributeResolver.getAttributeName(uuid, unknownServiceString));</span><br><span class="line">    currentServiceData.put(LIST_UUID, uuid);</span><br><span class="line">    gattServiceData.add(currentServiceData);</span><br><span class="line"></span><br><span class="line">    final List&lt;Map&lt;String, String&gt;&gt; gattCharacteristicGroupData = new ArrayList&lt;&gt;();</span><br><span class="line">    final List&lt;BluetoothGattCharacteristic&gt; gattCharacteristics = gattService.getCharacteristics();</span><br><span class="line">    final List&lt;BluetoothGattCharacteristic&gt; charas = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    // Loops through available Characteristics.</span><br><span class="line">    for (final BluetoothGattCharacteristic gattCharacteristic : gattCharacteristics) &#123;</span><br><span class="line">        charas.add(gattCharacteristic);</span><br><span class="line">        final Map&lt;String, String&gt; currentCharaData = new HashMap&lt;&gt;();</span><br><span class="line">        uuid = gattCharacteristic.getUuid().toString();</span><br><span class="line">        currentCharaData.put(LIST_NAME, GattAttributeResolver.getAttributeName(uuid, unknownCharaString));</span><br><span class="line">        currentCharaData.put(LIST_UUID, uuid);</span><br><span class="line">        gattCharacteristicGroupData.add(currentCharaData);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    mGattCharacteristics.add(charas);</span><br><span class="line">    gattCharacteristicData.add(gattCharacteristicGroupData);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在获取到<code>BluetoothGattCharacteristic</code>后可进行如下操作：</p>
+<ul>
+<li>设置通知服务<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViseBluetooth.getInstance(this).enableCharacteristicNotification(characteristic, new IBleCallback&lt;BluetoothGattCharacteristic&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onSuccess(BluetoothGattCharacteristic bluetoothGattCharacteristic, int type) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onFailure(BleException exception) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;, false);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其中最后一个参数是设置该通知是否是指示器方式，指示器方式为有应答的通知方式，在传输时更为靠谱。如果在连接成功时已经知道该设备可通知的UUID并且已经设置成功，那么此处还可以如下设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViseBluetooth.getInstance(this).enableCharacteristicNotification(new IBleCallback&lt;BluetoothGattCharacteristic&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onSuccess(BluetoothGattCharacteristic bluetoothGattCharacteristic, int type) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onFailure(BleException exception) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;, false);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>读取信息<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViseBluetooth.getInstance(this).readCharacteristic(characteristic, new IBleCallback&lt;BluetoothGattCharacteristic&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onSuccess(BluetoothGattCharacteristic bluetoothGattCharacteristic, int type) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onFailure(BleException exception) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>同上，如果已设置过可读的UUID，那么此处也可以通过如下方式读取信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViseBluetooth.getInstance(this).readCharacteristic(new IBleCallback&lt;BluetoothGattCharacteristic&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onSuccess(BluetoothGattCharacteristic bluetoothGattCharacteristic, int type) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onFailure(BleException exception) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>写入数据<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViseBluetooth.getInstance(this).writeCharacteristic(characteristic, new byte[]&#123;0x00,0x01,0x02&#125;, new IBleCallback&lt;BluetoothGattCharacteristic&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onSuccess(BluetoothGattCharacteristic bluetoothGattCharacteristic, int type) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onFailure(BleException exception) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>同样，如果在连接成功时设置过可写UUID，那么此处也可以通过如下方式写入数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViseBluetooth.getInstance(this).writeCharacteristic(new byte[]&#123;0x00,0x01,0x02&#125;, new IBleCallback&lt;BluetoothGattCharacteristic&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onSuccess(BluetoothGattCharacteristic bluetoothGattCharacteristic, int type) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onFailure(BleException exception) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>此处的数据<code>new byte[]{0x00,0x01,0x02}</code>为模拟数据，在使用时替换为真实数据即可，切记每次发送的数据必须在20个字节内，如果大于20字节可采用分包机制进行处理。</p>
+<h3 id="示例图-3"><a href="#示例图-3" class="headerlink" title="示例图"></a>示例图</h3><p><img src="http://img.blog.csdn.net/20160828100343826" alt="设备服务"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>从以上的描述中可以知道，设备相关的所有操作都统一交给<code>ViseBluetooth</code>进行处理，并且该类是单例模式，全局只有一个，管理很方便，连接设备成功时会自动获得一个<code>BluetoothGatt</code>，在断开连接时会将该<code>BluetoothGatt</code>关闭，上层不用关心连接数最大为6的限制问题，只需要在需要释放资源时调用<code>ViseBluetooth.getInstance(this).clear();</code>就行，简单易用，这也正是该项目的宗旨。</p>
+<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p>在此要感谢两位作者提供的开源库<a href="https://github.com/litesuits/android-lite-bluetoothLE" target="_blank" rel="external">https://github.com/litesuits/android-lite-bluetoothLE</a>和<a href="https://github.com/alt236/Bluetooth-LE-Library---Android" target="_blank" rel="external">https://github.com/alt236/Bluetooth-LE-Library—Android</a>，这两个开源库对于本项目的完成提供了很大的帮助。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/08/28/Android-BLE基础操作框架使用详解/">Android BLE基础操作框架使用详解</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 胡伟 的个人博客">胡伟</a></p>
+        <p><span>发布时间:</span>2016年08月28日 - 18时13分</p>
+        <p><span>最后更新:</span>2016年08月28日 - 18时18分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/28/Android-BLE基础操作框架使用详解/" title="Android BLE基础操作框架使用详解">http://www.xiaoyaoyou1212.com/2016/08/28/Android-BLE基础操作框架使用详解/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xiaoyaoyou1212.com/2016/08/28/Android-BLE基础操作框架使用详解/　　作者: 胡伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/29/Android-Permission整理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android Permission整理</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设备扫描"><span class="toc-number">1.</span> <span class="toc-text">设备扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用简介"><span class="toc-number">1.1.</span> <span class="toc-text">使用简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例图"><span class="toc-number">1.2.</span> <span class="toc-text">示例图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设备连接"><span class="toc-number">2.</span> <span class="toc-text">设备连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用简介-1"><span class="toc-number">2.1.</span> <span class="toc-text">使用简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例图-1"><span class="toc-number">2.2.</span> <span class="toc-text">示例图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设备详情"><span class="toc-number">3.</span> <span class="toc-text">设备详情</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用简介-2"><span class="toc-number">3.1.</span> <span class="toc-text">使用简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DEVICE-INFO-设备信息"><span class="toc-number">3.1.1.</span> <span class="toc-text">DEVICE INFO(设备信息)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RSSI-INFO-信号信息"><span class="toc-number">3.1.2.</span> <span class="toc-text">RSSI INFO(信号信息)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SCAN-RECORD-INFO-广播信息"><span class="toc-number">3.1.3.</span> <span class="toc-text">SCAN RECORD INFO(广播信息)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例图-2"><span class="toc-number">3.2.</span> <span class="toc-text">示例图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设备操作"><span class="toc-number">4.</span> <span class="toc-text">设备操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用简介-3"><span class="toc-number">4.1.</span> <span class="toc-text">使用简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例图-3"><span class="toc-number">4.2.</span> <span class="toc-text">示例图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#感谢"><span class="toc-number">6.</span> <span class="toc-text">感谢</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/08/28/Android-BLE基础操作框架使用详解/" data-title="Android BLE基础操作框架使用详解" data-url="http://www.xiaoyaoyou1212.com/2016/08/28/Android-BLE基础操作框架使用详解/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/07/29/Android-Permission整理/" title="下一篇: Android Permission整理">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/28/Android-BLE基础操作框架使用详解/">Android BLE基础操作框架使用详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/Android-Permission整理/">Android Permission整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/24/App的打磨之路/">App的打磨之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Android-BLE学习笔记/">Android BLE学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/算法基础：排序与查找/">算法基础：排序与查找</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/数据结构学习整理/">数据结构学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/从零开始搭建属于自己的博客/">从零开始搭建属于自己的博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Mac常用功能整理/">Mac常用功能整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Git学习整理/">Git学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Linux常用命令整理/">Linux常用命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Android-Studio常用Gradle操作/">Android Studio常用Gradle操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/28/Android常见问题集锦/">Android常见问题集锦</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                版权所有 &copy; 2016 胡伟
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >伙伴到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

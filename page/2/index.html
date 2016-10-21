@@ -146,7 +146,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/学习笔记/" style="font-size: 15px;">学习笔记</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
+                        <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/学习笔记/" style="font-size: 17.5px;">学习笔记</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/开源项目/" style="font-size: 12.5px;">开源项目</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
                     </div>
                 </section>
                 
@@ -223,6 +223,68 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Linux常用命令整理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/29/Linux常用命令整理/" class="article-date">
+      <time datetime="2016-05-29T02:51:43.000Z" itemprop="datePublished">2016-05-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/29/Linux常用命令整理/">Linux常用命令整理</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p><strong>学习环境</strong>：Ubuntu 15.04;<br><strong>说明：</strong>该常用命令整理不针对具体的使用，如果要查询某命令的具体用法，直接在命令后面加上 –help就可以查看；<br><strong>1 查看环境</strong>：cat /etc/issue;<br><strong>2 设备别名</strong>：alias ps=’ps -ef’;<br><strong>3 删除别名</strong>：unalias ps;<br><strong>4 查看所有别名</strong>：alias;<br><strong>5 在指定的时间执行特定的命令</strong>：at [选项] [时间]；<br>      选项：<br>          -d&lt;作业编号&gt; 将待执行的作业删除；<br>          -f&lt;文件&gt; 从文件中读取要执行的命令；<br>          -m 将 at 执行的结果以 E-mail 的方式返回；<br>      时间：以 24 小时制指定,格式为 HH:MM；<br>      例如：输入at 21:00,显示at&gt;,继续输入echo Hello Wrold!,按Ctrl+D结束输入，那么将在21:00时屏幕显示Hello World!；<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/05/29/Linux常用命令整理/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-Android-Studio常用Gradle操作" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -313,9 +375,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <ul>
-<li>SVN：Commit failed(details follow):svn: xxx is scheduled for addition, but is missing<br><strong>描述：</strong>删除文件夹后点commit提交，但是提示以下错误： “svn: Commit failed (details follow): svn: ‘xxx’ is scheduled for addition, but is missing”。<br><strong>原因：</strong>之前用SVN提交过的文件，被标记为”add”状态，等待被加入到仓库。若此时你把这个文件删除了，SVN提交的时候还是会尝试提交这个文件，虽然它的状态已经是 “missing”了。<br><strong>解决：</strong>在命令行下用 “svn revert xxx –depth infinity”，在图形界面下，右键–Revert，选中那个文件或文件夹。这样就告诉SVN把这个文件退回到之前的状态 “unversioned”，也就是不对这个文件做任何修改。</li>
-<li>Java工程中调用Android库出现“Stub!”错误<br><strong>描述：</strong>控制台显示错误：Exception in thread “main” java.lang.RuntimeException: Stub!<br><strong>原因：</strong>在Java工程中尝试使用Android库中的org.json.JSONObject类，在执行时出现“Stub！”错误，Android工程中无法执行java的main函数相似，Android工程和Java工程还有一定的差异，不能混用他们的库，和函数入口方法。<br><strong>解决：</strong>将执行的代码，移植到在Android工程可以正确执行！
+              <p><strong>前言：</strong>在开发中，每个人或多或少会遇到各种各样的问题，有些问题依据代码思路调试就可以定位出来，而大部分的问题都是经验性问题，遇到过就很容易解决，但在第一次遇到时往往会花费大量时间来定位问题。针对此种情况，下文把做开发以来遇到的经典问题整理出来，希望对有需要的朋友有所帮助！</p>
+<p><em>注：此文后续会同步更新最新的问题哦！</em><br>
           
       
     </div>

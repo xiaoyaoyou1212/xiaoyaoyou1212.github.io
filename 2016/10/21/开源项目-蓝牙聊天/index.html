@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>开源项目--蓝牙聊天 | 逍遥游</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言基于Android Classic Bluetooth的蓝牙聊天软件，目前仅支持一对一实时通信、文件传输、好友添加、好友分组、好友在线状态更新等功能，其中消息发送支持文本、表情等方式。
+项目地址：https://github.com/xiaoyaoyou1212/BluetoothChat（欢迎Fork参与）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开源项目--蓝牙聊天">
+<meta property="og:url" content="http://www.xiaoyaoyou1212.com/2016/10/21/开源项目-蓝牙聊天/index.html">
+<meta property="og:site_name" content="逍遥游">
+<meta property="og:description" content="前言基于Android Classic Bluetooth的蓝牙聊天软件，目前仅支持一对一实时通信、文件传输、好友添加、好友分组、好友在线状态更新等功能，其中消息发送支持文本、表情等方式。
+项目地址：https://github.com/xiaoyaoyou1212/BluetoothChat（欢迎Fork参与）">
+<meta property="og:image" content="http://img.blog.csdn.net/20161013141713632">
+<meta property="og:image" content="http://img.blog.csdn.net/20161013141703709">
+<meta property="og:image" content="http://img.blog.csdn.net/20161013141724366">
+<meta property="og:image" content="http://img.blog.csdn.net/20161013141653177">
+<meta property="og:image" content="http://img.blog.csdn.net/20161013141736695">
+<meta property="og:image" content="http://img.blog.csdn.net/20161013141758601">
+<meta property="og:image" content="http://img.blog.csdn.net/20161013141809023">
+<meta property="og:image" content="http://img.blog.csdn.net/20161013141747804">
+<meta property="og:updated_time" content="2016-10-21T14:05:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开源项目--蓝牙聊天">
+<meta name="twitter:description" content="前言基于Android Classic Bluetooth的蓝牙聊天软件，目前仅支持一对一实时通信、文件传输、好友添加、好友分组、好友在线状态更新等功能，其中消息发送支持文本、表情等方式。
+项目地址：https://github.com/xiaoyaoyou1212/BluetoothChat（欢迎Fork参与）">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161013141713632">
+  
+    <link rel="alternative" href="/atom.xml" title="逍遥游" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: true
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">胡伟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives">所有文章</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                            <li><a href="/picture">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl facebook" target="_blank" href="#" title="facebook">facebook</a>
+                            
+                                <a class="fl rss" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/学习笔记/" style="font-size: 17.5px;">学习笔记</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/开源项目/" style="font-size: 12.5px;">开源项目</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">热爱技术，喜欢钻研新技术，对新事物充满强烈的好奇心；爱好数学，喜欢数字独特的魅力；衷爱科学，喜欢探索解密，希望一生为之努力！</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">胡伟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="http://sony.it168.com/data/attachment/forum/201408/25/204416wl0ybdhh060d7ewb.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">胡伟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">逍遥世界逍遥游，潇潇洒洒不回头，几多风雨几多愁，道上一曲逍遥游！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives">所有文章</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                    <li><a href="/picture">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://xiaoyaoyou1212.360doc.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/xiaoyaoyou1212" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="facebook" target="_blank" href="#" title="facebook">facebook</a>
+                    
+                        <a class="rss" target="_blank" href="http://blog.csdn.net/xiaoyaoyou1212" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-开源项目-蓝牙聊天" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/21/开源项目-蓝牙聊天/" class="article-date">
+      <time datetime="2016-10-21T14:01:50.000Z" itemprop="datePublished">2016-10-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      开源项目--蓝牙聊天
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开源项目/">开源项目</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>基于Android Classic Bluetooth的蓝牙聊天软件，目前仅支持一对一实时通信、文件传输、好友添加、好友分组、好友在线状态更新等功能，其中消息发送支持文本、表情等方式。</p>
+<p>项目地址：<a href="https://github.com/xiaoyaoyou1212/BluetoothChat" target="_blank" rel="external">https://github.com/xiaoyaoyou1212/BluetoothChat</a>（欢迎Fork参与）<br><a id="more"></a></p>
+<h3 id="前景"><a href="#前景" class="headerlink" title="前景"></a>前景</h3><p>蓝牙技术作为一种小范围无线连接技术，能够在设备间实现方便快捷、灵活安全、低成本、低功耗的数据和语音通信，是目前实现无线个人局域网的主流技术之一。同时，蓝牙系统以自组式组网的方式工作，每个蓝牙设备都可以在网络中实现路由选择的功能，可以形成移动自组网络。蓝牙的特性在许多方面正好符合Ad Hoc和WPAN的概念，显示了其真正的潜力所在。而且，将蓝牙与其他网络相连接可带来更广泛的应用，例如接入互联网、PSTN或公众移动通信网，可以使用户应用更方便或给用户带来更大的实惠。</p>
+<p>蓝牙聊天作为一款针对局域网范围内的聊天软件，在办公密集，想实现快速稳定实时通讯还是比较有实用价值的。目前蓝牙技术发展迅速，5.0传输速率已经达到2Mbps，传输级别达到无损级别，有效工作距离可达300米，在蓝牙组网方面技术也在进一步更新，相信要不了多久会有很成熟的方案出来，这样一来就可以实现多人在线实时聊天功能，打破只能一对多实时聊天的界限。</p>
+<h3 id="技术简介"><a href="#技术简介" class="headerlink" title="技术简介"></a>技术简介</h3><p>1、蓝牙通信的主从关系<br>蓝牙技术规定每一对设备之间进行蓝牙通讯时，必须一个为主角色，另一为从角色，才能进行通信，通信时，必须由主端进行查找，发起配对，建链成功后，双方即可收发数据。理论上，一个蓝牙主端设备，可同时与7个蓝牙从端设备进行通讯。一个具备蓝牙通讯功能的设备， 可以在两个角色间切换，平时工作在从模式，等待其它主设备来连接，需要时，转换为主模式，向其它设备发起呼叫。一个蓝牙设备以主模式发起呼叫时，需要知道对方的蓝牙地址，配对密码等信息，配对完成后，可直接发起呼叫。<br>2、蓝牙的呼叫过程<br>蓝牙主端设备发起呼叫，首先是查找，找出周围处于可被查找的蓝牙设备。主端设备找到从端蓝牙设备后，与从端蓝牙设备进行配对，此时需要输入从端设备的PIN码，也有设备不需要输入PIN码。配对完成后，从端蓝牙设备会记录主端设备的信任信息，此时主端即可向从端设备发起呼叫，已配对的设备在下次呼叫时，不再需要重新配对。已配对的设备，做为从端的蓝牙设备也可以发起建链请求，但做数据通讯的蓝牙模块一般不发起呼叫。链路建立成功后，主从两端之间即可进行双向的数据或语音通讯。在通信状态下，主端和从端设备都可以发起断链，断开蓝牙链路。<br>3、蓝牙一对一的串口数据传输应用<br>蓝牙数据传输应用中，一对一串口数据通讯是最常见的应用之一，蓝牙设备在出厂前即提前设好两个蓝牙设备之间的配对信息，主端预存有从端设备的PIN码、地址等，两端设备加电即自动建链，透明串口传输，无需外围电路干预。一对一应用中从端设备可以设为两种类型，一是静默状态，即只能与指定的主端通信，不被别的蓝牙设备查找；二是开发状态，既可被指定主端查找，也可以被别的蓝牙设备查找建链。</p>
+<h3 id="功能概述"><a href="#功能概述" class="headerlink" title="功能概述"></a>功能概述</h3><p>蓝牙聊天功能主要分为以下几个模块：消息模块、好友模块以及个人模块。</p>
+<h4 id="消息模块"><a href="#消息模块" class="headerlink" title="消息模块"></a>消息模块</h4><p>支持一对一、一对多、多对多实时聊天，能传输文字、表情、图片、文件等。对方不在线时可支持离线消息发送，在对方在线时能及时推送过去。消息支持历史消息存储与查看。</p>
+<h4 id="好友模块"><a href="#好友模块" class="headerlink" title="好友模块"></a>好友模块</h4><p>支持附近好友添加，好友删除，好友分组显示，好友上下线提醒，好友昵称及分组名称修改。</p>
+<h4 id="个人模块"><a href="#个人模块" class="headerlink" title="个人模块"></a>个人模块</h4><p>展示个人信息，包含昵称、图像、加入时间等信息。<br><img src="http://img.blog.csdn.net/20161013141713632" alt="个人中心"><br>该模块还未实现，目前实现功能主要有一对一实时聊天、能传输文字、表情、文件，支持好友添加、删除、分组。下文主要介绍已经实现的蓝牙通信流程。</p>
+<h3 id="操作流程"><a href="#操作流程" class="headerlink" title="操作流程"></a>操作流程</h3><h4 id="查找已配对设备（即好友列表）"><a href="#查找已配对设备（即好友列表）" class="headerlink" title="查找已配对设备（即好友列表）"></a>查找已配对设备（即好友列表）</h4><p>代码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">private void findDevice()&#123;</span><br><span class="line">    // 获得已经保存的配对设备</span><br><span class="line">    Set&lt;BluetoothDevice&gt; pairedDevices = BluetoothAdapter.getDefaultAdapter().getBondedDevices();</span><br><span class="line">    if (pairedDevices.size() &gt; 0) &#123;</span><br><span class="line">        mGroupFriendListData.clear();</span><br><span class="line">        GroupInfo groupInfo = new GroupInfo();</span><br><span class="line">        groupInfo.setGroupName(BluetoothAdapter.getDefaultAdapter().getName());</span><br><span class="line">        List&lt;FriendInfo&gt; friendInfoList = new ArrayList&lt;&gt;();</span><br><span class="line">        for (BluetoothDevice device : pairedDevices) &#123;</span><br><span class="line">            FriendInfo friendInfo = new FriendInfo();</span><br><span class="line">            friendInfo.setIdentificationName(device.getName());</span><br><span class="line">            friendInfo.setDeviceAddress(device.getAddress());</span><br><span class="line">            friendInfo.setFriendNickName(device.getName());</span><br><span class="line">            friendInfo.setOnline(false);</span><br><span class="line">            friendInfo.setJoinTime(DateTime.getStringByFormat(new Date(), DateTime.DEFYMDHMS));</span><br><span class="line">            friendInfo.setBluetoothDevice(device);</span><br><span class="line">            friendInfoList.add(friendInfo);</span><br><span class="line">        &#125;</span><br><span class="line">        groupInfo.setFriendList(friendInfoList);</span><br><span class="line">        groupInfo.setOnlineNumber(0);</span><br><span class="line">        mGroupFriendListData.add(groupInfo);</span><br><span class="line">        mGroupFriendAdapter.setGroupInfoList(mGroupFriendListData);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>好友列表示例图：<br><img src="http://img.blog.csdn.net/20161013141703709" alt="好友列表"></p>
+<h4 id="启用设备的可发现性"><a href="#启用设备的可发现性" class="headerlink" title="启用设备的可发现性"></a>启用设备的可发现性</h4><p>如果要让本地设备可以被其他设备发现，那么就要调用ACTION_REQUEST_DISCOVERABLE操作意图的startActivityForResult(Intent, int)方法。这个方法会向系统设置发出一个启用可发现模式的请求。默认情况下，设备的可发现模式会持续120秒。通过给Intent对象添加EXTRA_DISCOVERABLE_DURATION附加字段，可以定义不同持续时间。应用程序能够设置的最大持续时间是3600秒，0意味着设备始终是可发现的。任何小于0或大于3600秒的值都会自动的被设为120秒。例如，以下代码把持续时间设置为300秒：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent discoverableIntent = new</span><br><span class="line">Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);</span><br><span class="line">discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);</span><br><span class="line">startActivity(discoverableIntent);</span><br></pre></td></tr></table></figure></p>
+<p>申请用户启用设备的可发现模式时，会显示一个对话框。如果响应“Yes”，那么设备的可发现模式会持续指定的时间，而且你的Activity会接收带有结果代码等于可发现设备持续时间的onActivityResult()回调方法的调用。如果用户响应“No”或有错误发生，则结果代码等于RESULT_CANCELED.<br>在可发现模式下，设备会静静的把这种模式保持到指定的时长。如果你想要在可发现模式被改变时获得通知，那么你可以注册一个ACTION_SCAN_MODE_CHANGED类型的Intent广播。这个Intent对象中包含了EXTRA_SCAN_MODE和EXTRA_PREVIOUS_SCAN_MODE附加字段，它们会分别告诉你新旧扫描模式。它们每个可能的值是：SCAN_MODE_CONNECTABLE_DISCOVERABLE，SCAN_MODE_CONNECTABLE或SCAN_MODE_NONE，它们分别指明设备是在可发现模式下，还是在可发现模式下但依然可接收连接，或者是在可发现模式下并不能接收连接。<br>如果你要初始化跟远程设备的连接，你不需要启用设备的可现性。只有在你想要把你的应用程序作为服务端来接收输入连接时，才需要启用可发现性，因为远程设备在跟你的设备连接之前必须能够发现它。</p>
+<h4 id="搜索设备并进行配对（即添加好友）"><a href="#搜索设备并进行配对（即添加好友）" class="headerlink" title="搜索设备并进行配对（即添加好友）"></a>搜索设备并进行配对（即添加好友）</h4><p>简单的调用startDiscovery()方法就可以开始发现设备。该过程是异步的，并且该方法会立即返回一个布尔值来指明发现处理是否被成功的启动。通常发现过程会查询扫描大约12秒，接下来获取扫描发现的每个设备的蓝牙名称。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class ScanBroadcastReceiver extends BroadcastReceiver &#123;</span><br><span class="line"></span><br><span class="line">    private IScanCallback&lt;BluetoothDevice&gt; scanCallback;</span><br><span class="line">    private final Map&lt;String, BluetoothDevice&gt; mDeviceMap = new HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    public ScanBroadcastReceiver(IScanCallback&lt;BluetoothDevice&gt; scanCallback) &#123;</span><br><span class="line">        this.scanCallback = scanCallback;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">        if (scanCallback == null) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if(intent.getAction().equals(BluetoothDevice.ACTION_FOUND))&#123;</span><br><span class="line">            //扫描到蓝牙设备</span><br><span class="line">            BluetoothDevice bluetoothDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);</span><br><span class="line">            if (bluetoothDevice == null) &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            if (!mDeviceMap.containsKey(bluetoothDevice.getAddress())) &#123;</span><br><span class="line">                mDeviceMap.put(bluetoothDevice.getAddress(), bluetoothDevice);</span><br><span class="line">            &#125;</span><br><span class="line">            scanCallback.discoverDevice(bluetoothDevice);</span><br><span class="line">        &#125;else if(intent.getAction().equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)) &#123;</span><br><span class="line">            //扫描设备结束</span><br><span class="line">            final List&lt;BluetoothDevice&gt; deviceList = new ArrayList&lt;&gt;(mDeviceMap.values());</span><br><span class="line">            if(deviceList != null &amp;&amp; deviceList.size() &gt; 0)&#123;</span><br><span class="line">                scanCallback.scanFinish(deviceList);</span><br><span class="line">            &#125; else&#123;</span><br><span class="line">                scanCallback.scanTimeout();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>搜索好友示例图：<br><img src="http://img.blog.csdn.net/20161013141724366" alt="添加好友"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public class PairBroadcastReceiver extends BroadcastReceiver &#123;</span><br><span class="line"></span><br><span class="line">    private IPairCallback pairCallback;</span><br><span class="line"></span><br><span class="line">    public PairBroadcastReceiver(IPairCallback pairCallback) &#123;</span><br><span class="line">        this.pairCallback = pairCallback;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">        if(intent.getAction().equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED))&#123;</span><br><span class="line">            //取得状态改变的设备，更新设备列表信息（配对状态）</span><br><span class="line">            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);</span><br><span class="line">            if(device != null)&#123;</span><br><span class="line">                resolveBondingState(device.getBondState());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void resolveBondingState(final int bondState) &#123;</span><br><span class="line">        if (pairCallback == null) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        switch (bondState) &#123;</span><br><span class="line">            case BluetoothDevice.BOND_BONDED://已配对</span><br><span class="line">                pairCallback.bonded();</span><br><span class="line">                break;</span><br><span class="line">            case BluetoothDevice.BOND_BONDING://配对中</span><br><span class="line">                pairCallback.bonding();</span><br><span class="line">                break;</span><br><span class="line">            case BluetoothDevice.BOND_NONE://未配对</span><br><span class="line">                pairCallback.unBonded();</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                pairCallback.bondFail();</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>配对信息示例图：<br><img src="http://img.blog.csdn.net/20161013141653177" alt="添加好友"><br>配对过程示例图：<br><img src="http://img.blog.csdn.net/20161013141736695" alt="添加好友"></p>
+<h4 id="连接设备（即好友建立通信通道）"><a href="#连接设备（即好友建立通信通道）" class="headerlink" title="连接设备（即好友建立通信通道）"></a>连接设备（即好友建立通信通道）</h4><p>当你想要连接两个设备时，一个必须通过持有一个打开的BluetoothServerSocket对象来作为服务端。服务套接字的用途是监听输入的连接请求，并且在一个连接请求被接收时，提供一个BluetoothSocket连接对象。在从BluetoothServerSocket对象中获取BluetoothSocket时，BluetoothServerSocket能够（并且也应该）被废弃，除非你想要接收更多的连接。<br>以下是建立服务套接字和接收一个连接的基本过程：<br>1、调用listenUsingRfcommWithServiceRecord(String, UUID)方法来获得一个BluetoothServerSocket对象。该方法中的String参数是一个可识别的你的服务端的名称，系统会自动的把它写入设备上的Service Discovery Protocol（SDP）数据库实体（该名称是任意的，并且可以简单的使用你的应用程序的名称）。UUID参数也会被包含在SDP实体中，并且是跟客户端设备连接的基本协议。也就是说，当客户端尝试跟服务端连接时，它会携带一个它想要连接的服务端能够唯一识别的UUID。只有在这些UUID完全匹配的情况下，连接才可能被接收。<br>2、通过调用accept()方法，启动连接请求。这是一个阻塞调用。只有在连接被接收或发生异常的情况下，该方法才返回。只有在发送连接请求的远程设备所携带的UUID跟监听服务套接字所注册的一个UUID匹配的时候，该连接才被接收。连接成功，accept()方法会返回一个被连接的BluetoothSocket对象。<br>3、除非你想要接收其他连接，否则要调用close()方法。该方法会释放服务套接字以及它所占用的所有资源，但不会关闭被连接的已经有accept()方法所返回的BluetoothSocket对象。跟TCP/IP不一样，每个RFCOMM通道一次只允许连接一个客户端，因此在大多数情况下，在接收到一个连接套接字之后，立即调用BluetoothServerSocket对象的close()方法是有道理的。<br>以下是以上过程实现的监听线程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">public class AcceptThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    private BluetoothChatHelper mHelper;</span><br><span class="line">    private final BluetoothServerSocket mServerSocket;</span><br><span class="line">    private String mSocketType;</span><br><span class="line"></span><br><span class="line">    public AcceptThread(BluetoothChatHelper bluetoothChatHelper, boolean secure) &#123;</span><br><span class="line">        mHelper = bluetoothChatHelper;</span><br><span class="line">        BluetoothServerSocket tmp = null;</span><br><span class="line">        mSocketType = secure ? &quot;Secure&quot; : &quot;Insecure&quot;;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            if (secure) &#123;</span><br><span class="line">                tmp = mHelper.getAdapter().listenUsingRfcommWithServiceRecord(ChatConstant.NAME_SECURE, ChatConstant.UUID_SECURE);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                tmp = mHelper.getAdapter().listenUsingInsecureRfcommWithServiceRecord(ChatConstant.NAME_INSECURE, ChatConstant.UUID_INSECURE);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            BleLog.e(&quot;Socket Type: &quot; + mSocketType + &quot;listen() failed&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">        mServerSocket = tmp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void run() &#123;</span><br><span class="line">        BleLog.i(&quot;Socket Type: &quot; + mSocketType + &quot;BEGIN mAcceptThread&quot; + this);</span><br><span class="line">        setName(&quot;AcceptThread&quot; + mSocketType);</span><br><span class="line"></span><br><span class="line">        BluetoothSocket socket = null;</span><br><span class="line"></span><br><span class="line">        while (mHelper.getState() != com.vise.basebluetooth.common.State.STATE_CONNECTED) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                BleLog.i(&quot;wait new socket:&quot; + mServerSocket);</span><br><span class="line">                socket = mServerSocket.accept();</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                BleLog.e(&quot;Socket Type: &quot; + mSocketType + &quot; accept() failed&quot;, e);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            if (socket != null) &#123;</span><br><span class="line">                synchronized (this) &#123;</span><br><span class="line">                    if(mHelper.getState() == com.vise.basebluetooth.common.State.STATE_LISTEN</span><br><span class="line">                            || mHelper.getState() == com.vise.basebluetooth.common.State.STATE_CONNECTING)&#123;</span><br><span class="line">                        BleLog.i(&quot;mark CONNECTING&quot;);</span><br><span class="line">                        mHelper.connected(socket, socket.getRemoteDevice(), mSocketType);</span><br><span class="line">                    &#125; else if(mHelper.getState() == com.vise.basebluetooth.common.State.STATE_NONE</span><br><span class="line">                            || mHelper.getState() == com.vise.basebluetooth.common.State.STATE_CONNECTED)&#123;</span><br><span class="line">                        try &#123;</span><br><span class="line">                            socket.close();</span><br><span class="line">                        &#125; catch (IOException e) &#123;</span><br><span class="line">                            BleLog.e(&quot;Could not close unwanted socket&quot;, e);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        BleLog.i(&quot;END mAcceptThread, socket Type: &quot; + mSocketType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void cancel() &#123;</span><br><span class="line">        BleLog.i(&quot;Socket Type&quot; + mSocketType + &quot;cancel &quot; + this);</span><br><span class="line">        try &#123;</span><br><span class="line">            mServerSocket.close();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            BleLog.e(&quot;Socket Type&quot; + mSocketType + &quot;close() of server failed&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以下是一个基本的连接过程：<br>1、通过调用BluetoothDevice的createRfcommSocketToServiceRecord(UUID)方法，获得一个BluetoothSocket对象。这个方法会初始化一个连接到BluetoothDevice对象的BluetoothSocket对象。传递给这个方法的UUID参数必须与服务端设备打开BluetoothServerSocket对象时所使用的UUID相匹配。在你的应用程序中简单的使用硬编码进行比对，如果匹配，服务端和客户端代码就可以应用这个BluetoothSocket对象了。<br>2、通过调用connect()方法来初始化连接。在这个调用中，为了找到匹配的UUID，系统会在远程的设备上执行一个SDP查询。如果查询成功，并且远程设备接收了该连接请求，那么它会在连接期间共享使用RFCOMM通道，并且connect()方法会返回。这个方法是一个阻塞调用。如果因为某些原因，连接失败或连接超时（大约在12秒之后），就会抛出一个异常。<br>以下是实现以上过程的连接线程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">public class ConnectThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    private BluetoothChatHelper mHelper;</span><br><span class="line">    private final BluetoothSocket mSocket;</span><br><span class="line">    private final BluetoothDevice mDevice;</span><br><span class="line">    private String mSocketType;</span><br><span class="line"></span><br><span class="line">    public ConnectThread(BluetoothChatHelper bluetoothChatHelper, BluetoothDevice device, boolean secure) &#123;</span><br><span class="line">        mHelper = bluetoothChatHelper;</span><br><span class="line">        mDevice = device;</span><br><span class="line">        BluetoothSocket tmp = null;</span><br><span class="line">        mSocketType = secure ? &quot;Secure&quot; : &quot;Insecure&quot;;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            if (secure) &#123;</span><br><span class="line">                tmp = device.createRfcommSocketToServiceRecord(ChatConstant.UUID_SECURE);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                tmp = device.createInsecureRfcommSocketToServiceRecord(ChatConstant.UUID_INSECURE);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            BleLog.e(&quot;Socket Type: &quot; + mSocketType + &quot;create() failed&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">        mSocket = tmp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void run() &#123;</span><br><span class="line">        BleLog.i(&quot;BEGIN mConnectThread SocketType:&quot; + mSocketType);</span><br><span class="line">        setName(&quot;ConnectThread&quot; + mSocketType);</span><br><span class="line"></span><br><span class="line">        mHelper.getAdapter().cancelDiscovery();</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            mSocket.connect();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                mSocket.close();</span><br><span class="line">            &#125; catch (IOException e2) &#123;</span><br><span class="line">                BleLog.e(&quot;unable to close() &quot; + mSocketType + &quot; socket during connection failure&quot;, e2);</span><br><span class="line">            &#125;</span><br><span class="line">            mHelper.connectionFailed();</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        synchronized (this) &#123;</span><br><span class="line">            mHelper.setConnectThread(null);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mHelper.connected(mSocket, mDevice, mSocketType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void cancel() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            mSocket.close();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            BleLog.e(&quot;close() of connect &quot; + mSocketType</span><br><span class="line">                    + &quot; socket failed&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在建立连接之前要调用cancelDiscovery()方法。在连接之前应该始终调用这个方法，并且不用实际的检查蓝牙发现处理是否正在运行也是安全的（如果想要检查，调用isDiscovering()方法）。</p>
+<h4 id="管理连接（即好友间通信）"><a href="#管理连接（即好友间通信）" class="headerlink" title="管理连接（即好友间通信）"></a>管理连接（即好友间通信）</h4><p>当你成功的连接了两个（或更多）设备时，每一个设备都有一个被连接的BluetoothSocket对象。这是良好的开始，因为你能够在设备之间共享数据。使用BluetoothSocket对象来传输任意数据的过程是简单的：<br>1、分别通过getInputStream()和getOutputStream()方法来获得通过套接字来处理传输任务的InputStream和OutputStream对象；<br>2、用read(byte[])和write（byte[]）方法来读写流中的数据。<br>以下为实现以上过程的通信线程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">public class ConnectedThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    private final BluetoothChatHelper mHelper;</span><br><span class="line">    private final BluetoothSocket mSocket;</span><br><span class="line">    private final InputStream mInStream;</span><br><span class="line">    private final OutputStream mOutStream;</span><br><span class="line"></span><br><span class="line">    public ConnectedThread(BluetoothChatHelper bluetoothChatHelper, BluetoothSocket socket, String socketType) &#123;</span><br><span class="line">        BleLog.i(&quot;create ConnectedThread: &quot; + socketType);</span><br><span class="line">        mHelper = bluetoothChatHelper;</span><br><span class="line">        mSocket = socket;</span><br><span class="line">        InputStream tmpIn = null;</span><br><span class="line">        OutputStream tmpOut = null;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            tmpIn = socket.getInputStream();</span><br><span class="line">            tmpOut = socket.getOutputStream();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            BleLog.e(&quot;temp sockets not created&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mInStream = tmpIn;</span><br><span class="line">        mOutStream = tmpOut;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void run() &#123;</span><br><span class="line">        BleLog.i(&quot;BEGIN mConnectedThread&quot;);</span><br><span class="line">        int bytes;</span><br><span class="line">        byte[] buffer = new byte[1024];</span><br><span class="line"></span><br><span class="line">        // Keep listening to the InputStream while connected</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                bytes = mInStream.read(buffer);</span><br><span class="line">                byte[] data = new byte[bytes];</span><br><span class="line">                System.arraycopy(buffer, 0, data, 0, data.length);</span><br><span class="line">                mHelper.getHandler().obtainMessage(ChatConstant.MESSAGE_READ, bytes, -1, data).sendToTarget();</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                BleLog.e(&quot;disconnected&quot;, e);</span><br><span class="line">                mHelper.start(false);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void write(byte[] buffer) &#123;</span><br><span class="line">        if(mSocket.isConnected())&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                mOutStream.write(buffer);</span><br><span class="line">                mHelper.getHandler().obtainMessage(ChatConstant.MESSAGE_WRITE, -1, -1, buffer).sendToTarget();</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                BleLog.e(&quot;Exception during write&quot;, e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void cancel() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            mSocket.close();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            BleLog.e(&quot;close() of connect socket failed&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>发送消息示例图：<br><img src="http://img.blog.csdn.net/20161013141758601" alt="发送消息"><br>发送表情示例图：<br><img src="http://img.blog.csdn.net/20161013141809023" alt="发送表情"><br>发送文件示例图：<br><img src="http://img.blog.csdn.net/20161013141747804" alt="发送文件"></p>
+<p>参考：<a href="http://blog.csdn.net/mapeifan/article/details/50684688" target="_blank" rel="external">android 传统蓝牙Bluetooth联通性</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/10/21/开源项目-蓝牙聊天/">开源项目--蓝牙聊天</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 胡伟 的个人博客">胡伟</a></p>
+        <p><span>发布时间:</span>2016年10月21日 - 22时01分</p>
+        <p><span>最后更新:</span>2016年10月21日 - 22时05分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/21/开源项目-蓝牙聊天/" title="开源项目--蓝牙聊天">http://www.xiaoyaoyou1212.com/2016/10/21/开源项目-蓝牙聊天/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xiaoyaoyou1212.com/2016/10/21/开源项目-蓝牙聊天/　　作者: 胡伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/28/Android-BLE基础操作框架使用详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android BLE基础操作框架使用详解</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前景"><span class="toc-number">2.</span> <span class="toc-text">前景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#技术简介"><span class="toc-number">3.</span> <span class="toc-text">技术简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#功能概述"><span class="toc-number">4.</span> <span class="toc-text">功能概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#消息模块"><span class="toc-number">4.1.</span> <span class="toc-text">消息模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#好友模块"><span class="toc-number">4.2.</span> <span class="toc-text">好友模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#个人模块"><span class="toc-number">4.3.</span> <span class="toc-text">个人模块</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作流程"><span class="toc-number">5.</span> <span class="toc-text">操作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#查找已配对设备（即好友列表）"><span class="toc-number">5.1.</span> <span class="toc-text">查找已配对设备（即好友列表）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启用设备的可发现性"><span class="toc-number">5.2.</span> <span class="toc-text">启用设备的可发现性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#搜索设备并进行配对（即添加好友）"><span class="toc-number">5.3.</span> <span class="toc-text">搜索设备并进行配对（即添加好友）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#连接设备（即好友建立通信通道）"><span class="toc-number">5.4.</span> <span class="toc-text">连接设备（即好友建立通信通道）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#管理连接（即好友间通信）"><span class="toc-number">5.5.</span> <span class="toc-text">管理连接（即好友间通信）</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/10/21/开源项目-蓝牙聊天/" data-title="开源项目--蓝牙聊天" data-url="http://www.xiaoyaoyou1212.com/2016/10/21/开源项目-蓝牙聊天/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/08/28/Android-BLE基础操作框架使用详解/" title="下一篇: Android BLE基础操作框架使用详解">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/21/开源项目-蓝牙聊天/">开源项目--蓝牙聊天</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/28/Android-BLE基础操作框架使用详解/">Android BLE基础操作框架使用详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/Android-Permission整理/">Android Permission整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/24/App的打磨之路/">App的打磨之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Android-BLE学习笔记/">Android BLE学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/算法基础：排序与查找/">算法基础：排序与查找</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/数据结构学习整理/">数据结构学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/从零开始搭建属于自己的博客/">从零开始搭建属于自己的博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Mac常用功能整理/">Mac常用功能整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Git学习整理/">Git学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Linux常用命令整理/">Linux常用命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/Android-Studio常用Gradle操作/">Android Studio常用Gradle操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/28/Android常见问题集锦/">Android常见问题集锦</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                版权所有 &copy; 2016 胡伟
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >伙伴到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

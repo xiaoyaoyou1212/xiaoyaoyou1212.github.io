@@ -3,18 +3,31 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Linux常用命令整理 | 逍遥游</title>
+  <title>Android XSnow框架详解(RxJava+Retrofit) | 逍遥游</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="学习环境：Ubuntu 15.04;说明：该常用命令整理不针对具体的使用，如果要查询某命令的具体用法，直接在命令后面加上 –help就可以查看；1 查看环境：cat /etc/issue;2 设备别名：alias ps=’ps -ef’;3 删除别名：unalias ps;4 查看所有别名：alias;5 在指定的时间执行特定的命令：at [选项] [时间]；      选项：">
+  <meta name="description" content="基于RxJava+Retrofit精心打造的Android基础框架，包含网络、下载、缓存、事件总线、数据库、图片加载、UI模块，基本都是项目中必用功能，每个模块充分解耦，可随意替换。XSnow，X：未知一切，取其通用之意；Snow：雪，取其纯净之意。该框架通用纯净，只依赖公共核心库，每个模块都可单独作为一个库，如只需要网络相关，那么只需拷贝common和net包就行。
+
+项目地址：https://">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux常用命令整理">
-<meta property="og:url" content="http://www.xiaoyaoyou1212.com/2016/05/29/Linux常用命令整理/index.html">
+<meta property="og:title" content="Android XSnow框架详解(RxJava+Retrofit)">
+<meta property="og:url" content="http://www.xiaoyaoyou1212.com/2017/01/20/Android-XSnow框架详解-RxJava-Retrofit/index.html">
 <meta property="og:site_name" content="逍遥游">
-<meta property="og:description" content="学习环境：Ubuntu 15.04;说明：该常用命令整理不针对具体的使用，如果要查询某命令的具体用法，直接在命令后面加上 –help就可以查看；1 查看环境：cat /etc/issue;2 设备别名：alias ps=’ps -ef’;3 删除别名：unalias ps;4 查看所有别名：alias;5 在指定的时间执行特定的命令：at [选项] [时间]；      选项：">
-<meta property="og:updated_time" content="2016-06-06T15:44:32.000Z">
+<meta property="og:description" content="基于RxJava+Retrofit精心打造的Android基础框架，包含网络、下载、缓存、事件总线、数据库、图片加载、UI模块，基本都是项目中必用功能，每个模块充分解耦，可随意替换。XSnow，X：未知一切，取其通用之意；Snow：雪，取其纯净之意。该框架通用纯净，只依赖公共核心库，每个模块都可单独作为一个库，如只需要网络相关，那么只需拷贝common和net包就行。
+
+项目地址：https://">
+<meta property="og:image" content="http://img.blog.csdn.net/20170120152904942?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3lhb3lvdTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170120152916952?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3lhb3lvdTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170120152933661?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3lhb3lvdTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170120152955708?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3lhb3lvdTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170120153009922?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3lhb3lvdTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170120153021266?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3lhb3lvdTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-01-20T12:40:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux常用命令整理">
-<meta name="twitter:description" content="学习环境：Ubuntu 15.04;说明：该常用命令整理不针对具体的使用，如果要查询某命令的具体用法，直接在命令后面加上 –help就可以查看；1 查看环境：cat /etc/issue;2 设备别名：alias ps=’ps -ef’;3 删除别名：unalias ps;4 查看所有别名：alias;5 在指定的时间执行特定的命令：at [选项] [时间]；      选项：">
+<meta name="twitter:title" content="Android XSnow框架详解(RxJava+Retrofit)">
+<meta name="twitter:description" content="基于RxJava+Retrofit精心打造的Android基础框架，包含网络、下载、缓存、事件总线、数据库、图片加载、UI模块，基本都是项目中必用功能，每个模块充分解耦，可随意替换。XSnow，X：未知一切，取其通用之意；Snow：雪，取其纯净之意。该框架通用纯净，只依赖公共核心库，每个模块都可单独作为一个库，如只需要网络相关，那么只需拷贝common和net包就行。
+
+项目地址：https://">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170120152904942?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3lhb3lvdTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
   
     <link rel="alternative" href="/atom.xml" title="逍遥游" type="application/atom+xml">
   
@@ -220,11 +233,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-Linux常用命令整理" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Android-XSnow框架详解-RxJava-Retrofit" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/05/29/Linux常用命令整理/" class="article-date">
-      <time datetime="2016-05-29T02:51:43.000Z" itemprop="datePublished">2016-05-29</time>
+      <a href="/2017/01/20/Android-XSnow框架详解-RxJava-Retrofit/" class="article-date">
+      <time datetime="2017-01-20T12:36:23.000Z" itemprop="datePublished">2017-01-20</time>
 </a>
     </div>
   
@@ -237,7 +250,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Linux常用命令整理
+      Android XSnow框架详解(RxJava+Retrofit)
     </h1>
   
 
@@ -248,7 +261,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开源项目/">开源项目</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -258,8 +271,43 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>学习环境</strong>：Ubuntu 15.04;<br><strong>说明：</strong>该常用命令整理不针对具体的使用，如果要查询某命令的具体用法，直接在命令后面加上 –help就可以查看；<br><strong>1 查看环境</strong>：cat /etc/issue;<br><strong>2 设备别名</strong>：alias ps=’ps -ef’;<br><strong>3 删除别名</strong>：unalias ps;<br><strong>4 查看所有别名</strong>：alias;<br><strong>5 在指定的时间执行特定的命令</strong>：at [选项] [时间]；<br>      选项：<br>          -d&lt;作业编号&gt; 将待执行的作业删除；<br>          -f&lt;文件&gt; 从文件中读取要执行的命令；<br>          -m 将 at 执行的结果以 E-mail 的方式返回；<br>      时间：以 24 小时制指定,格式为 HH:MM；<br>      例如：输入at 21:00,显示at&gt;,继续输入echo Hello Wrold!,按Ctrl+D结束输入，那么将在21:00时屏幕显示Hello World!；<br><a id="more"></a><br><strong>6 压缩文件</strong>：bzip2 [选项] 文件名；<br><strong>7 显示日历</strong>：cal [选项]或cal [月份] [年份]；<br><strong>8 串接文件到制定文件或在标准输出上显示文件内容</strong>：cat [选项] [文件名];<br><strong>9 切换工作目录</strong>：cd [目的目录];<br>    注：“~”表示当前用户的主目录(如/home/user1),“.”表示当前目录,“..”表示当前目录的上一层目录；<br><strong>10 更改文件或目录的访问权限</strong>：chmod [选项] 文件名；<br>     选项:<br>         -c 只有在文件或目录权限更改的前提下,才显示更改信息；<br>          -R 递归处理，若目标文件为目录文件,则以递归形式更改目录下所有文件的权限,并显示更改信息；<br>      –reference=文件名或目录名 设置成与指定的文件或目录相同的权限；<br><strong>11 改变文件的所有者或用户组，或两者同时改变</strong>：chown [选项] [用户]:[组] 文件名；<br><strong>12 清屏</strong>：clear;<br><strong>13 复制</strong>：cp;<br><strong>14 显示或设置系统的时间/日期</strong>：date [选项] [日期或时间格式]；<br><strong>15 显示每个文件系统所使用的磁盘空间情况</strong>：df [选项] [文件或磁盘设备];<br><strong>16 比较两个不同文件或不同目录下两个同名文件的功能，并生产补丁文件</strong>：diff [选项] [文件1] [文件2];<br><strong>17 显示文件或目录所占用的磁盘空间</strong>：du [选项] [文件或目录];<br><strong>18 显示文字</strong>：echo [选项] 字符串；<br><strong>19 弹出设备，如光驱</strong>：eject [选项] [设备];<br><strong>20 修改磁盘分区</strong>：fdisk [选项] [设备名称];<br><strong>21 查找文件或目录</strong>：find [路径] [选项] [文件或目录名];<br><strong>22 显示内存使用情况</strong>：free;<br><strong>23 文件传输</strong>：ftp [选项] [主机名或IP地址];<br><strong>24 C和C++编译器</strong>：gcc [选项] [文件];<br><strong>25 管理系统中用户组的信息</strong>：gpasswd [选项] [用户] [组];<br><strong>26 查找文件</strong>：grep [选项] [字符串或正则表达式] [文件名……];<br><strong>27 创建一个新的用户组</strong>：groupadd [选项] 用户组名；<br><strong>28 删除组</strong>：groupdel 组名；<br><strong>29 压缩制定文件或目录</strong>：gzip [选项] [文件或目录……];<br><strong>30 关闭系统</strong>：halt [选项];<br><strong>31 查看文件头部的内容</strong>：head [选项] 文件名；<br><strong>32 显示Shell内部指令的帮助信息</strong>：help [选项] [指令];<br><strong>33 输出使用过的命令，按时间顺序排序</strong>：history [选项];<br><strong>34 查询主机使用的域名</strong>：host [选项] 网址名称 [服务器];<br><strong>35 查看或设置主机名</strong>：hostname [选项];<br><strong>36 显示用户ID和所属组ID</strong>：id [选项] [用户名];<br><strong>37 查看或配置网络接口的地址和参数</strong>：ifconfig [接口名称];<br><strong>38 中止正在执行的程序或作业</strong>：kill [选项] [pid];<br><strong>39 显示当前和过去登陆用户的相关信息</strong>：last [选项] [用户或终端];<br><strong>40 显示所有失败的登陆信息</strong>：lastb [选项] [用户或终端];<br><strong>41 一次显示一页文本</strong>：less [选项] 文件名;<br><strong>42 建立链接文件</strong>：ln [选项] [源文件或目录] 目标文件或目录;<br><strong>43 列出目录内容，包括文件或子目录</strong>：ls [选项] [文件/目录];<br><strong>44 维护或编译内核或模块</strong>：make [选项] [makefile文件];<br><strong>45 显示命令说明/帮助信息</strong>：man [选项] 指令名；<br><strong>46 查看文件内容</strong>：more [选项] [文件名];<br><strong>47 移动或重命名现有的文件或目录</strong>：mv [选项] 源文件/目录 目标文件/目录；<br><strong>48 查询当前网络状态</strong>：netstat [第一选项] [其他选项];<br><strong>49 设置或修改用户密码</strong>：passwd [选项] [用户名];<br><strong>50 使用特定的包检测主机的连通性</strong>：ping [选项] [主机名或IP];<br><strong>51 显示当前进程的状态</strong>：ps [选项];<br><strong>52 显示当前工作目录（绝对路径）</strong>：pwd;<br><strong>53 重启系统</strong>：reboot [选项];<br><strong>54 删除文件或目录</strong>：rm [选项] 文件/目录；<br><strong>55 查看或设置路由</strong>：route [选项];<br><strong>56 管理rpm套件（软件包）</strong>：rpm [选项] 软件包名；<br><strong>57 加密的远程登陆</strong>：ssh [选项] 远程主机名或地址 [执行指令];<br><strong>58 变更用户身份</strong>：su [选项] [用户名];<br><strong>59 打包同时压缩或解压缩文件</strong>：tar [选项] [打包后的文件] [被打包的文件];<br><strong>60 远程登陆</strong>：telnet [选项] 主机名/IP；<br><strong>61 显示当前进程信息</strong>：top [选项];<br><strong>62 设置文件默认的权限掩码，只对当前Shell有效</strong>：umask [选项] [权限掩码];<br><strong>63 添加用户</strong>：useradd [选项] 用户名；<br><strong>64 删除用户</strong>：userdel [选项] 用户名；<br><strong>65 显示当前登陆系统的用户信息</strong>：w [选项] [用户名];<br><strong>66 查找特定的文件，在系统默认位置开始查找</strong>：whereis [选项] 文件名；<br><strong>67 查找文件，在环境变量中查找</strong>：which 文件名；<br><strong>68 显示当前登陆系统的用户信息</strong>：who [选项];<br><strong>69 显示当前用户名</strong>：whoami;<br><strong>70 归档压缩文件</strong>：zip [选项] 文件1 文件2；<br><strong>71 退出当前的Shell环境</strong>：exit;<br><strong>72 设备或显示环境变量</strong>：export [选项] [环境变量=[变量值]];</p>
-
+        <p>基于RxJava+Retrofit精心打造的Android基础框架，包含网络、下载、缓存、事件总线、数据库、图片加载、UI模块，基本都是项目中必用功能，每个模块充分解耦，可随意替换。<br>XSnow，X：未知一切，取其通用之意；Snow：雪，取其纯净之意。该框架通用纯净，只依赖公共核心库，每个模块都可单独作为一个库，如只需要网络相关，那么只需拷贝common和net包就行。</p>
+<ul>
+<li><p>项目地址：<a href="https://github.com/xiaoyaoyou1212/XSnow" target="_blank" rel="external">https://github.com/xiaoyaoyou1212/XSnow</a></p>
+</li>
+<li><p>项目依赖：<code>compile project(&#39;com.vise.xiaoyaoyou:xsnow:1.0.0&#39;)</code></p>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p>网络算是项目的灵魂，基本每个项目都离不开网络，而一个简单好用，又支持各种配置的网络访问库就显得尤为重要了。该模块也是XSnow的核心功能，使用简单，支持定制常用配置，如各种拦截器、缓存策略、请求头等。上层项目基于RxJava+Retrofit请求网络时需要每个接口都写一个服务接口，这样非常不便利，如何将响应结果通用处理就成为该模块的重点，后面采用泛型转换方式，将响应结果ResponseBody通过map操作符转换成需要的T，具体实现参考项目中net包下的func包，如果需要Http响应码，也可以将响应结果包装成Response<responsebody>这样进行转换成T，考虑到项目中很少需要Http响应码来进行判定，一般使用服务器自定义的响应码就可以了，故该模块采用ResponseBody统一接收这种处理方式。</responsebody></p>
+<ul>
+<li><p>支持OKHttp本身的HTTP缓存，也支持外部自定义的在线离线缓存，可配置常用缓存策略，如优先获取缓存策略等。</p>
+</li>
+<li><p>支持请求与响应统一处理，不需要上层每个模块都定义ApiService接口。</p>
+</li>
+<li><p>支持泛型T接收处理响应数据，也可根据服务器返回的统一数据模式定制如包含Code、Data、Message的通用Model ApiResult<t>。</t></p>
+</li>
+<li><p>支持异常统一处理，定制了ApiException拦截处理，可根据服务器各种响应码定制异常提示。</p>
+</li>
+<li><p>支持不需订阅者的回调数据处理。</p>
+</li>
+<li><p>支持自定义请求头。</p>
+</li>
+<li><p>……</p>
+</li>
+</ul>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>基本思路都来源于此项目<a href="https://github.com/ssseasonnn/RxDownload" target="_blank" rel="external">https://github.com/ssseasonnn/RxDownload</a>，这里我就不赘述了，具体使用详情可参考该项目地址，RxDownload算是基于RxJava+Retrofit写得比较优秀的下载框架了。</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>包含内存、磁盘二级缓存以及SharedPreferences缓存，可自由拓展。支持磁盘缓存支持KEY加密存储，可定制缓存时长。SharedPreferences支持内容安全存储，采用Base64加密解密。</p>
+<h2 id="事件总线"><a href="#事件总线" class="headerlink" title="事件总线"></a>事件总线</h2><p>采用Rx响应式编程思想建立的RxBus模块，采用注解方式标识事件消耗地，通过遍历查找事件处理方法。支持可插拔，可替换成EventBus库，只需上层采用的同样是注解方式，那么上层是不需要动任何代码的。</p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>采用greenDao数据库，其优势就不多说了，网上有解释，其主要优点就是性能高。该模块定制数据库操作接口，有统一的实现类DBManager，上层只需实现getAbstractDao()方法告知底层DaoSession，增删改查操作不需要关心具体细节，调用DBManager中的方法就行。</p>
+<h2 id="图片加载"><a href="#图片加载" class="headerlink" title="图片加载"></a>图片加载</h2><p>采用Glide库进行图片加载，支持轻量级图片加载，该模块支持可插拔，可根据需求替换成任意图片加载库，如果项目中对于图片处理要求比较高，那么可以替换成Facebook提供的Fresco库。</p>
+<h2 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h2><p>包含BaseActivity、BaseFragment以及万能适配器，适配器可满足所有基于BaseAdapter的适配器组装，使用方便，易拓展。</p>
+<h2 id="使用介绍"><a href="#使用介绍" class="headerlink" title="使用介绍"></a>使用介绍</h2><p>网络请求对象初始化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//不带缓存</span><br><span class="line">ViseApi mViseApi = new ViseApi.Builder(mContext).build();</span><br><span class="line">//带缓存</span><br><span class="line">ViseApi mViseApi = new ViseApi.Builder(mContext).cacheKey(ApiHost.getHost()).cacheMode(CacheMode.FIRST_CACHE).build();</span><br></pre></td></tr></table></figure></p>
+<p>数据库操作初始化：<code>DbHelper.getInstance().init(this);</code><br>图片加载初始化：<code>LoaderFactory.getLoader().init(this);</code><br>下载对象初始化：<code>ViseDownload.getInstance().maxThread(3).context(mContext);</code></p>
+<p>注：其他配置和具体使用详情请参考demo和docs中的API介绍，demo中有详细的使用展示，基本能明白具体怎么使用，XSnow库中核心的API都有注释，能满足基本的调用需求，如果有不明白的地方欢迎留言交流！</p>
+<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><p><img src="http://img.blog.csdn.net/20170120152904942?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3lhb3lvdTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170120152916952?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3lhb3lvdTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170120152933661?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3lhb3lvdTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170120152955708?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3lhb3lvdTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170120153009922?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3lhb3lvdTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170120153021266?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3lhb3lvdTEyMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><em>注：该框架引用了日志系统和公共工具库，这两个库都很轻量级，具体使用详情可分别参考<a href="https://github.com/xiaoyaoyou1212/ViseLog" target="_blank" rel="external">https://github.com/xiaoyaoyou1212/ViseLog</a>和<a href="https://github.com/xiaoyaoyou1212/ViseUtils" target="_blank" rel="external">https://github.com/xiaoyaoyou1212/ViseUtils</a>。</em></p>
+<h3 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a>关于作者</h3><h4 id="作者：胡伟"><a href="#作者：胡伟" class="headerlink" title="作者：胡伟"></a>作者：胡伟</h4><h4 id="网站：http-www-xiaoyaoyou1212-com"><a href="#网站：http-www-xiaoyaoyou1212-com" class="headerlink" title="网站：http://www.xiaoyaoyou1212.com"></a>网站：<a href="http://www.xiaoyaoyou1212.com">http://www.xiaoyaoyou1212.com</a></h4><h4 id="博客：http-blog-csdn-net-xiaoyaoyou1212"><a href="#博客：http-blog-csdn-net-xiaoyaoyou1212" class="headerlink" title="博客：http://blog.csdn.net/xiaoyaoyou1212"></a>博客：<a href="http://blog.csdn.net/xiaoyaoyou1212" target="_blank" rel="external">http://blog.csdn.net/xiaoyaoyou1212</a></h4>
       
     </div>
     
@@ -267,13 +315,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/05/29/Linux常用命令整理/">Linux常用命令整理</a></p>
+        <p><span>本文标题:</span><a href="/2017/01/20/Android-XSnow框架详解-RxJava-Retrofit/">Android XSnow框架详解(RxJava+Retrofit)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 胡伟 的个人博客">胡伟</a></p>
-        <p><span>发布时间:</span>2016年05月29日 - 10时51分</p>
-        <p><span>最后更新:</span>2016年06月06日 - 23时44分</p>
+        <p><span>发布时间:</span>2017年01月20日 - 20时36分</p>
+        <p><span>最后更新:</span>2017年01月20日 - 20时40分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/05/29/Linux常用命令整理/" title="Linux常用命令整理">http://www.xiaoyaoyou1212.com/2016/05/29/Linux常用命令整理/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.xiaoyaoyou1212.com/2016/05/29/Linux常用命令整理/　　作者: 胡伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/01/20/Android-XSnow框架详解-RxJava-Retrofit/" title="Android XSnow框架详解(RxJava+Retrofit)">http://www.xiaoyaoyou1212.com/2017/01/20/Android-XSnow框架详解-RxJava-Retrofit/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xiaoyaoyou1212.com/2017/01/20/Android-XSnow框架详解-RxJava-Retrofit/　　作者: 胡伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -286,18 +334,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2016/05/29/Git学习整理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Git学习整理
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/29/Android-Studio常用Gradle操作/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Android Studio常用Gradle操作</div>
+    <a href="/2016/12/12/日志系统ViseLog使用详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">日志系统ViseLog使用详解</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -308,7 +347,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络"><span class="toc-number">1.</span> <span class="toc-text">网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载"><span class="toc-number">2.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存"><span class="toc-number">3.</span> <span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件总线"><span class="toc-number">4.</span> <span class="toc-text">事件总线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库"><span class="toc-number">5.</span> <span class="toc-text">数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片加载"><span class="toc-number">6.</span> <span class="toc-text">图片加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UI"><span class="toc-number">7.</span> <span class="toc-text">UI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用介绍"><span class="toc-number">8.</span> <span class="toc-text">使用介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#效果展示"><span class="toc-number">9.</span> <span class="toc-text">效果展示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于作者"><span class="toc-number">9.1.</span> <span class="toc-text">关于作者</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#作者：胡伟"><span class="toc-number">9.1.1.</span> <span class="toc-text">作者：胡伟</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#网站：http-www-xiaoyaoyou1212-com"><span class="toc-number">9.1.2.</span> <span class="toc-text">网站：http://www.xiaoyaoyou1212.com</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#博客：http-blog-csdn-net-xiaoyaoyou1212"><span class="toc-number">9.1.3.</span> <span class="toc-text">博客：http://blog.csdn.net/xiaoyaoyou1212</span></a></li></ol></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -356,7 +395,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/05/29/Linux常用命令整理/" data-title="Linux常用命令整理" data-url="http://www.xiaoyaoyou1212.com/2016/05/29/Linux常用命令整理/"></div>
+    <div class="ds-thread" data-thread-key="2017/01/20/Android-XSnow框架详解-RxJava-Retrofit/" data-title="Android XSnow框架详解(RxJava+Retrofit)" data-url="http://www.xiaoyaoyou1212.com/2017/01/20/Android-XSnow框架详解-RxJava-Retrofit/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -379,13 +418,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/05/29/Git学习整理/" title="上一篇: Git学习整理">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2016/05/29/Android-Studio常用Gradle操作/" title="下一篇: Android Studio常用Gradle操作">
+            <a href="/2016/12/12/日志系统ViseLog使用详解/" title="下一篇: 日志系统ViseLog使用详解">
                 <i class="fa fa-angle-right"></i>
             </a>
         

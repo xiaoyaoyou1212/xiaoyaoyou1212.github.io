@@ -2126,74 +2126,39 @@ a {
 #header .header-nav .social a:last-of-type {
   margin-right: 0;
 }
-#header .header-nav .social a.weibo {
-  background: url("/img/weibo.png") center no-repeat #f00;
-  border: 1px solid #f00;
-}
-#header .header-nav .social a.weibo:hover {
-  border: 1px solid #f00;
-}
-#header .header-nav .social a.rss {
-  background: url("/img/rss.png") center no-repeat #ef7522;
-  border: 1px solid #ef7522;
-}
-#header .header-nav .social a.rss:hover {
-  border: 1px solid #ef7522;
-}
 #header .header-nav .social a.github {
-  background: url("/img/github.png") center no-repeat #000;
-  border: 1px solid #000;
+  background: url("/img/github.png") center no-repeat #55cff8;
+  border: 1px solid #55cff8;
 }
 #header .header-nav .social a.github:hover {
+  border: 1px solid #55cff8;
+}
+#header .header-nav .social a.csdn {
+  background: url("/img/csdn.png") center no-repeat #ef7522;
+  border: 1px solid #ef7522;
+}
+#header .header-nav .social a.csdn:hover {
+  border: 1px solid #ef7522;
+}
+#header .header-nav .social a.juejin {
+  background: url("/img/juejin.png") center no-repeat #000;
   border: 1px solid #000;
 }
-#header .header-nav .social a.facebook {
-  background: url("/img/facebook.png") center no-repeat #3b5998;
-  border: 1px solid #3b5998;
+#header .header-nav .social a.juejin:hover {
+  border: 1px solid #000;
 }
-#header .header-nav .social a.facebook:hover {
-  border: 1px solid #3b5998;
-}
-#header .header-nav .social a.google {
-  background: url("/img/google.png") center no-repeat #f00;
-  border: 1px solid #f00;
-}
-#header .header-nav .social a.google:hover {
-  border: 1px solid #f00;
-}
-#header .header-nav .social a.twitter {
-  background: url("/img/twitter.png") center no-repeat #55cff8;
-  border: 1px solid #55cff8;
-}
-#header .header-nav .social a.twitter:hover {
-  border: 1px solid #55cff8;
-}
-#header .header-nav .social a.linkedin {
-  background: url("/img/linkedin.png") center no-repeat #00639a;
+#header .header-nav .social a.blogger {
+  background: url("/img/blogger.png") center no-repeat #00639a;
   border: 1px solid #00639a;
 }
-#header .header-nav .social a.linkedin:hover {
-  border: 1px solid #006b98;
+#header .header-nav .social a.blogger:hover {
+  border: 1px solid #00639a;
 }
-#header .header-nav .social a.zhihu {
-  background: url("/img/zhihu.png") center no-repeat #0663c1;
-  border: 1px solid #0663c1;
-}
-#header .header-nav .social a.zhihu:hover {
-  border: 1px solid #0663c1;
-}
-#header .header-nav .social a.douban {
-  background: url("/img/douban.png") center no-repeat #06c611;
-  border: 1px solid #06c611;
-}
-#header .header-nav .social a.douban:hover {
-  border: 1px solid #06c611;
-}
-#header .header-nav .social a.mail {
-  background: url("/img/mail.png") center no-repeat #00abff;
+#header .header-nav .social a.doc {
+  background: url("/img/doc.png") center no-repeat #00abff;
   border: 1px solid #00abff;
 }
-#header .header-nav .social a.mail:hover {
+#header .header-nav .social a.doc:hover {
   border: 1px solid #00abff;
 }
 #header .switch-part {
